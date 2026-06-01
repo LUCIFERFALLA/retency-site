@@ -208,8 +208,31 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
   gap: 28px; opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease-out);
 }
 .mobile-menu.open { opacity: 1; pointer-events: auto; }
-.mobile-menu a { font-family: var(--f-display); font-size: 44px; color: var(--text); font-weight: 500; letter-spacing: -0.04em; font-variation-settings: 'wdth' 88; }
-.mobile-menu a em { color: var(--copper); font-style: normal; }
+.mobile-menu a {
+  font-family: var(--f-display); font-size: clamp(28px, 8vw, 40px);
+  color: var(--text); font-weight: 500; letter-spacing: -0.025em;
+  line-height: 1;
+}
+.mobile-menu a em { color: var(--copper); font-style: italic; }
+.mobile-menu-cta {
+  margin-top: 24px;
+  padding: 16px 28px;
+  background: var(--text); color: var(--bg) !important;
+  border-radius: var(--r-pill);
+  font-family: var(--f-body) !important;
+  font-size: 14px !important;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.mobile-menu-close {
+  position: absolute; top: 20px; right: 20px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--line-2);
+  color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.2s, border-color 0.2s;
+}
+.mobile-menu-close:hover { background: rgba(255,255,255,0.08); border-color: var(--copper); color: var(--copper); }
 
 /* ============================================
    HERO — Beyond Awaits editorial with video bg
@@ -938,33 +961,42 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 }
 .circ-dot.active { background: var(--copper); transform: scale(1.4); }
 
-/* Mobile fallback — horizontal scroll snap instead of 3D ring */
+/* Mobile fallback — horizontal scroll snap, smaller card, no GPU 3D */
 @media (max-width: 768px) {
   .circ-stage {
-    perspective: none; height: auto; padding: 0 var(--s-5);
+    perspective: none; height: auto;
+    padding: 0; margin-top: 24px;
+    display: block;
   }
   .circ-ring {
     transform: none !important;
     transform-style: flat;
-    display: flex; gap: var(--s-4);
+    display: flex; gap: 14px;
+    width: 100%; height: auto;
     overflow-x: auto; overflow-y: hidden;
-    padding: var(--s-4) 0 var(--s-12);
+    padding: 6px 18px 18px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    will-change: auto;
   }
   .circ-ring::-webkit-scrollbar { display: none; }
   .circ-card {
     position: relative; top: auto; left: auto;
     margin: 0; flex-shrink: 0;
-    width: 75vw; max-width: 320px;
-    height: auto; aspect-ratio: 9/14;
+    width: 72vw; max-width: 280px;
+    height: auto; aspect-ratio: 4/5;
     transform: none !important;
     scroll-snap-align: center;
     opacity: 1 !important;
+    box-shadow: 0 12px 28px -10px rgba(0,0,0,0.7);
   }
-  .circ-card-overlay { opacity: 1; }
-  .circ-controls { position: static; margin-top: var(--s-4); }
+  .circ-card.is-front { border-color: var(--copper); }
+  .circ-card-overlay { opacity: 1; padding: 16px; }
+  .circ-title { font-size: 16px; }
+  .circ-tag { font-size: 9px; padding: 4px 8px; margin-bottom: 8px; }
+  .circ-controls { position: static; margin: 18px 18px 0; }
+  .circ-pager-btn { width: 38px; height: 38px; }
 }
 
 /* ============================================
@@ -1264,9 +1296,10 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 /* Even tighter for true phones */
 @media (max-width: 480px) {
   .wrap { padding: 0 16px; }
-  .nav { padding: 8px 8px 8px 14px; }
-  .nav-cta { padding: 9px 12px; font-size: 12px; }
-  .nav-cta .arrow { display: none; }
+  .nav { padding: 6px 6px 6px 14px; grid-template-columns: auto auto; gap: 0; }
+  /* Hide the empty CTA on phones — burger menu drawer carries the Start-a-project link */
+  .nav-cta { display: none; }
+  .nav-burger { padding: 12px; }
   .footer-grid { grid-template-columns: 1fr; }
   .marquee-item.logo { width: 110px; height: 44px; }
   .marquee-item.logo img { max-height: 30px; }

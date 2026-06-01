@@ -84,8 +84,14 @@
   const burger = document.querySelector('.nav-burger');
   const drawer = document.querySelector('.mobile-menu');
   if (burger && drawer) {
+    const closeDrawer = () => drawer.classList.remove('open');
     burger.addEventListener('click', () => drawer.classList.toggle('open'));
-    drawer.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => drawer.classList.remove('open')));
+    drawer.querySelector('.mobile-menu-close')?.addEventListener('click', closeDrawer);
+    drawer.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeDrawer));
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
   }
 
   // ---------- Hero orb subtle parallax ----------
@@ -115,7 +121,7 @@
     });
   });
 
-  // ---------- Contact form -> Airtable ----------
+  // ---------- Contact form -> Airtable (no mailto fallback) ----------
   const form = document.querySelector('.contact-form');
   if (form) {
     const AIRTABLE_TOKEN = 'patuOIf443aDYoRyO.481ad6586bea9f9e24192967330f8d84fbd07c0581770f97cee1da5ccff6b298';
@@ -125,7 +131,16 @@
     const btn = form.querySelector('.form-submit');
     const originalHTML = btn ? btn.innerHTML : '';
 
-    // Honeypot anti-spam — if filled, silently drop
+    // Inject an error message slot below the button
+    let errBox = form.querySelector('.form-error');
+    if (!errBox) {
+      errBox = document.createElement('div');
+      errBox.className = 'form-error';
+      errBox.style.cssText = 'display:none;margin-top:14px;padding:12px 14px;border-radius:10px;background:rgba(214,47,60,0.08);border:1px solid rgba(214,47,60,0.3);color:#f6a8ae;font-size:13px;line-height:1.5;font-family:var(--f-body)';
+      btn.insertAdjacentElement('afterend', errBox);
+    }
+
+    // Honeypot anti-spam
     if (!form.querySelector('[name="website"]')) {
       const hp = document.createElement('input');
       hp.type = 'text'; hp.name = 'website'; hp.tabIndex = -1; hp.autocomplete = 'off';
@@ -138,37 +153,43 @@
       e.preventDefault();
       const d = Object.fromEntries(new FormData(form));
 
-      // Honeypot triggered → fake success, do nothing
-      if (d.website) { return; }
-      // Basic rate-limit (one submit per 10s)
+      if (d.website) { return; } // honeypot
       const last = +sessionStorage.getItem('retency_last_submit') || 0;
       if (Date.now() - last < 10000) { return; }
       sessionStorage.setItem('retency_last_submit', Date.now());
 
+      errBox.style.display = 'none';
       if (btn) { btn.disabled = true; btn.innerHTML = 'Sending…'; }
 
       try {
+        const payload = {
+          records: [{
+            fields: {
+              Name:    d.name    || '',
+              Email:   d.email   || '',
+              Brand:   d.brand   || '',
+              Budget:  d.budget  || '',
+              Service: d.service || '',
+              Message: d.message || '',
+            }
+          }],
+          typecast: true
+        };
+
         const res = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            records: [{
-              fields: {
-                Name:    d.name    || '',
-                Email:   d.email   || '',
-                Brand:   d.brand   || '',
-                Budget:  d.budget  || '',
-                Service: d.service || '',
-                Message: d.message || '',
-              }
-            }]
-          })
+          body: JSON.stringify(payload),
         });
 
-        if (!res.ok) throw new Error('Airtable error ' + res.status);
+        if (!res.ok) {
+          const errBody = await res.text();
+          console.error('Airtable error', res.status, errBody);
+          throw new Error(`${res.status}: ${errBody}`);
+        }
 
         if (btn) {
           btn.innerHTML = '✓ Sent — we’ll reply within 24 hours';
@@ -178,12 +199,12 @@
         form.querySelectorAll('input, textarea, select').forEach(f => f.disabled = true);
 
       } catch (err) {
-        // Fallback to mailto so we never lose a lead
-        const subject = encodeURIComponent(`New project inquiry — ${d.brand || 'Retency'}`);
-        const body = encodeURIComponent(
-          `Name: ${d.name || ''}\nEmail: ${d.email || ''}\nBrand: ${d.brand || ''}\nBudget: ${d.budget || ''}\nService: ${d.service || ''}\n\nMessage:\n${d.message || ''}`
-        );
-        window.location.href = `mailto:retencymedia@gmail.com?subject=${subject}&body=${body}`;
+        console.error('Submission failed:', err);
+        errBox.innerHTML = `
+          <strong>We couldn't save your submission.</strong><br/>
+          Please email us directly at <a href="mailto:retencymedia@gmail.com" style="color:var(--copper);text-decoration:underline">retencymedia@gmail.com</a> — we'll respond within 24 hours.
+        `;
+        errBox.style.display = 'block';
         if (btn) { btn.disabled = false; btn.innerHTML = originalHTML; }
       }
     });
@@ -204,17 +225,22 @@
 
     // ----- Mobile: horizontal scroll snap, no 3D -----
     if (isMobile) {
+      // Mobile-only Cloudinary transform — smaller bitrate + width
+      const mobileSrc = (raw) => {
+        if (!raw || !raw.includes('cloudinary.com') || !raw.includes('/upload/')) return raw;
+        return raw.replace('/upload/', '/upload/w_540,br_500k,');
+      };
       const mvObs = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           const v = entry.target.querySelector('video');
           if (!v) return;
           if (entry.isIntersecting) {
             const src = v.getAttribute('data-src');
-            if (src && !v.src) { v.src = src; v.load(); }
+            if (src && !v.src) { v.src = mobileSrc(src); v.load(); }
             v.play().catch(()=>{});
           } else { v.pause(); }
         });
-      }, { threshold: 0.55 });
+      }, { threshold: 0.6, rootMargin: '0px 100px' });
       cards.forEach((c) => mvObs.observe(c));
       return;
     }
