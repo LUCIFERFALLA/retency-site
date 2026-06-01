@@ -5,11 +5,17 @@
   'use strict';
 
   // ---------- Lazy-load ALL [data-hero-video] videos (hero, trailer, etc.) ----------
+  const isSmallScreen = window.matchMedia('(max-width: 900px)').matches;
   document.querySelectorAll('[data-hero-video]').forEach((vid) => {
     const loadVideo = () => {
       const source = vid.querySelector('source[data-src]');
       if (source && !source.src) {
-        source.src = source.dataset.src;
+        let src = source.dataset.src;
+        // On mobile, force a smaller Cloudinary variant (saves 60-70% bytes + CPU)
+        if (isSmallScreen && src.includes('cloudinary.com') && src.includes('/upload/')) {
+          src = src.replace('/upload/', '/upload/w_720,br_800k,').replace(/,br_800k,br_800k/g, ',br_800k');
+        }
+        source.src = src;
         vid.load();
         vid.play().catch(() => { /* autoplay blocked — poster stays */ });
       }

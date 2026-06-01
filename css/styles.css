@@ -154,18 +154,15 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 .brand {
   display: flex; align-items: center; gap: 10px; padding-right: 22px; border-right: 1px solid var(--line);
 }
+/* Chakra wheel brand mark (inline SVG via background-image) */
 .brand-mark {
-  width: 26px; height: 26px; border-radius: 50%; position: relative; flex-shrink: 0;
-  background: radial-gradient(circle at 30% 30%, var(--copper) 0%, var(--crimson) 60%, #2a0508 100%);
-  box-shadow: 0 0 12px var(--crimson-glow), inset 0 0 8px rgba(0,0,0,0.5);
+  width: 28px; height: 28px; flex-shrink: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><radialGradient id='h' cx='50%25' cy='50%25'><stop offset='0%25' stop-color='%23ffd093'/><stop offset='55%25' stop-color='%23d62f3c'/><stop offset='100%25' stop-color='%232a0508'/></radialGradient></defs><circle cx='32' cy='32' r='30' fill='none' stroke='%23d4a256' stroke-width='1.6' opacity='0.95'/><circle cx='32' cy='32' r='22' fill='none' stroke='%23d62f3c' stroke-width='0.9' opacity='0.7'/><g stroke='%23d4a256' stroke-width='1.3' stroke-linecap='round' opacity='0.9'><line x1='32' y1='32' x2='32' y2='6'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(22.5 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(45 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(67.5 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(90 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(112.5 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(135 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(157.5 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(180 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(202.5 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(225 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(247.5 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(270 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(292.5 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(315 32 32)'/><line x1='32' y1='32' x2='32' y2='6' transform='rotate(337.5 32 32)'/></g><circle cx='32' cy='32' r='7' fill='url(%23h)'/><circle cx='32' cy='32' r='3' fill='%230a0608'/><circle cx='32' cy='32' r='1' fill='%23d4a256'/></svg>");
+  background-size: contain; background-repeat: no-repeat; background-position: center;
+  filter: drop-shadow(0 0 6px rgba(214,47,60,0.3));
+  transition: transform 0.6s var(--ease-out);
 }
-.brand-mark::after {
-  content: ""; position: absolute; inset: 4px; border-radius: 50%;
-  background: conic-gradient(from 0deg, var(--copper), var(--crimson), var(--copper), var(--crimson), var(--copper));
-  mask: radial-gradient(circle, transparent 30%, black 32%, black 48%, transparent 50%);
-  -webkit-mask: radial-gradient(circle, transparent 30%, black 32%, black 48%, transparent 50%);
-  opacity: 0.9;
-}
+.brand:hover .brand-mark { transform: rotate(45deg); }
 .brand-name {
   font-family: var(--f-display); font-weight: 600;
   font-size: 18px; letter-spacing: -0.03em; color: var(--text);
@@ -1117,4 +1114,160 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
   .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
+}
+
+/* ============================================
+   MOBILE PERFORMANCE OVERHAUL
+   Kill expensive GPU effects + tighten layout
+   ============================================ */
+@media (max-width: 900px) {
+  /* Remove the grain overlay (mix-blend-mode is GPU-heavy on mobile) */
+  .bg-grain { display: none; }
+
+  /* Drastically reduce ambient blur (the radial gradient stays — that's free) */
+  .bg-ambient::before { filter: blur(40px); opacity: 0.7; }
+
+  /* Reduce/remove backdrop-filter blur — biggest mobile killer */
+  .nav { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .metric-card,
+  .svc,
+  .contact-form,
+  .marquee-item.logo,
+  .tag-pill,
+  .trailer-overlay .mono,
+  .trailer-sound,
+  .circ-pager-btn {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* Compensate the loss with solid background */
+  .metric-card { background: rgba(14, 14, 19, 0.85); }
+  .svc { background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%); }
+  .contact-form { background: rgba(14, 14, 19, 0.6); }
+
+  /* Trim heavy shadows */
+  .nav,
+  .svc.featured::after,
+  .circ-card,
+  .work-card { box-shadow: 0 14px 28px -10px rgba(0,0,0,0.7); }
+  .svc.featured::after { display: none; } /* the giant glow blob */
+
+  /* Section padding tighter on mobile (per 10K checklist) */
+  .section { padding: 56px 0; }
+  .wrap { padding: 0 18px; }
+
+  /* Hero: compact, breathing */
+  .hero { padding: 100px 0 32px; min-height: auto; }
+  .hero-stage { min-height: 0; padding: 8px 0 32px; }
+  .hero-headline { gap: 16px; }
+  .hero-eyebrow { font-size: 10px; letter-spacing: 0.14em; }
+  .hero-title { font-size: clamp(34px, 9vw, 44px); line-height: 1.05; letter-spacing: -0.025em; max-width: 100%; }
+  .hero-sub { font-size: 15px; line-height: 1.55; }
+  .hero-cta-row { gap: 8px; }
+  .hero-cta-row .btn { padding: 12px 18px; font-size: 13px; min-height: 44px; }
+  .hero-top { padding-bottom: 24px; font-size: 10px; gap: 6px; }
+  .hero-top .right { text-align: left; opacity: 0.75; }
+  .hero-bottom { padding-top: 28px; gap: 20px; }
+
+  /* Hero video: keep but pause more aggressively */
+  .hero-video { will-change: auto; }
+  .hero-video-overlay::after { display: none; } /* the noise overlay = needless GPU */
+
+  /* Section heads tighter */
+  .section-head { margin-bottom: 32px; }
+  .section-title { font-size: clamp(26px, 6.5vw, 32px); line-height: 1.08; }
+  .section-desc { font-size: 15px; line-height: 1.55; margin-top: 14px; }
+
+  /* Services stack */
+  .services-grid { gap: 12px; }
+  .svc { padding: 24px; min-height: 280px; }
+  .svc-num { margin-bottom: 18px; font-size: 10px; }
+  .svc-title { font-size: 22px; margin-bottom: 12px; line-height: 1.15; }
+  .svc-desc { font-size: 15px; line-height: 1.55; margin-bottom: 18px; }
+  .svc-foot { margin-top: 18px; padding-top: 18px; }
+
+  /* Work cards */
+  .work-grid { gap: 14px; }
+  .work-overlay { padding: 20px; }
+  .work-title { font-size: 19px; line-height: 1.15; }
+  .work-tag { font-size: 9px; padding: 5px 9px; }
+  .work-placeholder { padding: 14% 14% 28% 14%; }
+
+  /* Shivaji/Swarajya teaser tighter */
+  .shivaji-teaser { padding: 64px 0; }
+  .shivaji-title { font-size: clamp(36px, 9vw, 48px); }
+  .shivaji-desc { font-size: 15px; }
+  .shivaji-badge { font-size: 9px; padding: 8px 14px; margin-bottom: 24px; }
+
+  /* FAQ tighter */
+  .faq-item summary { padding: 18px 0; gap: 14px; }
+  .faq-q { font-size: 16px; line-height: 1.3; }
+  .faq-a { font-size: 15px; padding-right: 0; }
+  .faq-toggle { width: 26px; height: 26px; }
+
+  /* Contact */
+  .contact-grid { gap: 32px; }
+  .contact-info h2 { font-size: clamp(28px, 7vw, 36px); }
+  .contact-form { padding: 22px; }
+  .form-heading h3 { font-size: 18px; }
+  .form-field input, .form-field textarea, .form-field select {
+    font-size: 16px; /* iOS won't auto-zoom on 16px+ inputs */
+    padding: 14px 14px;
+  }
+  .form-field { margin-bottom: 16px; }
+  .trust-grid { gap: 10px; margin-top: 22px; }
+  .trust-cell { padding: 16px 16px; }
+  .trust-value { font-size: 17px; }
+  .qualification-line { font-size: 14px; padding: 14px 18px; }
+
+  /* Footer tighter */
+  .footer { padding: 56px 0 28px; }
+  .footer-grid { gap: 28px; margin-bottom: 36px; }
+  .footer-mega { font-size: clamp(64px, 26vw, 120px); margin-top: 24px; }
+  .footer-bottom { font-size: 9px; gap: 8px; }
+
+  /* Marquee tighter */
+  .marquee-section { padding: 32px 0; }
+  .marquee-track { gap: 48px; }
+  .marquee-item.logo { width: 130px; height: 50px; padding: 0 6px; }
+  .marquee-item.logo img { max-height: 36px; }
+  .marquee-label { font-size: 9px; margin-bottom: 18px; }
+
+  /* Carousel: ensure mobile horizontal scroll works smoothly */
+  .portfolio-section { padding-bottom: 32px; }
+  .circ-stage { margin-top: 24px; }
+
+  /* Page header tighter */
+  .page-header { padding: 130px 0 48px; }
+  .page-header h1 { font-size: clamp(30px, 8vw, 40px); }
+  .page-header p { font-size: 15px; margin-top: 18px; }
+
+  /* Reveal: skip the translate (causes janky paint on mobile) */
+  .reveal { transform: none; transition: opacity 0.6s var(--ease-out); }
+  .reveal-stagger > * { transform: none; transition: opacity 0.5s var(--ease-out); }
+
+  /* Touch targets: min 44px everywhere */
+  .btn, .nav-cta, .svc-link, .contact-method, .nav-burger,
+  .circ-pager-btn, .trailer-sound { min-height: 44px; }
+
+  /* Disable hover-only effects on touch devices */
+  .work-card:hover { transform: none; }
+  .svc:hover { transform: none; }
+  .metric-card:hover { transform: none; }
+
+  /* Brand mark smaller in compact nav */
+  .brand-mark { width: 22px; height: 22px; }
+  .brand-name { font-size: 16px; }
+  .brand { padding-right: 14px; }
+}
+
+/* Even tighter for true phones */
+@media (max-width: 480px) {
+  .wrap { padding: 0 16px; }
+  .nav { padding: 8px 8px 8px 14px; }
+  .nav-cta { padding: 9px 12px; font-size: 12px; }
+  .nav-cta .arrow { display: none; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .marquee-item.logo { width: 110px; height: 44px; }
+  .marquee-item.logo img { max-height: 30px; }
 }
