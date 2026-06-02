@@ -18,4 +18,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://retency.com/sitemap.xml
+Sitemap: https://retency.in/sitemap.xml

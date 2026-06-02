@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="hub" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd093"/>
+      <stop offset="55%" stop-color="#d62f3c"/>
+      <stop offset="100%" stop-color="#2a0508"/>
+    </radialGradient>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a0608" stop-opacity="1"/>
+      <stop offset="80%" stop-color="#07070a" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#07070a" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <!-- Solid dark background so the logo reads on any surface -->
+  <rect width="512" height="512" rx="64" fill="url(#bgGlow)"/>
+  <g transform="translate(256 256)">
+    <!-- Outer copper ring -->
+    <circle cx="0" cy="0" r="220" fill="none" stroke="#d4a256" stroke-width="6" opacity="0.95"/>
+    <!-- Inner crimson ring -->
+    <circle cx="0" cy="0" r="170" fill="none" stroke="#d62f3c" stroke-width="3" opacity="0.75"/>
+    <!-- 16 radiating spokes -->
+    <g stroke="#d4a256" stroke-width="4" stroke-linecap="round" opacity="0.9">
+      <line x1="0" y1="-205" x2="0" y2="-30"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(22.5)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(45)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(67.5)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(90)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(112.5)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(135)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(157.5)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(180)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(202.5)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(225)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(247.5)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(270)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(292.5)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(315)"/>
+      <line x1="0" y1="-205" x2="0" y2="-30" transform="rotate(337.5)"/>
+    </g>
+    <!-- Center hub -->
+    <circle cx="0" cy="0" r="50" fill="url(#hub)"/>
+    <circle cx="0" cy="0" r="22" fill="#0a0608"/>
+    <circle cx="0" cy="0" r="6" fill="#d4a256"/>
+  </g>
+</svg>
