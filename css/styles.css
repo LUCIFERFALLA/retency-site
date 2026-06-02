@@ -1061,13 +1061,14 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 @media (max-width: 1024px) { .testimonial-grid { grid-template-columns: 1fr; } }
 .testimonial {
   position: relative;
-  padding: var(--s-8) var(--s-7);
+  padding: var(--s-10) var(--s-8);
   border-radius: var(--r-lg);
   background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.005) 100%);
   border: 1px solid var(--line-2);
-  display: flex; flex-direction: column; gap: var(--s-6);
+  display: flex; flex-direction: column; gap: var(--s-8);
   transition: border-color 0.4s, transform 0.4s var(--ease-out);
 }
+@media (min-width: 1100px) { .testimonial { padding: var(--s-12) var(--s-10); } }
 .testimonial:hover { border-color: var(--line-warm); transform: translateY(-3px); }
 .testi-mark {
   font-family: var(--f-display); font-style: italic; font-weight: 400;
@@ -1082,7 +1083,7 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: var(--s-3);
 }
 .proof-card .testi-metric em {
   font-style: italic; color: var(--copper); font-weight: 500;
@@ -1090,10 +1091,10 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 .proof-card .testi-quote {
   font-family: var(--f-body);
   font-style: normal;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 15.5px;
+  line-height: 1.7;
   letter-spacing: -0.005em;
-  color: var(--text-dim);
+  color: var(--text-soft);
   font-weight: 400;
 }
 .testi-quote {
@@ -1107,7 +1108,8 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 }
 .testi-author {
   display: flex; align-items: center; gap: 14px;
-  padding-top: var(--s-5);
+  padding-top: var(--s-6);
+  margin-top: var(--s-2);
   border-top: 1px solid var(--line);
 }
 .testi-avatar {
@@ -1226,22 +1228,23 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 .faq-item[open] { background: linear-gradient(180deg, rgba(212,162,86,0.025) 0%, transparent 100%); }
 
 .faq-item summary {
-  display: flex; align-items: center; justify-content: space-between; gap: var(--s-6);
-  padding: var(--s-6) 0;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-8);
+  padding: var(--s-8) var(--s-4) var(--s-8) var(--s-2);
   cursor: pointer;
   list-style: none;
   transition: padding 0.3s var(--ease-out);
 }
 .faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary:hover { padding-left: var(--s-3); }
+.faq-item summary:hover { padding-left: var(--s-5); }
 
 .faq-q {
   font-family: var(--f-display);
   font-weight: 500;
-  font-size: clamp(18px, 1.5vw, 22px);
-  line-height: 1.3;
+  font-size: clamp(19px, 1.55vw, 24px);
+  line-height: 1.35;
   letter-spacing: -0.02em;
   color: var(--text);
+  padding-right: var(--s-4);
 }
 .faq-toggle {
   position: relative;
@@ -1271,11 +1274,11 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 .faq-item[open] .faq-toggle::after { transform: scaleY(0); }
 
 .faq-a {
-  padding: 0 var(--s-12) var(--s-7) 0;
+  padding: 0 var(--s-12) var(--s-8) var(--s-2);
   max-width: 70ch;
   font-family: var(--f-body);
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 16.5px;
+  line-height: 1.7;
   color: var(--text-dim);
   letter-spacing: -0.005em;
   animation: faqFade 0.4s ease-out;
