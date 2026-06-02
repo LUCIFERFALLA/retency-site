@@ -134,7 +134,7 @@
   // ---------- Contact form -> Airtable (no mailto fallback) ----------
   const form = document.querySelector('.contact-form');
   if (form) {
-    const AIRTABLE_TOKEN = 'patuOIf443aDYoRyO.481ad6586bea9f9e24192967330f8d84fbd07c0581770f97cee1da5ccff6b298';
+    const AIRTABLE_TOKEN = 'patJv4eePrMeyBMIY.cf2a00a49d85e919e58377e8a2dc3152bdc30b1b836f4516e089510686b93a1f';
     const BASE_ID  = 'appwu9VFeVwRjN91T';
     const TABLE_ID = 'tbl6HI3c48n2Haw51';
 
