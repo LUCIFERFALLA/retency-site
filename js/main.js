@@ -6,22 +6,24 @@
 
   // ---------- Lazy-load [data-hero-video] videos ----------
   const isPhone = window.matchMedia('(max-width: 768px)').matches;
-  const isSlow  = navigator.connection && /2g|slow-2g/.test(navigator.connection.effectiveType || '');
+  const isSlow  = (navigator.connection && /2g|slow-2g/.test(navigator.connection.effectiveType || '')) || false;
   document.querySelectorAll('[data-hero-video]').forEach((vid) => {
-    // On phones or slow networks: skip the video entirely. The poster image is enough.
-    if (isPhone || isSlow) {
+    // Truly slow networks only: keep poster. Phones DO get video (smaller variant).
+    if (isSlow) {
       vid.removeAttribute('autoplay');
       vid.removeAttribute('loop');
-      vid.style.opacity = '0.95';
       return;
     }
     const loadVideo = () => {
       const source = vid.querySelector('source[data-src]');
       if (source && !source.src) {
         let src = source.dataset.src;
-        // Desktop tablet (769-900): use medium variant for safety
-        if (window.innerWidth < 1100 && src.includes('cloudinary.com') && src.includes('/upload/')) {
-          src = src.replace('/upload/', '/upload/w_1280,br_1500k,');
+        if (src.includes('cloudinary.com') && src.includes('/upload/')) {
+          if (isPhone) {
+            src = src.replace('/upload/', '/upload/w_720,br_700k,');
+          } else if (window.innerWidth < 1100) {
+            src = src.replace('/upload/', '/upload/w_1280,br_1500k,');
+          }
         }
         source.src = src;
         vid.load();
