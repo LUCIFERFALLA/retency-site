@@ -12,20 +12,20 @@
   --bg-card: rgba(255, 255, 255, 0.035);
   --bg-card-hover: rgba(255, 255, 255, 0.06);
 
-  /* Ink */
-  --text: #f2ede4;
-  --text-soft: #e6dfd4;
-  --text-dim: #8a8478;
-  --text-mute: #4f4a42;
+  /* Ink — slightly brighter ivory + better dim contrast */
+  --text: #faf5eb;
+  --text-soft: #ebe3d3;
+  --text-dim: #a8a094;
+  --text-mute: #5a554d;
 
-  /* Brand */
-  --crimson: #d62f3c;
-  --crimson-soft: #b32833;
-  --crimson-glow: rgba(214, 47, 60, 0.35);
-  --copper: #d4a256;
-  --copper-soft: #b88641;
-  --copper-glow: rgba(212, 162, 86, 0.3);
-  --warm-ember: #f06a3f;
+  /* Brand — punchier accents */
+  --crimson: #e63846;
+  --crimson-soft: #c2303c;
+  --crimson-glow: rgba(230, 56, 70, 0.4);
+  --copper: #dfae62;
+  --copper-soft: #c2934d;
+  --copper-glow: rgba(223, 174, 98, 0.35);
+  --warm-ember: #ff7848;
 
   /* Lines */
   --line: rgba(242, 237, 228, 0.08);
@@ -84,10 +84,10 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 .bg-ambient::before {
   content: ""; position: absolute; inset: -20%;
   background:
-    radial-gradient(ellipse 60% 50% at 20% 20%, rgba(214,47,60,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(212,162,86,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 50% 100%, rgba(240,106,63,0.06) 0%, transparent 60%);
-  filter: blur(80px);
+    radial-gradient(ellipse 65% 50% at 18% 15%, rgba(230,56,70,0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 42% at 82% 68%, rgba(223,174,98,0.13) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 32% at 50% 100%, rgba(255,120,72,0.09) 0%, transparent 60%);
+  filter: blur(85px);
 }
 .bg-grain {
   position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.05;
