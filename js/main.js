@@ -218,6 +218,18 @@
     });
   }
 
+  // ---------- Mobile sticky CTA: show after hero scrolls past ----------
+  try {
+    const stickyCta = document.getElementById('mobileStickyCta');
+    const heroEl = document.querySelector('.hero');
+    if (stickyCta && heroEl && window.matchMedia('(max-width: 768px)').matches) {
+      const heroObs = new IntersectionObserver(([entry]) => {
+        stickyCta.classList.toggle('visible', !entry.isIntersecting);
+      }, { threshold: 0 });
+      heroObs.observe(heroEl);
+    }
+  } catch (e) { /* silent */ }
+
   // =========================================================
   // Circular video gallery — buttery-smooth single-rAF lerp loop
   // =========================================================

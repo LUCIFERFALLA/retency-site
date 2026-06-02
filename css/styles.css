@@ -1511,3 +1511,68 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
   .marquee-item.logo { width: 110px; height: 44px; }
   .marquee-item.logo img { max-height: 30px; }
 }
+
+/* ============================================
+   ADDITIVE: Scroll cue + Mobile sticky CTA
+   (appended to end — does not modify any existing rules)
+   ============================================ */
+.scroll-cue {
+  position: absolute; left: 50%; bottom: 20px;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: var(--text-dim);
+  z-index: 4;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.scroll-cue:hover { color: var(--copper); }
+.scroll-cue-label {
+  font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+.scroll-cue-line {
+  width: 1px; height: 32px;
+  background: linear-gradient(180deg, currentColor 0%, transparent 100%);
+  position: relative; overflow: hidden;
+}
+.scroll-cue-line::after {
+  content: ""; position: absolute; top: -32px; left: 0; right: 0; height: 32px;
+  background: linear-gradient(180deg, var(--copper) 0%, transparent 100%);
+  animation: scrollCueDrop 2.2s ease-in-out infinite;
+}
+@keyframes scrollCueDrop {
+  0% { top: -32px; }
+  60%, 100% { top: 32px; }
+}
+@media (max-width: 768px) { .scroll-cue { display: none; } }
+
+.mobile-sticky-cta {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, transparent 0%, rgba(7,7,10,0.92) 30%);
+  z-index: 60;
+  pointer-events: none;
+  transform: translateY(120%);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-sticky-cta.visible { transform: translateY(0); pointer-events: auto; }
+.mobile-sticky-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%;
+  padding: 14px 22px;
+  background: var(--text); color: var(--bg);
+  border-radius: 100px;
+  font-family: var(--f-body); font-size: 14px; font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: 0 14px 32px -8px rgba(214,47,60,0.35);
+  text-decoration: none;
+  min-height: 48px;
+}
+.mobile-sticky-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--crimson);
+  box-shadow: 0 0 10px var(--crimson);
+}
+@media (max-width: 768px) { .mobile-sticky-cta { display: block; } }
