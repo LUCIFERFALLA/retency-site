@@ -1,54 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://retency.in/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://res.cloudinary.com/dij7gyend/video/upload/so_2,w_1200,q_auto,f_auto/upscaled-video_3_gwkfp5.jpg</image:loc>
-      <image:title>Retency — AI Creative & Animation Studio</image:title>
-    </image:image>
-    <video:video>
-      <video:thumbnail_loc>https://res.cloudinary.com/dij7gyend/video/upload/so_2,w_1200,q_auto,f_auto/upscaled-video_3_gwkfp5.jpg</video:thumbnail_loc>
-      <video:title>Retency — AI creative that turns attention into revenue</video:title>
-      <video:description>India's AI-native creative studio building AI ads, performance creatives, and original IP.</video:description>
-      <video:content_loc>https://res.cloudinary.com/dij7gyend/video/upload/q_auto,f_auto/upscaled-video_3_gwkfp5.mp4</video:content_loc>
-    </video:video>
   </url>
 
   <url>
     <loc>https://retency.in/services.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://retency.in/work.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://retency.in/swarajya.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
-    <image:image>
-      <image:loc>https://res.cloudinary.com/dij7gyend/video/upload/so_3,w_1200,q_auto,f_auto/second_draft_1_plr63b.jpg</image:loc>
-      <image:title>Swarajya — India's first AI anime</image:title>
-    </image:image>
-    <video:video>
-      <video:thumbnail_loc>https://res.cloudinary.com/dij7gyend/video/upload/so_3,w_1200,q_auto,f_auto/second_draft_1_plr63b.jpg</video:thumbnail_loc>
-      <video:title>Swarajya — Official trailer · India's first AI anime</video:title>
-      <video:description>A Retency original. Based on the life of Chhatrapati Shivaji Maharaj. Crafted frame-by-frame with AI.</video:description>
-      <video:content_loc>https://res.cloudinary.com/dij7gyend/video/upload/q_auto,f_auto/second_draft_1_plr63b.mp4</video:content_loc>
-    </video:video>
   </url>
 
 </urlset>
