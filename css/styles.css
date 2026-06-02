@@ -32,8 +32,8 @@
   --line-2: rgba(242, 237, 228, 0.14);
   --line-warm: rgba(212, 162, 86, 0.2);
 
-  /* Type — Boska (editorial serif display) + DM Sans (modern body) */
-  --f-display: 'Boska', 'Times New Roman', serif;
+  /* Type — Fraunces (Google Fonts, editorial serif) + DM Sans body */
+  --f-display: 'Fraunces', 'Times New Roman', serif;
   --f-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
   --f-mono: 'DM Mono', 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
 
