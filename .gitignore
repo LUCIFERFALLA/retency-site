@@ -5,3 +5,6 @@ Thumbs.db
 .idea
 *.log
 node_modules/
+
+# Internal SEO audit reports (not for deploy)
+retency.in-audit/
