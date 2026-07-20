@@ -1449,20 +1449,25 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
   .faq-a { font-size: 15px; padding-right: 0; }
   .faq-toggle { width: 26px; height: 26px; }
 
-  /* Contact */
-  .contact-grid { gap: 32px; }
-  .contact-info h2 { font-size: clamp(28px, 7vw, 36px); }
-  .contact-form { padding: 22px; }
+  /* Contact — compact on phones */
+  .contact-grid { gap: 28px; }
+  .contact-info h2 { font-size: clamp(26px, 6.5vw, 32px); }
+  .contact-lede { font-size: 15px; max-width: 100%; }
+  .contact-method { margin-top: 20px; padding: 14px 0; }
+  .contact-form { padding: 18px; }
+  .form-heading { margin-bottom: 16px; padding-bottom: 14px; }
   .form-heading h3 { font-size: 18px; }
+  .form-row { gap: 12px; margin-bottom: 12px; }
   .form-field input, .form-field textarea, .form-field select {
     font-size: 16px; /* iOS won't auto-zoom on 16px+ inputs */
-    padding: 14px 14px;
+    padding: 12px 13px;
   }
-  .form-field { margin-bottom: 16px; }
-  .trust-grid { gap: 10px; margin-top: 22px; }
-  .trust-cell { padding: 16px 16px; }
-  .trust-value { font-size: 17px; }
-  .qualification-line { font-size: 14px; padding: 14px 18px; }
+  .form-field { margin-bottom: 12px; }
+  .form-field textarea { min-height: 84px; }
+  .trust-grid { gap: 8px; margin-top: 18px; }
+  .trust-cell { padding: 12px 10px; }
+  .trust-label { font-size: 8.5px; margin-bottom: 5px; }
+  .trust-value { font-size: 14px; }
 
   /* Footer tighter */
   .footer { padding: 56px 0 28px; }
