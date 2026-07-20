@@ -23,6 +23,9 @@
             src = src.replace('/upload/', '/upload/w_720,br_700k,');
           } else if (window.innerWidth < 1100) {
             src = src.replace('/upload/', '/upload/w_1280,br_1500k,');
+          } else {
+            // Desktop was previously served the raw ~4.8MB source; cap it.
+            src = src.replace('/upload/', '/upload/w_1920,br_2000k,');
           }
         }
         source.src = src;
@@ -224,9 +227,13 @@
   try {
     const stickyCta = document.getElementById('mobileStickyCta');
     const heroEl = document.querySelector('.hero');
+    const fab = document.querySelector('.whatsapp-fab');
     if (stickyCta && heroEl && window.matchMedia('(max-width: 768px)').matches) {
       const heroObs = new IntersectionObserver(([entry]) => {
-        stickyCta.classList.toggle('visible', !entry.isIntersecting);
+        const ctaVisible = !entry.isIntersecting;
+        stickyCta.classList.toggle('visible', ctaVisible);
+        // Lift the WhatsApp button so it never collides with the sticky CTA bar
+        if (fab) fab.classList.toggle('lifted', ctaVisible);
       }, { threshold: 0 });
       heroObs.observe(heroEl);
     }

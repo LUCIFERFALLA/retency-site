@@ -1608,8 +1608,10 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
   70%      { box-shadow: 0 12px 28px -6px rgba(37,211,102,0.55), 0 4px 12px rgba(0,0,0,0.35), 0 0 0 14px rgba(37,211,102,0); }
 }
 @media (max-width: 768px) {
-  .whatsapp-fab { width: 54px; height: 54px; right: 16px; bottom: calc(88px + env(safe-area-inset-bottom)); }
+  .whatsapp-fab { width: 54px; height: 54px; right: 16px; bottom: calc(88px + env(safe-area-inset-bottom)); transition: bottom 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.25s; }
   .whatsapp-fab svg { width: 28px; height: 28px; }
+  /* When the mobile sticky "Start a project" bar is showing, lift the FAB clear of it */
+  .whatsapp-fab.lifted { bottom: calc(150px + env(safe-area-inset-bottom)); }
 }
 
 /* ============================================
