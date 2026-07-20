@@ -663,22 +663,31 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 /* ============================================
    CONTACT
    ============================================ */
+/* Contact runs tighter than other sections so it fits one screen */
+#contact.section { padding: var(--s-16) 0; }
+@media (max-width: 900px) { #contact.section { padding: var(--s-12) 0; } }
+
 .contact-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
 }
-@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 32px; align-items: stretch; } }
 
 .contact-info h2 {
   font-family: var(--f-display); font-weight: 500;
-  font-size: clamp(2.25rem, 4.8vw, 4.25rem); line-height: 1; margin-bottom: 24px;
+  font-size: clamp(2rem, 3.6vw, 3.25rem); line-height: 1.02; margin-bottom: 16px;
   letter-spacing: -0.05em;
   font-variation-settings: 'wdth' 88, 'opsz' 48;
   text-wrap: balance;
 }
 .contact-info h2 em { font-style: normal; color: var(--copper); font-weight: 500; }
 
+.contact-lede {
+  color: var(--text-soft); max-width: 42ch; margin-top: 0;
+  font-size: 16px; line-height: 1.55; font-family: var(--f-body);
+}
+
 .contact-method {
-  display: flex; align-items: center; gap: 18px; padding: 20px 0; margin-top: 32px;
+  display: flex; align-items: center; gap: 16px; padding: 16px 0; margin-top: 26px;
   border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
   transition: padding 0.3s;
 }
@@ -694,18 +703,17 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 
 /* Trust grid — project range, response time, fit */
 .trust-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  margin-top: 32px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  margin-top: 22px;
 }
-@media (max-width: 600px) { .trust-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .trust-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; } }
 .trust-cell {
-  padding: 18px 20px; border-radius: var(--r-md);
+  padding: 14px 14px; border-radius: var(--r-md);
   background: rgba(255,255,255,0.025);
   border: 1px solid var(--line-2);
 }
-.trust-label { font-family: var(--f-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-mute); margin-bottom: 10px; }
-.trust-value { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem; letter-spacing: -0.03em; color: var(--text); font-variation-settings: 'wdth' 88; }
-.trust-note { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+.trust-label { font-family: var(--f-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-mute); margin-bottom: 7px; }
+.trust-value { font-family: var(--f-display); font-weight: 500; font-size: 1.05rem; line-height: 1.15; letter-spacing: -0.03em; color: var(--text); font-variation-settings: 'wdth' 88; }
 
 /* What happens next */
 .next-steps { margin-top: 36px; }
@@ -723,20 +731,20 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 }
 
 .contact-form {
-  padding: var(--s-10); border-radius: var(--r-lg);
+  padding: var(--s-8); border-radius: var(--r-lg);
   background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
   border: 1px solid var(--line-2); backdrop-filter: blur(20px);
 }
-.form-heading { margin-bottom: var(--s-8); padding-bottom: var(--s-5); border-bottom: 1px solid var(--line); }
+.form-heading { margin-bottom: var(--s-6); padding-bottom: var(--s-4); border-bottom: 1px solid var(--line); }
 .form-heading h3 {
-  font-family: var(--f-display); font-weight: 500; font-size: clamp(20px, 1.8vw, 26px);
+  font-family: var(--f-display); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px);
   line-height: 1.15; letter-spacing: -0.025em; margin-bottom: var(--s-2);
 }
-.form-heading p { font-family: var(--f-body); font-size: 14px; color: var(--text-dim); line-height: 1.55; }
-@media (min-width: 1100px) { .contact-form { padding: var(--s-12); } }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); margin-bottom: var(--s-5); }
-@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; gap: var(--s-5); } }
-.form-field { display: flex; flex-direction: column; gap: var(--s-2); margin-bottom: var(--s-5); }
+.form-heading p { font-family: var(--f-body); font-size: 13.5px; color: var(--text-dim); line-height: 1.5; }
+@media (min-width: 1100px) { .contact-form { padding: var(--s-10); } }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); margin-bottom: var(--s-4); }
+@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; gap: var(--s-4); } }
+.form-field { display: flex; flex-direction: column; gap: var(--s-2); margin-bottom: var(--s-4); }
 .form-field label {
   font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--text-mute); font-weight: 500;
@@ -751,7 +759,7 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
 .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
   outline: none; border-color: var(--copper); background: rgba(212,162,86,0.05);
 }
-.form-field textarea { resize: vertical; min-height: 140px; }
+.form-field textarea { resize: vertical; min-height: 96px; }
 .form-field select {
   appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='%23d4a256'><path d='M6 8L0 0h12z'/></svg>");
