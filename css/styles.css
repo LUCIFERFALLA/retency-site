@@ -1605,3 +1605,98 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
   .whatsapp-fab { width: 54px; height: 54px; right: 16px; bottom: calc(88px + env(safe-area-inset-bottom)); }
   .whatsapp-fab svg { width: 28px; height: 28px; }
 }
+
+/* ============================================
+   DEEP MOBILE POLISH (last, wins cascade)
+   ============================================ */
+html, body {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+* { -webkit-tap-highlight-color: transparent; }
+img, video { max-width: 100%; height: auto; }
+
+@media (max-width: 900px) {
+  /* Prevent long words / URLs from causing horizontal overflow */
+  .hero-title, .section-title, .work-title, .founder-quote,
+  .shivaji-title, .faq-q, .contact-info h2 {
+    overflow-wrap: anywhere; word-break: normal; hyphens: none;
+  }
+
+  /* Nav — respect iOS notch, tighter height */
+  .nav-wrap { padding-top: calc(10px + env(safe-area-inset-top)); }
+  .nav { min-height: 52px; }
+
+  /* Hero — slightly smaller headline on true small phones so it doesn't clip */
+  .hero-title { font-size: clamp(30px, 8.5vw, 42px); }
+  .hero-eyebrow { padding: 6px 12px; }
+
+  /* Metric cards — 2-up on mobile so they don't stack too tall */
+  .hero-metrics { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+  .metric-card { padding: 12px 10px; }
+  .metric-num { font-size: 22px !important; letter-spacing: -0.02em; }
+  .metric-num em { font-size: inherit; }
+  .metric-label { font-size: 10px; line-height: 1.25; margin-top: 4px; }
+
+  /* Marquee — slower on mobile so brands actually register */
+  .marquee-track { animation-duration: 32s !important; }
+
+  /* SHEIN JPG has white bg — knock it back so it doesn't scream on dark marquee */
+  .marquee-item.logo img[alt="SHEIN"], .marquee-item.logo img[alt=""][src*="shein-logo"] {
+    mix-blend-mode: luminosity; opacity: 0.9;
+  }
+  /* All work-grid logos: give white-bg logos a soft dark backdrop */
+  .work-placeholder img[src*="shein-logo"] { background: #fff; padding: 12px; border-radius: 12px; }
+
+  /* Contact form — clear focus ring for touch */
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus {
+    outline: 2px solid var(--copper);
+    outline-offset: -2px;
+  }
+
+  /* WhatsApp FAB shouldn't overlap the mobile sticky CTA even when it's shown */
+  .whatsapp-fab { z-index: 71; }
+
+  /* Kill the process horizontal rail overflow on mobile — stack it */
+  .process-grid { grid-template-columns: 1fr !important; border-top: none; }
+  .process-step { border-left: 2px solid var(--line); border-top: none; padding: 20px 0 20px 18px; }
+  .process-step:first-child { border-top: 1px solid var(--line-2); padding-top: 22px; }
+
+  /* Circular carousel dots: hide on mobile (scroll indicates position) */
+  .circ-dots { display: none !important; }
+
+  /* Trailer overlay clearer on small screens */
+  .trailer-overlay { bottom: 12px; left: 12px; right: 12px; }
+  .trailer-overlay .mono { font-size: 10px; padding: 6px 10px; }
+
+  /* Founder photo shorter aspect so it's not a wall of image */
+  .founder-portrait { aspect-ratio: 1/1; max-height: 400px; }
+
+  /* Footer mega wordmark: avoid horizontal clipping */
+  .footer-mega { overflow: hidden; }
+}
+
+/* True phones (≤480) */
+@media (max-width: 480px) {
+  .hero-title { font-size: clamp(28px, 8vw, 36px); line-height: 1.08; }
+  .hero-sub { font-size: 14.5px; }
+  .hero-cta-row { flex-direction: column; align-items: stretch; }
+  .hero-cta-row .btn { justify-content: center; width: 100%; }
+  .metric-num { font-size: 19px !important; }
+  .metric-label { font-size: 9px; }
+  .whatsapp-fab { width: 50px; height: 50px; bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .whatsapp-fab svg { width: 26px; height: 26px; }
+
+  /* SHEIN JPG in work grid: light card, tight */
+  .work-placeholder img[src*="shein-logo"] { padding: 10px; }
+}
+
+/* Respect reduced motion — kill decorative animations */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+  .whatsapp-fab { animation: none !important; }
+  .reveal, .reveal-stagger > * { transition: none !important; transform: none !important; opacity: 1 !important; }
+}
