@@ -468,11 +468,17 @@ button { font: inherit; background: none; border: none; color: inherit; cursor: 
   max-width: 100%;
   width: auto; height: auto;
   object-fit: contain;
-  opacity: 0.85;
-  filter: grayscale(1) brightness(1.15) contrast(1);
-  transition: 0.35s;
+  opacity: 1;
+  filter: none;
+  transition: transform 0.35s;
 }
-.marquee-item.logo:hover img { opacity: 1; filter: grayscale(0) brightness(1); }
+.marquee-item.logo:hover img { transform: scale(1.05); }
+/* SHEIN JPG has a white bg — wrap it in a light card so it looks intentional on the dark marquee */
+.marquee-item.logo img[src*="shein-logo"] {
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
 
 /* ============================================
    SERVICES — Editorial bento
@@ -1642,11 +1648,7 @@ img, video { max-width: 100%; height: auto; }
   /* Marquee — slower on mobile so brands actually register */
   .marquee-track { animation-duration: 32s !important; }
 
-  /* SHEIN JPG has white bg — knock it back so it doesn't scream on dark marquee */
-  .marquee-item.logo img[alt="SHEIN"], .marquee-item.logo img[alt=""][src*="shein-logo"] {
-    mix-blend-mode: luminosity; opacity: 0.9;
-  }
-  /* All work-grid logos: give white-bg logos a soft dark backdrop */
+  /* SHEIN white-bg card in work grid — kept smaller on mobile */
   .work-placeholder img[src*="shein-logo"] { background: #fff; padding: 12px; border-radius: 12px; }
 
   /* Contact form — clear focus ring for touch */
