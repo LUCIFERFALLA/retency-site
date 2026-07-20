@@ -44,7 +44,7 @@
   [
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": ["Organization", "ProfessionalService"],
       "@id": "https://retency.in/#organization",
       "name": "Retency Media",
       "alternateName": ["Retency", "Retency Studio"],
@@ -52,19 +52,25 @@
       "logo": {
         "@type": "ImageObject",
         "url": "https://retency.in/assets/chakra-logo.svg",
-        "width": "512",
-        "height": "512"
+        "width": 512,
+        "height": 512
       },
       "image": "https://retency.in/assets/og-card.svg",
       "email": "retencymedia@gmail.com",
-      "description": "India's AI-native creative studio building AI ads, AI creatives, performance marketing, SEO, PR, and original IP — for SHEIN, Flipkart, SuperMoney, XTEP, Shivora Ghee, Parv Essentials, Enorex, Manak Petroleum and more. Makers of Swarajya — India's first AI anime.",
+      "telephone": "+91-9880453875",
+      "priceRange": "₹₹",
+      "description": "India's AI-native creative studio building AI ads, AI creatives, performance marketing, SEO, PR, and original IP for SHEIN, Flipkart, SuperMoney, XTEP, Shivora Ghee, Parv Essentials, Enorex, Manak Petroleum and more. Makers of Swarajya, India's first AI anime.",
       "slogan": "Growth is luck. Luck is engineered.",
       "foundingDate": "2024",
       "founder": {
         "@type": "Person",
+        "@id": "https://retency.in/#parth-agarwal",
         "name": "Parth Agarwal",
         "jobTitle": "Founder",
-        "image": "https://res.cloudinary.com/uebesiag/image/upload/c_fill,g_face,ar_1:1,w_400,q_auto,f_auto/v1783365954/IMG_8912_mdktoh.jpg"
+        "worksFor": { "@id": "https://retency.in/#organization" },
+        "url": "https://retency.in/",
+        "image": "https://res.cloudinary.com/uebesiag/image/upload/c_fill,g_face,ar_1:1,w_400,q_auto,f_auto/v1783365954/IMG_8912_mdktoh.jpg",
+        "sameAs": []
       },
       "address": {
         "@type": "PostalAddress",
@@ -133,14 +139,14 @@
     {
       "@context": "https://schema.org",
       "@type": "CreativeWork",
-      "@id": "https://retency.in/swarajya.html",
+      "@id": "https://retency.in/swarajya",
       "name": "Swarajya",
       "alternateName": "Swarajya — India's first AI anime",
       "description": "Swarajya is a Retency original anime series based on the life of Chhatrapati Shivaji Maharaj — crafted frame-by-frame with AI. India's first AI anime.",
       "creator": { "@id": "https://retency.in/#organization" },
       "genre": ["Anime", "Historical", "AI-generated"],
       "inLanguage": "en",
-      "url": "https://retency.in/swarajya.html"
+      "url": "https://retency.in/swarajya"
     },
     {
       "@context": "https://schema.org",
@@ -963,6 +969,7 @@
           <span class="brand-name">Retency</span>
         </div>
         <p>Growth is luck. Luck is engineered.</p>
+        <p class="footer-nap" style="margin-top:10px;font-size:12px;color:var(--text-mute);line-height:1.6">Bengaluru, Karnataka, India<br/><a href="https://wa.me/919880453875" style="color:var(--text-dim)">WhatsApp: +91 98804 53875</a></p>
       </div>
       <div class="footer-col"><h4>Studio</h4><ul><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="work.html">Work</a></li><li><a href="swarajya.html">Swarajya</a></li><li><a href="blog.html">Blog</a></li></ul></div>
       <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">AI Ad Creatives</a></li><li><a href="services.html">PR &amp; Earned Media</a></li><li><a href="services.html">AI Film &amp; Animation</a></li><li><a href="services.html">Growth Retainer</a></li></ul></div>
