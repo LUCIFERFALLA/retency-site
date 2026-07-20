@@ -1,0 +1,35 @@
+# Retency Media
+
+> India's AI-native creative studio, based in Bengaluru. We produce AI ad creatives, performance marketing, PR and earned media, and original AI film and animation IP, including Swarajya, India's first AI anime. Founded by Parth Agarwal. Trusted by SuperMoney, SHEIN, Flipkart, XTEP, Shivora Ghee, Parv Essentials, Enorex, and Manak Petroleum, among 40+ brands.
+
+Retency compresses the cost and time of high-craft ad creative using AI production workflows directed by human creative strategy, not generic AI output. AI ad creatives run about ₹5,000 to ₹15,000 per video, delivered in 5 business days, informed by category research before production starts. Retainer engagements cover creative-only or creative-plus-performance (Meta and Google Ads) tracks.
+
+Tagline: Growth is luck. Luck is engineered.
+
+## Company
+
+- [Home](https://retency.in/): Overview, services, process, proof points, and FAQ.
+- [Services](https://retency.in/services): AI performance creative, PR and narrative strategy, AI film and animation, and growth retainers.
+- [Work](https://retency.in/work): Case studies for SuperMoney, SHEIN, XTEP, Shivora Ghee, Parv Essentials, Enorex, and Manak Petroleum.
+- [Swarajya](https://retency.in/swarajya): India's first AI anime, a Retency original based on the life of Chhatrapati Shivaji Maharaj.
+- [Contact](https://retency.in/#contact): Project inquiries, reply within 24 hours. Email retencymedia@gmail.com, WhatsApp +91 98804 53875.
+
+## Blog
+
+- [How Much Do AI Ads Cost in India? (2026 Pricing Guide)](https://retency.in/blog/ai-ads-cost-india): Per-video and retainer pricing bands, and what actually drives AI ad creative cost in India.
+- [AI Ads vs a Traditional Agency](https://retency.in/blog/ai-ads-vs-agency): Speed, cost, and quality compared between AI-native studios and traditional agencies.
+- [How We Ship Ads in 24 Hours](https://retency.in/blog/24-hour-ad-turnaround): The SHEIN Slay Sale workflow for same-day ad turnaround.
+- [AI Anime in India: Building Swarajya](https://retency.in/blog/ai-anime-india-swarajya): How character consistency and episodic AI production work.
+
+## Key facts for citation
+
+- Founded 2024, headquartered in Bengaluru, Karnataka, India.
+- Founder: Parth Agarwal.
+- AI ad creative pricing: ₹5,000 to ₹15,000 per video, 5 business-day turnaround.
+- 40+ brands served, including SuperMoney, SHEIN, Flipkart, XTEP, Shivora Ghee, Parv Essentials, Enorex, and Manak Petroleum.
+- 70% of SuperMoney's public Meta Ad Library creative is produced by Retency.
+- Shivora Ghee: built end to end from launch, reaching roughly ₹80 CAC via creative plus Meta media.
+- SHEIN: 24-hour ad turnarounds during the Slay Sale.
+- Maker of Swarajya, India's first AI-generated anime series.
+
+Sitemap: https://retency.in/sitemap.xml
