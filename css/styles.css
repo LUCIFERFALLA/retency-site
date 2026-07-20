@@ -1879,3 +1879,108 @@ img, video { max-width: 100%; height: auto; }
   .article-cta { padding: 30px 22px; margin-top: 44px; }
   .blog-card { min-height: 260px; padding: 26px 22px 22px; }
 }
+
+/* ============================================
+   MOBILE SWIPE CAROUSELS
+   Turn tall stacked card sections into horizontal
+   swipe rails on phones. Laptop/tablet untouched.
+   ============================================ */
+@media (max-width: 768px) {
+
+  /* Shared rail behaviour — override the stacked grids */
+  .services-grid,
+  .work-grid,
+  .testimonial-grid,
+  .blog-grid,
+  .process-grid,
+  .timeline {
+    display: flex !important;
+    grid-template-columns: none !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px !important;
+    padding: 4px 0 16px;
+    /* thin scroll affordance on browsers that show it */
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-2) transparent;
+    scroll-padding: 0;
+  }
+  .services-grid::-webkit-scrollbar,
+  .work-grid::-webkit-scrollbar,
+  .testimonial-grid::-webkit-scrollbar,
+  .blog-grid::-webkit-scrollbar,
+  .process-grid::-webkit-scrollbar,
+  .timeline::-webkit-scrollbar { height: 3px; }
+  .services-grid::-webkit-scrollbar-thumb,
+  .work-grid::-webkit-scrollbar-thumb,
+  .testimonial-grid::-webkit-scrollbar-thumb,
+  .blog-grid::-webkit-scrollbar-thumb,
+  .process-grid::-webkit-scrollbar-thumb,
+  .timeline::-webkit-scrollbar-thumb { background: var(--copper); border-radius: 3px; opacity: 0.6; }
+
+  /* Cards in a rail must stay visible — the scroll-reveal observer can leave
+     horizontally-offscreen slides stuck at opacity 0 otherwise. */
+  .services-grid > *,
+  .work-grid > *,
+  .testimonial-grid > *,
+  .blog-grid > *,
+  .process-grid > *,
+  .timeline > * { opacity: 1 !important; transform: none !important; }
+
+  /* Each card becomes a snap slide with a peek of the next one.
+     Different widths per section so the rhythm feels varied. */
+
+  /* Services — big bento cards, one at a time with a peek */
+  .services-grid > .svc {
+    flex: 0 0 86%;
+    scroll-snap-align: center;
+    min-height: 300px;
+    grid-column: auto !important;
+  }
+
+  /* Selected work — narrower cards, more of the next visible (there are many) */
+  .work-grid > .work-card {
+    flex: 0 0 72%;
+    scroll-snap-align: center;
+  }
+
+  /* Proof / receipts — one card, strong peek */
+  .testimonial-grid > .testimonial {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+  }
+
+  /* Blog cards */
+  .blog-grid > .blog-card {
+    flex: 0 0 80%;
+    scroll-snap-align: center;
+    min-height: 240px;
+  }
+
+  /* Process — compact step cards, ~1.6 visible so it reads as a sequence you scrub */
+  .process-grid {
+    border-top: none !important;
+    border-bottom: none !important;
+  }
+  .process-grid > .process-step {
+    flex: 0 0 62%;
+    scroll-snap-align: center;
+    border: 1px solid var(--line) !important;
+    border-radius: var(--r-md);
+    padding: 22px 20px 24px !important;
+    background: var(--bg-card);
+  }
+
+  /* Services-page timeline — same treatment */
+  .timeline > .timeline-item {
+    flex: 0 0 66%;
+    scroll-snap-align: center;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 22px 20px;
+    background: var(--bg-card);
+  }
+}
