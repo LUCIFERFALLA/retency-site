@@ -9,7 +9,11 @@ Tagline: Growth is luck. Luck is engineered.
 ## Company
 
 - [Home](https://retency.in/): Overview, services, process, proof points, and FAQ.
-- [Services](https://retency.in/services): AI performance creative, PR and narrative strategy, AI film and animation, and growth retainers.
+- [Services](https://retency.in/services): Overview of all four services.
+- [AI Ad Creative](https://retency.in/ai-ad-creative): Performance-grade AI video ads for Meta, Reels, and Shorts. ₹5,000 to ₹15,000 per video, 5-day delivery.
+- [AI Film & Animation](https://retency.in/ai-film-animation): Cinematic AI films, anime, and original brand worlds with character-consistent, episodic-ready workflows.
+- [PR & Earned Media](https://retency.in/pr-earned-media): Narrative strategy, founder positioning, and tier-1 press for Indian brands.
+- [Growth Retainer](https://retency.in/growth-retainer): Always-on creative engine; creative-only or creative-plus-performance (Meta and Google Ads) tracks.
 - [Pricing](https://retency.in/pricing): AI ad creative pricing. Per-video ₹5,000 to ₹15,000; creative-only and creative-plus-performance retainer tracks.
 - [Case Studies](https://retency.in/work): SuperMoney, SHEIN, Flipkart, XTEP, Shivora Ghee, Parv Essentials, Enorex, and Manak Petroleum.
 - [Swarajya](https://retency.in/swarajya): India's first AI anime, a Retency original based on the life of Chhatrapati Shivaji Maharaj.
