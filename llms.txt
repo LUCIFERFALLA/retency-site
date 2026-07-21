@@ -15,6 +15,10 @@ Tagline: Growth is luck. Luck is engineered.
 - [Swarajya](https://retency.in/swarajya): India's first AI anime, a Retency original based on the life of Chhatrapati Shivaji Maharaj.
 - [Contact](https://retency.in/#contact): Project inquiries, reply within 24 hours. Email retencymedia@gmail.com, WhatsApp +91 98804 53875.
 
+## Guides
+
+- [AI Ads in India: The Complete Guide (2026)](https://retency.in/ai-ads-in-india): The pillar guide. What AI ads are, cost, agency comparison, production speed, and how to choose a studio.
+
 ## Blog
 
 - [How Much Do AI Ads Cost in India? (2026 Pricing Guide)](https://retency.in/blog/ai-ads-cost-india): Per-video and retainer pricing bands, and what actually drives AI ad creative cost in India.
