@@ -67,7 +67,30 @@
     }
 
     const field = hx.querySelector('.hx-field');
-    let cur = 0, lastJ = -1, paused = false;
+    const hint  = hx.querySelector('.hx-rowhint');
+    let cur = 0, carousel = false;
+    // carousel state for the joined row
+    let off = 0, vel = 0, dragging = false, lastX = 0, moved = 0;
+    const SPAN = () => N * clamp(innerWidth * 0.152, 96, 210);
+    if (field) {
+      field.addEventListener('pointerdown', e => {
+        if (!carousel) return;
+        dragging = true; moved = 0; lastX = e.clientX; field.classList.add('dragging');
+        try { field.setPointerCapture(e.pointerId); } catch (_) {}
+      });
+      field.addEventListener('pointermove', e => {
+        if (!dragging) return;
+        const dx = e.clientX - lastX; lastX = e.clientX; moved += Math.abs(dx);
+        off -= dx; vel = -dx * 1.4;
+      });
+      const end = () => { dragging = false; field.classList.remove('dragging'); };
+      field.addEventListener('pointerup', end);
+      field.addEventListener('pointercancel', end);
+      field.addEventListener('wheel', e => {
+        if (!carousel || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+        e.preventDefault(); vel += e.deltaX * 0.5;
+      }, { passive: false });
+    }
     onTick(() => {
       const r = hx.getBoundingClientRect();
       if (r.bottom < -200 || r.top > innerHeight + 200) return;   // offscreen: do nothing
@@ -86,7 +109,11 @@
 
       for (let i = 0; i < N; i++) {
         const c = conf[i];
-        const ex = (i - (N - 1) / 2) * step;      // row target, px
+        let ex = (i - (N - 1) / 2) * step;        // row target, px
+        if (carousel) {                            // wrap into an endless belt
+          const span = SPAN();
+          ex = (((ex - off) % span) + span * 1.5) % span - span / 2;
+        }
         const x = lerp(c.sx * vw, ex, eased) + px * (10 - i * 1.1);
         const y = lerp(c.sy * vh, 0, eased) + py * (8 - i * 0.9);
         const rot = lerp(c.sr, 0, eased);
@@ -97,6 +124,11 @@
         c.el.style.opacity = op.toFixed(3);
       }
 
+      if (carousel) {
+        if (!dragging) vel *= 0.93;
+        off += vel * 0.06 + 0.30;
+      }
+
       if (copy) {
         const fade = clamp((cur - 0.34) / 0.30, 0, 1);
         copy.style.transform = `translate3d(0,${(-fade * 64).toFixed(1)}px,0)`;
@@ -104,35 +136,18 @@
         copy.style.pointerEvents = fade > 0.7 ? 'none' : '';
       }
 
-      // once the tiles have joined, the row reads as one slab:
-      // blur the footage back and bring the message forward.
-      // NOTE: blur is applied ONCE to the container, never per-video, and the
-      // clips are paused while blurred — filtering live video is ruinously slow.
+      // once joined, the row behaves like a carousel: it keeps drifting
+      // and you can throw it. No blur, nothing covering the films.
+      const join = clamp((eased - 0.66) / 0.34, 0, 1);
+      const j = join * join * (3 - 2 * join);
+      carousel = j > 0.5;
       if (banner) {
-        const join = clamp((eased - 0.72) / 0.28, 0, 1);
-        const j = join * join * (3 - 2 * join);
-        if (Math.abs(j - lastJ) > 0.004) {
-          lastJ = j;
-          field.style.filter = j > 0.01
-            ? `blur(${(j * 8).toFixed(1)}px) brightness(${(1 - j * 0.45).toFixed(2)})`
-            : '';
-          banner.style.opacity = j.toFixed(3);
-          banner.style.transform = `translate(-50%,-50%) translate3d(0,${((1 - j) * 22).toFixed(1)}px,0)`;
-          banner.classList.toggle('on', j > 0.55);
-
-          // stop decoding frames nobody can make out
-          const shouldPause = j > 0.35;
-          if (shouldPause !== paused) {
-            paused = shouldPause;
-            for (let i = 0; i < N; i++) {
-              const v = conf[i].el.querySelector('video');
-              if (!v) continue;
-              if (paused) { if (!v.paused) v.pause(); }
-              else { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
-            }
-          }
-        }
+        banner.style.opacity = (j * 0.96).toFixed(3);
+        banner.style.transform = `translate(-50%,-50%) translate3d(0,${(-(innerHeight * 0.30)).toFixed(0)}px,0)`;
+        banner.classList.toggle('on', j > 0.6);
       }
+      if (hint) hint.classList.toggle('on', j > 0.6);
+
     });
   }
 
