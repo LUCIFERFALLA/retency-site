@@ -17,17 +17,52 @@ body.studio{
 
   background:var(--paper);
   color:var(--ink);
+
+  /* ---- remap the legacy dark-theme tokens -------------------------
+     styles.css is the dark theme and ~120 of its rules paint with
+     --text/--text-dim/--text-mute/--line. Defining only the new --ink
+     tokens left every one of those rules still painting near-white on
+     the cream page (that is what made .svc-link and friends vanish).
+     Remap at the root so the whole legacy sheet inherits the light
+     theme, then flip them back inside the dark bands below. */
+  --text:var(--ink);
+  --text-soft:#1c1c22;
+  --text-dim:var(--ink-2);
+  --text-mute:var(--ink-3);
+  --line:var(--rule-2);
+  --line-2:var(--rule);
 }
+
+/* Dark scopes flip the same tokens back, so anything nested in a band
+   stays legible without per-element overrides. */
+body.studio .band,
+body.studio .rail-sec,
+body.studio .marquee-section,
+body.studio .swa,
+body.studio .work-card,
+body.studio .rail-card,
+body.studio .footer{
+  --text:#f4f2ee;
+  --text-soft:rgba(244,242,238,.88);
+  --text-dim:rgba(244,242,238,.62);
+  --text-mute:rgba(244,242,238,.45);
+  --line:rgba(244,242,238,.10);
+  --line-2:rgba(244,242,238,.18);
+}
+
 body.studio .bg-ambient,
 body.studio .bg-grain{ display:none; }
 
-/* kill the dark-theme section defaults on light pages */
+/* kill the dark-theme section defaults on light pages.
+   These paint with the scoped tokens, NOT raw --ink, so a heading
+   inside a dark band goes light automatically instead of being forced
+   to near-black on near-black (which is what happened to .rail-title). */
 body.studio .section{ background:transparent; }
 body.studio .section-title,
-body.studio h1,body.studio h2,body.studio h3{ color:var(--ink); }
+body.studio h1,body.studio h2,body.studio h3{ color:var(--text); }
 body.studio .section-desc,
-body.studio p{ color:var(--ink-2); }
-body.studio .section-num{ color:var(--ink-3); }
+body.studio p{ color:var(--text-dim); }
+body.studio .section-num{ color:var(--text-mute); }
 body.studio .section-num em{ color:var(--red); font-style:normal; }
 body.studio .section-title em{ color:var(--red); }
 
@@ -40,8 +75,10 @@ body.studio .nav{
   backdrop-filter:blur(18px) saturate(1.4);
   -webkit-backdrop-filter:blur(18px) saturate(1.4);
 }
+/* --text, not --ink: .brand-name also appears in the dark footer, where
+   a hardcoded ink value put near-black on near-black. */
 body.studio .nav-links a,
-body.studio .brand-name{ color:var(--ink); }
+body.studio .brand-name{ color:var(--text); }
 body.studio .nav-links a:hover{ color:var(--red); }
 body.studio .nav-cta{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
 body.studio .nav-cta:hover{ background:var(--red); border-color:var(--red); }
@@ -259,7 +296,17 @@ body.studio .blog-card-title,body.studio .trust-value{ color:var(--ink); }
 body.studio .svc-desc,body.studio .testi-quote,body.studio .blog-card-excerpt,
 body.studio .process-desc{ color:var(--ink-2); }
 body.studio .svc-num,body.studio .process-label,body.studio .trust-label,
-body.studio .work-tag,body.studio .blog-card-tag,body.studio .mono{ color:var(--ink-3); }
+body.studio .blog-card-tag,body.studio .mono{ color:var(--ink-3); }
+/* work tags live on a red-tinted pill inside a DARK card — muted ink
+   grey disappeared against it. Keep them light. */
+body.studio .work-tag,
+body.studio .work-tag.gold{ color:#f6a8ae; border-color:rgba(230,56,70,.42); }
+/* dark pill button: the label inherited the dark-theme --bg, so it was
+   near-black on the near-black pill. styles.css sets that colour with
+   !important, so this override has to carry it too. */
+body.studio .mobile-menu a.mobile-menu-cta,
+body.studio a.mobile-sticky-btn,
+body.studio a.mobile-sticky-btn span{ color:var(--paper) !important; }
 body.studio .svc-tag{ border-color:var(--rule); color:var(--ink-2); }
 body.studio .process-grid,body.studio .process-step{ border-color:var(--rule); }
 body.studio .process-num{ color:var(--red); }
