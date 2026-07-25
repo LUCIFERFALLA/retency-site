@@ -203,8 +203,8 @@
   <!-- Preload hero poster (LCP element) so it fetches in parallel with CSS -->
   <link rel="preload" as="image" fetchpriority="high" href="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_1920,q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.jpg" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300..800&display=swap" />
-  <link rel="stylesheet" href="css/styles.css?v=20260726a" />
-  <link rel="stylesheet" href="css/studio.css?v=20260726a" />
+  <link rel="stylesheet" href="css/styles.css?v=20260726c" />
+  <link rel="stylesheet" href="css/studio.css?v=20260726c" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 </head>
 <body class="studio">
@@ -301,14 +301,19 @@
             <source data-src="https://res.cloudinary.com/uebesiag/video/upload/w_620,br_900k,q_auto,f_auto/v1785019961/52_Therapist_1_wixurd.mp4" type="video/mp4" />
           </video>
         </figure>
-      <div class="hx-rowhint" aria-hidden="true"><i></i> Drag the reel</div>
-      <div class="hx-banner" aria-hidden="true">
-        <span class="hx-banner-kicker">40+ brands · 250M+ views engineered</span>
-        <span class="hx-banner-line">Growth is luck. <em>Luck is engineered.</em></span>
-        <a href="#contact" class="btn btn-primary hx-banner-cta">Start a project
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
+    </div>
+
+    <!-- The hint and the banner MUST sit outside .hx-field. That element
+         gets filter:blur() applied to it as the row joins, and a CSS
+         filter blurs every descendant — while these lived inside it the
+         headline was blurred to mush along with the clips. -->
+    <div class="hx-rowhint" aria-hidden="true"><i></i> Drag the reel</div>
+    <div class="hx-banner">
+      <span class="hx-banner-kicker">40+ brands · 250M+ views engineered</span>
+      <span class="hx-banner-line">Growth is luck. <em>Luck is engineered.</em></span>
+      <a href="#contact" class="btn btn-primary hx-banner-cta">Start a project
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
 
     <div class="wrap hx-copy">
@@ -732,29 +737,47 @@
 </section>
 
 <!-- FOUNDER NOTE -->
-<section class="section founder-section reveal" id="founder">
+<section class="section fnd" id="founder" data-fnd>
   <div class="wrap">
-    <div class="founder-grid">
-      <figure class="founder-portrait">
-        <img
-          src="https://res.cloudinary.com/uebesiag/image/upload/c_fill,g_face,ar_4:5,w_800,q_auto,f_auto/v1783365954/IMG_8912_mdktoh.jpg"
-          alt="Parth Agarwal — Founder, Retency"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="founder-portrait-tag mono">Founder · Retency</figcaption>
+
+    <div class="fnd-head">
+      <div class="section-num">[ 06 ] <em>From the founder</em></div>
+    </div>
+
+    <div class="fnd-stage">
+      <!-- portrait: parallax drift, duotone that clears as you arrive -->
+      <figure class="fnd-portrait">
+        <div class="fnd-portrait-inner">
+          <img
+            src="https://res.cloudinary.com/uebesiag/image/upload/c_fill,g_face,ar_4:5,w_900,q_auto,f_auto/v1783365954/IMG_8912_mdktoh.jpg"
+            alt="Parth Agarwal — Founder, Retency"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="fnd-wash" aria-hidden="true"></span>
+        </div>
+        <figcaption class="fnd-tag">
+          <span class="fnd-tag-dot" aria-hidden="true"></span>Parth Agarwal · Bengaluru
+        </figcaption>
       </figure>
-      <div class="founder-note">
-        <div class="section-num">[ 06 ] <em>From the founder</em></div>
-        <blockquote class="founder-quote">
-          We started Retency because the gap between "AI is changing creative" and "AI is producing creative
-          worth watching" was too big. So we built a studio that uses AI to <em>amplify craft</em>, not replace it.
-          Research-led, character-consistent, performance-grade. The same discipline that's making
-          <em>Swarajya</em> is what we bring to every brand we work with.
-        </blockquote>
-        <div class="founder-sign">
-          <div class="founder-sign-name">— Parth Agarwal</div>
-          <div class="founder-sign-meta mono">Founder · Retency · Bengaluru</div>
+
+      <div class="fnd-body">
+        <!-- each word lifts in on scroll -->
+        <blockquote class="fnd-quote" data-fnd-quote>We started Retency because the gap between “AI is changing creative” and “AI is producing creative worth watching” was too big. So we built a studio that uses AI to <em>amplify craft</em>, not replace it. Research-led, character-consistent, performance-grade. The same discipline making <em>Swarajya</em> is what we bring to every brand.</blockquote>
+
+        <!-- signature draws itself in -->
+        <div class="fnd-sign">
+          <svg class="fnd-sign-svg" viewBox="0 0 300 84" fill="none" aria-hidden="true">
+            <path class="fnd-sign-path" d="M8 60c10-30 18-44 24-44 5 0 3 12-2 24-6 14-14 26-14 26s10-30 22-40c7-6 12-4 12 3 0 6-4 14-8 21-3 6-2 9 2 9 6 0 12-8 17-17 3-6 7-6 7 0 0 5-3 12-3 17 0 4 3 6 7 4 7-3 13-11 18-20 3-5 7-4 6 2-1 7-4 13-4 18 0 4 3 5 7 3 6-3 12-10 17-18M108 34c14-3 28-5 42-6M196 62c8-26 14-40 20-40 4 0 3 10-2 21-5 12-12 22-12 22s9-26 19-35c6-5 11-3 11 3 0 5-3 12-6 18-3 5-2 8 2 8 6 0 13-9 19-20" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="fnd-sign-meta">Founder · Retency</div>
+        </div>
+
+        <!-- three things he actually answers for -->
+        <div class="fnd-facts">
+          <div class="fnd-fact"><b data-count="24" data-suffix="H">24</b><span>Brief to first cut</span></div>
+          <div class="fnd-fact"><b data-count="40" data-suffix="+">40</b><span>Brands shipped</span></div>
+          <div class="fnd-fact"><b data-count="250" data-suffix="M+">250</b><span>Views engineered</span></div>
         </div>
       </div>
     </div>
@@ -996,7 +1019,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
-<script src="js/main.js?v=20260726a"></script>
-<script src="js/studio.js?v=20260726a"></script>
+<script src="js/main.js?v=20260726c"></script>
+<script src="js/studio.js?v=20260726c"></script>
 </body>
 </html>

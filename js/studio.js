@@ -656,6 +656,99 @@
   }
 
   /* ==========================================================
+     6 · FOUNDER — portrait clears, the quote arrives a word at
+     a time as you scroll, the signature draws itself.
+     ========================================================== */
+  function initFounder() {
+    const sec = document.querySelector('[data-fnd]');
+    if (!sec) return;
+
+    /* signature: set the real path length so the dash animation is exact */
+    const path = sec.querySelector('.fnd-sign-path');
+    if (path && path.getTotalLength) {
+      const len = Math.ceil(path.getTotalLength());
+      path.style.setProperty('--len', len);
+    }
+
+    /* wrap every word so it can be lifted independently. Walk text nodes
+       only, so the <em> accents survive untouched. */
+    const quote = sec.querySelector('[data-fnd-quote]');
+    let words = [];
+    if (quote) {
+      const walker = document.createTreeWalker(quote, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      let n; while ((n = walker.nextNode())) nodes.push(n);
+      nodes.forEach(node => {
+        const parts = node.textContent.split(/(\s+)/);
+        if (parts.length < 2) return;
+        const frag = document.createDocumentFragment();
+        parts.forEach(p => {
+          if (!p) return;
+          if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+          const s = document.createElement('span');
+          s.className = 'fnd-w';
+          s.textContent = p;
+          frag.appendChild(s);
+        });
+        node.parentNode.replaceChild(frag, node);
+      });
+      words = [...quote.querySelectorAll('.fnd-w')];
+    }
+
+    /* arrival: clears the portrait, draws the signature, counts the facts */
+    let counted = false;
+    new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      sec.classList.add('is-in');
+      if (counted) return;
+      counted = true;
+      sec.querySelectorAll('.fnd-fact b').forEach(el => {
+        const target = parseInt(el.dataset.count, 10);
+        if (!target) return;
+        if (REDUCED) { el.textContent = target; return; }
+        const t0 = performance.now(), dur = 1500;
+        const step = now => {
+          const p = clamp((now - t0) / dur, 0, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased);
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.28 }).observe(sec);
+
+    if (REDUCED || !words.length) return;
+
+    /* scrub the words in against scroll position through the section */
+    words.forEach(w => { w.style.opacity = '0'; w.style.transform = 'translate3d(0,14px,0)'; });
+    const portrait = sec.querySelector('.fnd-portrait-inner');
+    let last = -1;
+
+    onTick(() => {
+      const r = sec.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > innerHeight + 100) return;   // offscreen: idle
+
+      /* 0 when the section's top hits 85% of the viewport, 1 by 35% */
+      const p = clamp((innerHeight * 0.85 - r.top) / (innerHeight * 0.5), 0, 1);
+      if (Math.abs(p - last) < 0.004) return;
+      last = p;
+
+      const n = words.length;
+      for (let i = 0; i < n; i++) {
+        /* each word gets its own slice of the runway, with overlap */
+        const start = (i / n) * 0.72;
+        const wp = clamp((p - start) / 0.28, 0, 1);
+        const e = wp * wp * (3 - 2 * wp);
+        words[i].style.opacity = e.toFixed(3);
+        words[i].style.transform = `translate3d(0,${((1 - e) * 14).toFixed(2)}px,0)`;
+      }
+      if (portrait) {
+        portrait.style.transform = `translate3d(0,${((1 - p) * -22).toFixed(1)}px,0)`;
+      }
+    });
+  }
+
+  /* ==========================================================
      BOOT
      ========================================================== */
   const boot = () => {
@@ -667,6 +760,7 @@
     safe(initType, 'type');
     safe(initSections, 'sections');
     safe(initSignal, 'signal');
+    safe(initFounder, 'founder');
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();

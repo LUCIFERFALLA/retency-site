@@ -958,3 +958,115 @@ body.studio .swa-title em, body.studio .hx-banner-line em{
 
 /* tighten the gap between hero and the logo band */
 body.studio .marquee-section{ padding-block:clamp(56px,7vw,92px); }
+
+/* ============================================================
+   FOUNDER — portrait that clears, a quote that arrives a word
+   at a time, a signature that draws itself.
+   All motion is transform/opacity + one SVG dash offset.
+   ============================================================ */
+.fnd{ position:relative; overflow:hidden; }
+.fnd-head{ margin-bottom:clamp(28px,4vw,52px); }
+
+.fnd-stage{
+  display:grid; grid-template-columns:minmax(260px,.82fr) 1.18fr;
+  gap:clamp(32px,5.5vw,90px); align-items:start;
+}
+@media (max-width:900px){ .fnd-stage{ grid-template-columns:1fr; gap:clamp(26px,6vw,44px); } }
+
+/* ---- portrait ---- */
+.fnd-portrait{ margin:0; position:relative; }
+.fnd-portrait-inner{
+  position:relative; overflow:hidden;
+  border-radius:clamp(14px,1.6vw,20px);
+  aspect-ratio:4/5; background:#111;
+  box-shadow:0 40px 90px -40px rgba(12,12,14,.55);
+  will-change:transform;
+}
+.fnd-portrait-inner img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transform:scale(1.06); will-change:transform;
+  filter:grayscale(1) contrast(1.06);
+  transition:filter .9s cubic-bezier(0.16,1,0.3,1);
+}
+/* red wash lifts off as the section arrives */
+.fnd-wash{
+  position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg,rgba(230,56,70,.42) 0%,rgba(230,56,70,.16) 55%,rgba(12,12,14,.5) 100%);
+  mix-blend-mode:multiply;
+  opacity:1; transition:opacity 1s cubic-bezier(0.16,1,0.3,1);
+}
+.fnd.is-in .fnd-portrait-inner img{ filter:grayscale(0) contrast(1); }
+.fnd.is-in .fnd-wash{ opacity:0; }
+
+.fnd-tag{
+  display:flex; align-items:center; gap:9px;
+  margin-top:16px; font-family:var(--f-body);
+  font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.fnd-tag-dot{
+  width:7px; height:7px; border-radius:50%; background:var(--red);
+  animation:fndpulse 2.6s ease-in-out infinite;
+}
+@keyframes fndpulse{
+  0%,100%{ transform:scale(1); opacity:1; }
+  50%{ transform:scale(1.5); opacity:.45; }
+}
+
+/* ---- the quote, word by word ---- */
+.fnd-quote{
+  margin:0 0 clamp(28px,4vw,46px);
+  font-family:var(--f-body); font-weight:400;
+  font-size:clamp(17px,2.05vw,27px); line-height:1.5;
+  letter-spacing:-.01em; color:var(--ink);
+  text-wrap:pretty;
+}
+.fnd-quote em{ font-style:normal; color:var(--red); font-weight:600; }
+.fnd-w{ display:inline-block; will-change:transform,opacity; }
+
+/* ---- signature ---- */
+.fnd-sign{
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  padding-top:clamp(20px,2.6vw,30px); border-top:1px solid var(--rule);
+}
+.fnd-sign-svg{ width:clamp(170px,17vw,240px); height:auto; color:var(--ink); display:block; }
+.fnd-sign-path{
+  stroke-dasharray:var(--len,1400); stroke-dashoffset:var(--len,1400);
+  transition:stroke-dashoffset 2.1s cubic-bezier(0.22,1,0.36,1);
+}
+.fnd.is-in .fnd-sign-path{ stroke-dashoffset:0; }
+.fnd-sign-meta{
+  font-family:var(--f-body); font-size:10.5px; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+}
+
+/* ---- facts ---- */
+.fnd-facts{
+  display:flex; flex-wrap:wrap; margin-top:clamp(26px,3.4vw,40px);
+  border-top:1px solid var(--rule);
+}
+.fnd-fact{ flex:1 1 0; min-width:118px; padding:clamp(16px,2.2vw,22px) 18px 0 0; }
+.fnd-fact + .fnd-fact{ padding-left:18px; border-left:1px solid var(--rule); }
+.fnd-fact b{
+  display:block; font-family:var(--f-display); font-weight:400;
+  font-size:clamp(26px,3.4vw,46px); line-height:1;
+  letter-spacing:.012em; color:var(--ink);
+}
+.fnd-fact b::after{ content:attr(data-suffix); }
+.fnd-fact span{
+  display:block; margin-top:8px; font-family:var(--f-body);
+  font-size:9.5px; font-weight:500; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+@media (max-width:600px){
+  .fnd-fact{ min-width:0; padding-right:10px; }
+  .fnd-fact + .fnd-fact{ padding-left:10px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fnd-portrait-inner img{ filter:none; }
+  .fnd-wash{ opacity:0; }
+  .fnd-sign-path{ stroke-dashoffset:0; transition:none; }
+  .fnd-w{ opacity:1 !important; transform:none !important; }
+  .fnd-tag-dot{ animation:none; }
+}
