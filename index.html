@@ -202,7 +202,7 @@
   <link rel="preconnect" href="https://res.cloudinary.com" />
   <!-- Preload hero poster (LCP element) so it fetches in parallel with CSS -->
   <link rel="preload" as="image" fetchpriority="high" href="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_1920,q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.jpg" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,30..100;1,9..144,300..700,30..100&family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Inter:wght@300;400;500;600;700&display=swap" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/studio.css" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
@@ -250,57 +250,76 @@
   <a href="#contact" class="mobile-menu-cta">Start a project →</a>
 </div>
 
-<!-- HUD — the instrument frame -->
-<div class="hud" aria-hidden="true">
-  <div class="hud-cross"><i class="vx"></i><i class="hz"></i></div>
-  <div class="hud-frame">
-    <span class="hud-mark tl"></span><span class="hud-mark tr"></span>
-    <span class="hud-mark bl"></span><span class="hud-mark br"></span>
-    <div class="hud-prog"></div>
-    <div class="hud-read tr"><span data-clock>IST —:—:—</span></div>
-    <div class="hud-read bl"><span data-coord>X 0000  Y 0000</span></div>
-    <div class="hud-read br"><span>BENGALURU · 12.97°N</span><span data-scrollpct>000%</span></div>
-  </div>
-</div>
-<div class="cur" aria-hidden="true"></div>
-<div class="cur-ring" aria-hidden="true"><span class="lbl"></span></div>
 
-<!-- HERO — ASCII showreel: glyph field dissolves into film on scroll -->
-<section class="shero" id="top">
-  <div class="shero-plate" data-plate aria-hidden="true">
-    <video muted loop playsinline autoplay preload="none"
-      poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_1920,q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.jpg">
-      <source data-src="https://res.cloudinary.com/uebesiag/video/upload/w_1600,br_1800k,q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.mp4" type="video/mp4" />
-    </video>
-    <canvas></canvas>
-  </div>
-  <div class="shero-scrim" aria-hidden="true"></div>
 
-  <div class="wrap shero-inner">
-    <div class="shero-eyebrow">AI Creative &amp; Animation Studio · Bengaluru</div>
-
-    <h1 class="shero-title" data-kinetic>AI creative that turns <em>attention</em> into <em>revenue</em>.</h1>
-
-    <div class="shero-foot">
-      <p class="shero-sub sr">Launching, rebranding, or scaling your brand. We've got you covered. Share the brief and we'll respond within 24 hours with next steps.</p>
-      <div class="shero-actions sr">
-        <a href="#contact" class="btn btn-primary" data-cursor="Talk">Schedule a call
+<!-- HERO — work converges into the reel -->
+<section class="hx" data-hx>
+  <div class="hx-stick">
+    <div class="hx-field" aria-hidden="true">
+        <figure class="hx-tile" data-i="0" style="--sx:-34;--sy:-26;--sr:-11">
+          <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783359624/57_supermoney_crowd_o0ta6n.jpg">
+            <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783359624/57_supermoney_crowd_o0ta6n.mp4" type="video/mp4" />
+          </video>
+        </figure>
+        <figure class="hx-tile" data-i="1" style="--sx:-20;--sy:20;--sr:8">
+          <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783360775/16_ipl_interview_0804_uzibug.jpg">
+            <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783360775/16_ipl_interview_0804_uzibug.mp4" type="video/mp4" />
+          </video>
+        </figure>
+        <figure class="hx-tile" data-i="2" style="--sx:6;--sy:-30;--sr:-5">
+          <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783360201/HANUMAN_kvilbb.jpg">
+            <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783360201/HANUMAN_kvilbb.mp4" type="video/mp4" />
+          </video>
+        </figure>
+        <figure class="hx-tile" data-i="3" style="--sx:28;--sy:-6;--sr:10">
+          <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783361094/13_cashback_nita_0704_si7djk.jpg">
+            <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783361094/13_cashback_nita_0704_si7djk.mp4" type="video/mp4" />
+          </video>
+        </figure>
+        <figure class="hx-tile" data-i="4" style="--sx:40;--sy:24;--sr:-9">
+          <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783360303/42_walk_spot_hu9jjq.jpg">
+            <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783360303/42_walk_spot_hu9jjq.mp4" type="video/mp4" />
+          </video>
+        </figure>
+        <figure class="hx-tile" data-i="5" style="--sx:-8;--sy:32;--sr:5">
+          <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783360622/22_girl_stadium_ugc1004_hyaabr.jpg">
+            <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783360622/22_girl_stadium_ugc1004_hyaabr.mp4" type="video/mp4" />
+          </video>
+        </figure>
+      <div class="hx-banner" aria-hidden="true">
+        <span class="hx-banner-kicker">40+ brands · 2.4M+ views engineered</span>
+        <span class="hx-banner-line">Growth is luck. <em>Luck is engineered.</em></span>
+        <a href="#contact" class="btn btn-primary hx-banner-cta">Start a project
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="work.html" class="btn btn-ghost" data-cursor="View">See our work
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M7 7h10v10"/></svg>
         </a>
       </div>
     </div>
 
-    <div class="shero-stats sr">
-      <div class="shero-stat"><b>24H</b><span>Brief to first cut</span></div>
-      <div class="shero-stat"><b>40+</b><span>Brands shipped</span></div>
-      <div class="shero-stat"><b>62%</b><span>Avg ROAS lift</span></div>
-      <div class="shero-stat"><b>70%</b><span>Of SuperMoney's ad library</span></div>
+    <div class="wrap hx-copy">
+      <div class="hx-eyebrow">AI Creative &amp; Animation Studio · Bengaluru</div>
+      <h1 class="hx-title" data-kinetic>AI creative that turns <em>attention</em> into <em>revenue</em>.</h1>
+      <div class="hx-foot">
+        <p class="hx-sub">Launching, rebranding, or scaling your brand. We've got you covered. Share the brief and we'll respond within 24 hours with next steps.</p>
+        <div class="hx-actions">
+          <a href="#contact" class="btn btn-primary">Schedule a call
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="work.html" class="btn btn-ghost">See our work
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hx-stats">
+        <div class="hx-stat"><b>24H</b><span>Brief to first cut</span></div>
+        <div class="hx-stat"><b>40+</b><span>Brands shipped</span></div>
+        <div class="hx-stat"><b>62%</b><span>Avg ROAS lift</span></div>
+        <div class="hx-stat"><b>70%</b><span>Of SuperMoney's ad library</span></div>
+      </div>
     </div>
   </div>
 </section>
+
+
 
 <!-- MARQUEE -->
 <section class="marquee-section vmarquee">
@@ -428,6 +447,8 @@
       </div>
     </div>
 
+    <div class="sig" data-signal aria-hidden="true"></div>
+
     <div class="process-grid reveal-stagger">
       <div class="process-step">
         <div class="process-num">01</div>
@@ -462,6 +483,8 @@
     </div>
   </div>
 </section>
+
+
 
 <!-- PORTFOLIO REEL — infinite momentum rail -->
 <section class="section rail-sec" id="portfolio" style="padding-top:0">
@@ -722,19 +745,25 @@
   </div>
 </section>
 
-<!-- SHIVAJI TEASER -->
-<section class="shivaji-teaser">
-  <div class="shivaji-bg" style="background-image:url('assets/shivaji-1.jpeg')"></div>
-  <div class="wrap">
-    <div class="shivaji-content reveal">
-      <div class="shivaji-badge">India's first · AI anime feature</div>
-      <h2 class="shivaji-title">An empire,<br/>reimagined in <em>AI</em>.</h2>
-      <p class="shivaji-desc">
-        Swarajya is a Retency original, a frame-by-frame AI-crafted anime series
-        retelling one of history's most cinematic lives. A new format. A new craft. Made in India.
-      </p>
-      <a href="swarajya.html" class="btn btn-crimson">
-        Enter the world
+<!-- SWARAJYA — title first, then the film opens, then the invitation -->
+<section class="swa" data-swa aria-label="Swarajya, India's first AI anime">
+  <div class="swa-stick">
+    <div class="swa-frame">
+      <video muted loop playsinline preload="none"
+        poster="https://res.cloudinary.com/uebesiag/video/upload/so_3,w_1600,q_auto,f_auto/v1783360946/second_draft_1_olzldl.jpg">
+        <source data-src="https://res.cloudinary.com/uebesiag/video/upload/w_1600,br_1800k,q_auto,f_auto/v1783360946/second_draft_1_olzldl.mp4" type="video/mp4" />
+      </video>
+      <div class="swa-vig" aria-hidden="true"></div>
+    </div>
+
+    <div class="swa-lead">
+      <div class="swa-badge">India's first · AI anime feature</div>
+      <h2 class="swa-title">An empire,<br/>reimagined in <em>AI</em>.</h2>
+    </div>
+
+    <div class="swa-invite">
+      <p class="swa-desc">Swarajya is a Retency original: a frame-by-frame AI-crafted anime series retelling one of history's most cinematic lives. A new format. A new craft. Made in India.</p>
+      <a href="swarajya.html" class="btn btn-primary swa-cta">Enter the world
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
