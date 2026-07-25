@@ -752,8 +752,20 @@ body.studio .nav-cta-lite .arrow{ color:currentColor; }
 .hx-rowhint i{ width:22px; height:1px; background:var(--red); display:inline-block;
   animation:railhint 2.2s cubic-bezier(0.65,0.05,0.36,1) infinite; }
 
-/* the banner sits ABOVE the row, never on top of the films */
-.hx-banner{ top:auto; bottom:auto; }
+/* The banner is centred ON the joined slab — by this point the row has
+   blurred to 9px at 0.54 brightness, so it is a backdrop, not a film.
+   Do NOT set top/bottom to auto here: the abspos static position inside
+   this grid resolves to the top of .hx-stick, which threw the white text
+   onto the cream page where it read as invisible. */
+.hx-banner{ top:50%; bottom:auto; }
+/* soft focus scrim so the copy holds even where the slab is thin */
+.hx-banner::before{
+  content:""; position:absolute; left:50%; top:50%; z-index:-1;
+  width:150%; height:190%; transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse at center,
+    rgba(8,8,10,.72) 0%, rgba(8,8,10,.55) 45%, rgba(8,8,10,0) 72%);
+  pointer-events:none;
+}
 
 
 /* ============================================================
@@ -807,22 +819,40 @@ body.studio .hx-stat b, body.studio .svc-title, body.studio .work-title,
 body.studio .rail-title, body.studio .blog-card-title, body.studio .brand-name{
   font-family:var(--f-display); font-variation-settings:normal;
 }
+/* Bebas Neue is caps-only, condensed, single weight. Asking for 700 makes
+   the browser synthesise a bold and the strokes smear, so every display
+   element is pinned to 400 and gets POSITIVE tracking — condensed caps
+   set solid are unreadable without it. Caps have no descenders, so the
+   line-height can run tighter than a lowercase face would allow. */
 body.studio .hx-title, body.studio .section-title,
-body.studio .swa-title, body.studio .hx-banner-line, body.studio .page-header h1{
-  font-weight:700; letter-spacing:-.028em; font-style:normal;
+body.studio .swa-title, body.studio .hx-banner-line, body.studio .page-header h1,
+body.studio h1, body.studio h2, body.studio h3,
+body.studio .hx-stat b, body.studio .svc-title, body.studio .work-title,
+body.studio .rail-title, body.studio .blog-card-title, body.studio .brand-name{
+  font-weight:400;
+  letter-spacing:.012em;
+  font-style:normal;
 }
+/* the big display sizes carry a touch less tracking than small ones */
+body.studio .hx-title, body.studio .swa-title, body.studio .hx-banner-line{
+  letter-spacing:.006em; line-height:.92;
+}
+body.studio .section-title{ line-height:.96; }
+/* condensed glyphs pack more per ch — the old measures were set for
+   Helvetica and now read as tall narrow columns. */
+body.studio .hx-title{ max-width:19ch; }
+body.studio .hx-banner-line{ max-width:18ch; }
 body.studio .hx-title em, body.studio .section-title em,
 body.studio .swa-title em, body.studio .hx-banner-line em{
   font-style:normal; font-weight:700; color:var(--red);
 }
 
 /* ---- HERO: air. the copy sits low-left, never crowding the centre ---- */
-.hx-stick{ place-items:end start; }
-.hx-copy{
-  padding-bottom:clamp(26px,5vh,62px);
-  max-width:min(1180px,92vw);
-  margin:0 auto;
-}
+.hx-stick{ place-items:end stretch; }
+/* .hx-copy is also a .wrap — it MUST keep .wrap's measure and padding or
+   the hero copy sits on a different left edge than every other section
+   on the page. Do not give it its own max-width/margin. */
+.hx-copy{ padding-bottom:clamp(26px,5vh,62px); }
 .hx-eyebrow{ margin-bottom:clamp(20px,3.2vh,34px); }
 .hx-title{
   max-width:15ch;
