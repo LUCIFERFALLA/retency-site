@@ -41,6 +41,11 @@ body.studio .marquee-section,
 body.studio .swa,
 body.studio .work-card,
 body.studio .rail-card,
+body.studio .article-cta,
+body.studio .circ-card,
+body.studio .trailer-overlay,
+body.studio .shivaji-bg,
+body.studio .shivaji-hero-bg,
 body.studio .footer{
   --text:#f4f2ee;
   --text-soft:rgba(244,242,238,.88);
@@ -1070,3 +1075,23 @@ body.studio .marquee-section{ padding-block:clamp(56px,7vw,92px); }
   .fnd-w{ opacity:1 !important; transform:none !important; }
   .fnd-tag-dot{ animation:none; }
 }
+
+/* ============================================================
+   INNER PAGES — the dark CTA panel keeps its gradient (a black
+   block reads well as an accent on a light page), but its type
+   has to flip with it. Buttons inside it invert to stay visible.
+   ============================================================ */
+body.studio .article-cta{ border-color:rgba(244,242,238,.14); }
+body.studio .article-cta h2,
+body.studio .article-cta h3{ color:#f4f2ee; }
+body.studio .article-cta p{ color:rgba(244,242,238,.72); }
+body.studio .article-cta .btn-primary{
+  background:#f7f5f0; color:#0c0c0e; border-color:#f7f5f0;
+}
+body.studio .article-cta .btn-primary:hover{
+  background:var(--red); border-color:var(--red); color:#fff;
+}
+body.studio .article-cta .btn-ghost{
+  color:#f4f2ee; border-color:rgba(244,242,238,.34); background:transparent;
+}
+body.studio .article-cta .btn-ghost:hover{ border-color:#f4f2ee; }
