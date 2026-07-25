@@ -33,19 +33,19 @@ body.studio{
   --line-2:var(--rule);
 }
 
-/* Dark scopes flip the same tokens back, so anything nested in a band
-   stays legible without per-element overrides. */
-body.studio .band,
-body.studio .rail-sec,
-body.studio .marquee-section,
-body.studio .swa,
+/* The page is white end to end — no dark bands. The ONLY places that
+   still flip to light tokens are the two contexts where type genuinely
+   sits on top of moving footage (a work card's scrim, the Swarajya
+   trailer). Everything else, including the footer and the rail, stays
+   on the light scope. */
 body.studio .work-card,
 body.studio .rail-card,
-body.studio .footer{
+body.studio .reel-sticky,
+body.studio .swa-stick{
   --text:#f4f2ee;
   --text-soft:rgba(244,242,238,.88);
-  --text-dim:rgba(244,242,238,.62);
-  --text-mute:rgba(244,242,238,.45);
+  --text-dim:rgba(244,242,238,.72);
+  --text-mute:rgba(244,242,238,.55);
   --line:rgba(244,242,238,.10);
   --line-2:rgba(244,242,238,.18);
 }
@@ -97,14 +97,14 @@ body.studio .btn-ghost:hover{ border-color:var(--ink); background:transparent; }
    ============================================================ */
 .band{
   position:relative;
-  background:#0a0a0c;
-  color:#f4f2ee;
+  background:var(--paper);
+  color:var(--ink);
   /* break out of .wrap without horizontal scroll */
   padding-block:clamp(56px,8vw,110px);
 }
-.band h2,.band h3,.band .section-title{ color:#f4f2ee; }
-.band p,.band .section-desc{ color:rgba(244,242,238,.62); }
-.band .section-num{ color:rgba(244,242,238,.45); }
+.band h2,.band h3,.band .section-title{ color:var(--text); }
+.band p,.band .section-desc{ color:var(--text-dim); }
+.band .section-num{ color:var(--text-mute); }
 .band .section-title em,.band .section-num em{ color:var(--red); }
 
 /* ============================================================
@@ -167,7 +167,7 @@ body.studio .btn-ghost:hover{ border-color:var(--ink); background:transparent; }
    REEL — the showreel that grows with your scroll
    sticky runway + pure transform scale = 60fps
    ============================================================ */
-.reel-runway{ position:relative; height:230vh; background:#0a0a0c; }
+.reel-runway{ position:relative; height:230vh; background:var(--paper); }
 @media (max-width:768px){ .reel-runway{ height:170vh; } }
 
 .reel-sticky{
@@ -219,7 +219,7 @@ body.studio .btn-ghost:hover{ border-color:var(--ink); background:transparent; }
 }
 .rail-hint{
   font-family:var(--f-mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
-  color:rgba(244,242,238,.5); display:flex; align-items:center; gap:9px;
+  color:var(--ink-3); display:flex; align-items:center; gap:9px;
 }
 .rail-hint i{ width:20px; height:1px; background:var(--red); display:inline-block;
   animation:railhint 2.2s cubic-bezier(0.65,0.05,0.36,1) infinite; }
@@ -275,8 +275,8 @@ body.studio .btn-ghost:hover{ border-color:var(--ink); background:transparent; }
    LIGHT-THEME COMPONENT REPAIRS
    ============================================================ */
 /* marquee lives on a dark band so the white SuperMoney mark stays visible */
-body.studio .marquee-section{ background:#0a0a0c; padding-block:clamp(30px,4vw,46px); }
-body.studio .marquee-label{ color:rgba(244,242,238,.42); }
+body.studio .marquee-section{ background:var(--paper); padding-block:clamp(30px,4vw,46px); }
+body.studio .marquee-label{ color:var(--ink-3); }
 
 /* service / work / proof cards on paper */
 body.studio .svc,
@@ -351,7 +351,7 @@ body.studio .page-header h1 em{ color:var(--red); }
 body.studio .page-header p{ color:var(--ink-2); }
 
 /* footer stays dark — anchors the page */
-body.studio .footer{ background:#0a0a0c; border-color:transparent; }
+body.studio .footer{ background:var(--paper); border-top:1px solid var(--rule); }
 
 /* ============================================================
    HUD — technical hairlines (light)
@@ -547,13 +547,13 @@ body.studio{ cursor:auto !important; }
 .hx-banner.on{ pointer-events:auto; }
 .hx-banner-kicker{
   font-family:var(--f-body); font-size:10.5px; font-weight:600;
-  letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.72);
+  letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3);
 }
 .hx-banner-line{
   font-family:var(--f-display); font-weight:700;
   font-size:clamp(1.7rem,5vw,4.2rem); line-height:1;
   letter-spacing:-.045em; font-variation-settings:'wdth' 80;
-  color:#fff; text-wrap:balance; max-width:16ch;
+  color:var(--ink); text-wrap:balance; max-width:16ch;
 }
 .hx-banner-line em{ font-style:normal; color:var(--red); }
 .hx-banner-cta{ margin-top:6px; }
@@ -562,7 +562,7 @@ body.studio{ cursor:auto !important; }
 /* ============================================================
    SWARAJYA — title, then the film opens, then the invitation
    ============================================================ */
-.swa{ position:relative; height:260vh; background:#07070a; }
+.swa{ position:relative; height:260vh; background:var(--paper); }
 @media (max-width:768px){ .swa{ height:200vh; } }
 .swa-stick{
   position:sticky; top:0; height:100svh; min-height:540px;
@@ -669,30 +669,25 @@ body.studio .hx-stat b{ font-variant-numeric:tabular-nums; }
    SOFT BAND EDGES — no more hard white/black cuts
    ============================================================ */
 body.studio .marquee-section{
-  background:linear-gradient(180deg,
-    var(--paper) 0%, #0a0a0c 22%, #0a0a0c 78%, var(--paper) 100%);
+  background:var(--paper);
   padding-block:clamp(72px,9vw,120px);
 }
 body.studio .marquee-label{
-  color:rgba(244,242,238,.5);
+  color:var(--ink-3);
   margin-bottom:30px;
 }
 
 /* the work rail becomes its own dark stage with feathered edges */
 body.studio .rail-sec{
-  background:linear-gradient(180deg,
-    var(--paper) 0%, #0a0a0c 14%, #0a0a0c 86%, var(--paper) 100%);
+  background:var(--paper);
   padding-block:clamp(90px,11vw,150px);
 }
-body.studio .rail-sec .section-num{ color:rgba(244,242,238,.5); }
-body.studio .rail-sec .section-title{ color:#f4f2ee; }
+body.studio .rail-sec .section-num{ color:var(--ink-3); }
+body.studio .rail-sec .section-title{ color:var(--ink); }
 body.studio .rail-sec .section-title em{ color:var(--red); }
 
 /* Swarajya fades in from the page and out into the footer */
-body.studio .swa{
-  background:linear-gradient(180deg,
-    var(--paper) 0%, #07070a 9%, #07070a 100%);
-}
+body.studio .swa{ background:var(--paper); }
 
 /* generous, readable rhythm everywhere */
 body.studio .section{ padding-block:clamp(100px,13vw,190px); }
@@ -744,18 +739,19 @@ body.studio .nav{
   border:1px solid var(--rule);
   box-shadow:0 8px 30px -18px rgba(12,12,14,.28);
 }
+/* Plain nav links. No sliding underline, no colour swipe — just a quiet
+   opacity shift on hover. The bar itself never moves, resizes or
+   restyles on scroll; it stays exactly where it is the whole way down. */
 body.studio .nav-links a{
-  font-family:var(--f-body); font-weight:600;
-  font-size:13.5px; letter-spacing:-.01em; color:var(--ink);
-  position:relative; padding-bottom:2px;
+  font-family:var(--f-body); font-weight:500;
+  font-size:14px; letter-spacing:0; color:var(--ink);
+  position:relative; padding:6px 2px;
+  opacity:.72;
+  transition:opacity .25s ease, color .25s ease;
 }
-body.studio .nav-links a::after{
-  content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
-  background:var(--red); transition:right .35s cubic-bezier(0.16,1,0.3,1);
-}
-body.studio .nav-links a:hover::after,
-body.studio .nav-links a.active::after{ right:0; }
-body.studio .nav-links a.active{ color:var(--red); }
+body.studio .nav-links a::after{ content:none; }
+body.studio .nav-links a:hover{ opacity:1; color:var(--ink); }
+body.studio .nav-links a.active{ opacity:1; color:var(--ink); font-weight:600; }
 body.studio .brand-name{ font-family:var(--f-display); font-weight:800; letter-spacing:-.03em; }
 
 /* CTA is an outlined invitation, not a black brick */
@@ -810,7 +806,7 @@ body.studio .nav-cta-lite .arrow{ color:currentColor; }
   content:""; position:absolute; left:50%; top:50%; z-index:-1;
   width:150%; height:190%; transform:translate(-50%,-50%);
   background:radial-gradient(ellipse at center,
-    rgba(8,8,10,.72) 0%, rgba(8,8,10,.55) 45%, rgba(8,8,10,0) 72%);
+    rgba(247,245,240,.94) 0%, rgba(247,245,240,.82) 42%, rgba(247,245,240,0) 74%);
   pointer-events:none;
 }
 
