@@ -2068,3 +2068,24 @@ img, video { max-width: 100%; height: auto; }
 }
 .retainer-card h3 em { font-style: italic; color: var(--copper); }
 .retainer-card p { font-size: 14.5px; line-height: 1.6; color: var(--text-dim); }
+
+/* ============================================================
+   BEBAS NEUE METRICS — applies to all pages
+   Bebas Neue is caps-only, condensed, and ships a SINGLE 400
+   weight. This sheet's display sizing was written for Helvetica,
+   so it asks for 500-700 and negative tracking; on a condensed
+   caps face that synthesises a smeared bold and collides the
+   glyphs. Pin the weight and give the caps room to breathe.
+   Kept at the end so it wins on order without touching the
+   rules above it.
+   ============================================================ */
+h1, h2, h3, h4, h5, h6,
+.section-title, .svc-title, .work-title, .rail-title, .blog-card-title,
+.hero-title, .shero-title, .page-header h1, .price-title, .retainer-card h3,
+.trust-value, .contact-method-value, .testi-metric, .brand-name, .stat-value {
+  font-weight: 400;
+  letter-spacing: 0.012em;
+  font-variation-settings: normal;
+}
+/* the largest sizes need slightly less than the small ones */
+h1, .hero-title, .shero-title, .page-header h1 { letter-spacing: 0.006em; }
