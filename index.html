@@ -204,9 +204,10 @@
   <link rel="preload" as="image" fetchpriority="high" href="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_1920,q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.jpg" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,30..100;1,9..144,300..700,30..100&family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/studio.css" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 </head>
-<body>
+<body class="studio">
 
 <div class="bg-ambient"></div>
 <div class="bg-grain"></div>
@@ -249,85 +250,60 @@
   <a href="#contact" class="mobile-menu-cta">Start a project →</a>
 </div>
 
-<!-- HERO — Editorial with video background -->
-<section class="hero">
-  <div class="hero-video-wrap" aria-hidden="true">
-    <video
-      class="hero-video"
-      muted loop playsinline preload="metadata"
-      poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_1920,q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.jpg"
-      data-hero-video>
-      <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.mp4" type="video/mp4" />
-    </video>
-    <div class="hero-video-overlay"></div>
+<!-- HUD — the instrument frame -->
+<div class="hud" aria-hidden="true">
+  <div class="hud-cross"><i class="vx"></i><i class="hz"></i></div>
+  <div class="hud-frame">
+    <span class="hud-mark tl"></span><span class="hud-mark tr"></span>
+    <span class="hud-mark bl"></span><span class="hud-mark br"></span>
+    <div class="hud-prog"></div>
+    <div class="hud-read tr"><span data-clock>IST —:—:—</span></div>
+    <div class="hud-read bl"><span data-coord>X 0000  Y 0000</span></div>
+    <div class="hud-read br"><span>BENGALURU · 12.97°N</span><span data-scrollpct>000%</span></div>
   </div>
+</div>
+<div class="cur" aria-hidden="true"></div>
+<div class="cur-ring" aria-hidden="true"><span class="lbl"></span></div>
 
-  <div class="wrap">
-    <!-- Top meta strip -->
-    <div class="hero-top">
-      <span>MRS · 2026 · BENGALURU</span>
-      <span class="right">[ The shift ] · Where craft meets AI</span>
-    </div>
+<!-- HERO — ASCII showreel: glyph field dissolves into film on scroll -->
+<section class="shero" id="top">
+  <div class="shero-plate" data-plate aria-hidden="true">
+    <video muted loop playsinline autoplay preload="none"
+      poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_1920,q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.jpg">
+      <source data-src="https://res.cloudinary.com/uebesiag/video/upload/w_1600,br_1800k,q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.mp4" type="video/mp4" />
+    </video>
+    <canvas></canvas>
+  </div>
+  <div class="shero-scrim" aria-hidden="true"></div>
 
-    <!-- Headline stage -->
-    <div class="hero-stage">
-      <div class="hero-headline">
-        <div class="hero-eyebrow">AI Creative &amp; Animation Studio · Bengaluru</div>
-        <h1 class="hero-title">
-          AI creative that turns <span class="accent">attention</span> into <span class="accent">revenue</span>.
-        </h1>
-        <p class="hero-sub">
-          Launching, rebranding, or scaling your brand. We've got you covered.
-          Share the brief and we'll respond within 24 hours with next steps.
-        </p>
-        <div class="hero-cta-row">
-          <a href="#contact" class="btn btn-primary">Schedule a call
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a href="work.html" class="btn btn-ghost">See our work
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M7 7h10v10"/></svg>
-          </a>
-        </div>
+  <div class="wrap shero-inner">
+    <div class="shero-eyebrow">AI Creative &amp; Animation Studio · Bengaluru</div>
+
+    <h1 class="shero-title" data-kinetic>AI creative that turns <em>attention</em> into <em>revenue</em>.</h1>
+
+    <div class="shero-foot">
+      <p class="shero-sub sr">Launching, rebranding, or scaling your brand. We've got you covered. Share the brief and we'll respond within 24 hours with next steps.</p>
+      <div class="shero-actions sr">
+        <a href="#contact" class="btn btn-primary" data-cursor="Talk">Schedule a call
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="work.html" class="btn btn-ghost" data-cursor="View">See our work
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
       </div>
     </div>
 
-    <!-- Bottom: metrics + description/tags -->
-    <a href="#process" class="scroll-cue" aria-label="Scroll">
-      <span class="scroll-cue-label">Scroll</span>
-      <span class="scroll-cue-line"></span>
-    </a>
-
-    <div class="hero-bottom reveal">
-      <div class="hero-metrics">
-        <div class="metric-card">
-          <div class="metric-num"><em>24H</em></div>
-          <div class="metric-label">Brief to first cut</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-num"><em>40+</em></div>
-          <div class="metric-label">Brands shipped</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-num"><em>62%</em></div>
-          <div class="metric-label">Avg ROAS lift</div>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <p class="desc">An AI-first creative studio building scroll-stopping ads, editorial PR, and original IP, including India's first AI anime, Swarajya.</p>
-        <div class="hero-tags">
-          <span class="tag-pill">AI Creatives</span>
-          <span class="tag-pill">PR &amp; Earned</span>
-          <span class="tag-pill">AI Film</span>
-          <span class="tag-pill">Growth</span>
-        </div>
-      </div>
+    <div class="shero-stats sr">
+      <div class="shero-stat"><b>24H</b><span>Brief to first cut</span></div>
+      <div class="shero-stat"><b>40+</b><span>Brands shipped</span></div>
+      <div class="shero-stat"><b>62%</b><span>Avg ROAS lift</span></div>
+      <div class="shero-stat"><b>70%</b><span>Of SuperMoney's ad library</span></div>
     </div>
   </div>
 </section>
 
 <!-- MARQUEE -->
-<section class="marquee-section">
+<section class="marquee-section vmarquee">
   <div class="wrap"><div class="marquee-label">Trusted by brands that move fast</div></div>
   <div class="marquee">
     <div class="marquee-track">
@@ -487,87 +463,80 @@
   </div>
 </section>
 
-<!-- PORTFOLIO REEL — 3D circular video gallery -->
-<section class="section portfolio-section" id="portfolio" style="padding-top:0">
+<!-- PORTFOLIO REEL — infinite momentum rail -->
+<section class="section rail-sec" id="portfolio" style="padding-top:0">
   <div class="wrap">
-    <div class="section-head">
-      <div class="section-num reveal">[ 03 ] <em>In motion</em></div>
-      <div class="reveal">
-        <h2 class="section-title">A <em>reel</em> of the recent.</h2>
-        <p class="section-desc">Scroll to spin the carousel, or let it drift. Each card is a piece we shipped this year.</p>
+    <div class="rail-head">
+      <div>
+        <div class="section-num sr">[ 03 ] <em>In motion</em></div>
+        <h2 class="section-title sr" style="margin-top:10px">A <em>reel</em> of the recent.</h2>
       </div>
+      <div class="rail-hint"><i></i> Drag, scroll or throw it</div>
     </div>
   </div>
 
-  <div class="circ-stage" id="circStage">
-    <div class="circ-ring" id="circRing">
-
-      <div class="circ-card" data-idx="0">
-        <video class="circ-video" muted loop playsinline preload="none"
-          poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_900,q_auto,f_auto/v1783359624/57_supermoney_crowd_o0ta6n.jpg"
-          data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,w_900/v1783359624/57_supermoney_crowd_o0ta6n.mp4"></video>
-        <div class="circ-card-overlay">
-          <span class="circ-tag">SuperMoney · Brand Spot</span>
-          <h3 class="circ-title">Fintech · Crowd film</h3>
+  <div class="rail-view" data-rail>
+    <div class="rail-track">
+      <article class="rail-card" data-cursor="Play">
+        <span class="rail-idx">01 / 06</span>
+        <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783359624/57_supermoney_crowd_o0ta6n.jpg">
+          <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783359624/57_supermoney_crowd_o0ta6n.mp4" type="video/mp4" />
+        </video>
+        <div class="rail-meta">
+          <span class="rail-tag">SuperMoney · Brand Spot</span>
+          <h3 class="rail-title">Fintech · Crowd film</h3>
         </div>
-      </div>
-
-      <div class="circ-card" data-idx="1">
-        <video class="circ-video" muted loop playsinline preload="none"
-          poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_900,q_auto,f_auto/v1783360775/16_ipl_interview_0804_uzibug.jpg"
-          data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,w_900/v1783360775/16_ipl_interview_0804_uzibug.mp4"></video>
-        <div class="circ-card-overlay">
-          <span class="circ-tag">SuperMoney · IPL</span>
-          <h3 class="circ-title">Fintech · Interview spot</h3>
+      </article>
+      <article class="rail-card" data-cursor="Play">
+        <span class="rail-idx">02 / 06</span>
+        <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783360775/16_ipl_interview_0804_uzibug.jpg">
+          <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783360775/16_ipl_interview_0804_uzibug.mp4" type="video/mp4" />
+        </video>
+        <div class="rail-meta">
+          <span class="rail-tag">SuperMoney · IPL</span>
+          <h3 class="rail-title">Fintech · Interview spot</h3>
         </div>
-      </div>
-
-      <div class="circ-card" data-idx="2">
-        <video class="circ-video" muted loop playsinline preload="none"
-          poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_900,q_auto,f_auto/v1783360201/HANUMAN_kvilbb.jpg"
-          data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,w_900/v1783360201/HANUMAN_kvilbb.mp4"></video>
-        <div class="circ-card-overlay">
-          <span class="circ-tag">Original IP · Cinematic</span>
-          <h3 class="circ-title">Mythic · AI film</h3>
+      </article>
+      <article class="rail-card" data-cursor="Play">
+        <span class="rail-idx">03 / 06</span>
+        <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783360201/HANUMAN_kvilbb.jpg">
+          <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783360201/HANUMAN_kvilbb.mp4" type="video/mp4" />
+        </video>
+        <div class="rail-meta">
+          <span class="rail-tag">Original IP · Cinematic</span>
+          <h3 class="rail-title">Mythic · AI film</h3>
         </div>
-      </div>
-
-      <div class="circ-card" data-idx="3">
-        <video class="circ-video" muted loop playsinline preload="none"
-          poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_900,q_auto,f_auto/v1783361094/13_cashback_nita_0704_si7djk.jpg"
-          data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,w_900/v1783361094/13_cashback_nita_0704_si7djk.mp4"></video>
-        <div class="circ-card-overlay">
-          <span class="circ-tag">SuperMoney · Cashback</span>
-          <h3 class="circ-title">Fintech · Character ad</h3>
+      </article>
+      <article class="rail-card" data-cursor="Play">
+        <span class="rail-idx">04 / 06</span>
+        <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783361094/13_cashback_nita_0704_si7djk.jpg">
+          <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783361094/13_cashback_nita_0704_si7djk.mp4" type="video/mp4" />
+        </video>
+        <div class="rail-meta">
+          <span class="rail-tag">SuperMoney · Cashback</span>
+          <h3 class="rail-title">Fintech · Character ad</h3>
         </div>
-      </div>
-
-      <div class="circ-card" data-idx="4">
-        <video class="circ-video" muted loop playsinline preload="none"
-          poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_900,q_auto,f_auto/v1783360303/42_walk_spot_hu9jjq.jpg"
-          data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,w_900/v1783360303/42_walk_spot_hu9jjq.mp4"></video>
-        <div class="circ-card-overlay">
-          <span class="circ-tag">Shivora · Lifestyle</span>
-          <h3 class="circ-title">FMCG · Brand spot</h3>
+      </article>
+      <article class="rail-card" data-cursor="Play">
+        <span class="rail-idx">05 / 06</span>
+        <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783360303/42_walk_spot_hu9jjq.jpg">
+          <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783360303/42_walk_spot_hu9jjq.mp4" type="video/mp4" />
+        </video>
+        <div class="rail-meta">
+          <span class="rail-tag">Shivora · Lifestyle</span>
+          <h3 class="rail-title">FMCG · Brand spot</h3>
         </div>
-      </div>
-
-      <div class="circ-card" data-idx="5">
-        <video class="circ-video" muted loop playsinline preload="none"
-          poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_900,q_auto,f_auto/v1783360622/22_girl_stadium_ugc1004_hyaabr.jpg"
-          data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,w_900/v1783360622/22_girl_stadium_ugc1004_hyaabr.mp4"></video>
-        <div class="circ-card-overlay">
-          <span class="circ-tag">SuperMoney · UGC</span>
-          <h3 class="circ-title">Fintech · Stadium spot</h3>
+      </article>
+      <article class="rail-card" data-cursor="Play">
+        <span class="rail-idx">06 / 06</span>
+        <video muted loop playsinline preload="none" poster="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783360622/22_girl_stadium_ugc1004_hyaabr.jpg">
+          <source data-src="https://res.cloudinary.com/uebesiag/video/upload/q_auto,f_auto,br_900k,w_620/v1783360622/22_girl_stadium_ugc1004_hyaabr.mp4" type="video/mp4" />
+        </video>
+        <div class="rail-meta">
+          <span class="rail-tag">SuperMoney · UGC</span>
+          <h3 class="rail-title">Fintech · Stadium spot</h3>
         </div>
-      </div>
-
-    </div>
-
-    <div class="circ-controls">
-      <button class="circ-pager-btn" data-circ-prev aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg></button>
-      <div class="circ-dots" id="circDots"></div>
-      <button class="circ-pager-btn" data-circ-next aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l6-6-6-6"/></svg></button>
+      </article>
     </div>
   </div>
 </section>
@@ -983,5 +952,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/studio.js"></script>
 </body>
 </html>
