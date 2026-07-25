@@ -664,7 +664,9 @@ body.studio .rail-head{ margin-bottom:clamp(30px,4vw,52px); }
 
 
 /* ============================================================
-   SYNE — bold, sharp, readable
+   TYPE ROLES — display vs body. Families come from --f-display /
+   --f-body in styles.css, never hardcoded here, so swapping the
+   face is a one-line change in one file.
    ============================================================ */
 body.studio .hx-title,
 body.studio .section-title,
@@ -672,8 +674,7 @@ body.studio .swa-title,
 body.studio .hx-banner-line,
 body.studio .page-header h1,
 body.studio h1,body.studio h2{
-  font-family:'Syne',sans-serif; font-weight:800;
-  letter-spacing:-.035em; font-variation-settings:normal;
+  font-family:var(--f-display); font-variation-settings:normal;
 }
 body.studio .hx-stat b,
 body.studio .testi-metric em,
@@ -681,7 +682,7 @@ body.studio .svc-title,
 body.studio .work-title,
 body.studio .rail-title,
 body.studio .blog-card-title{
-  font-family:'Syne',sans-serif; font-weight:700; letter-spacing:-.025em;
+  font-family:var(--f-display);
   font-variation-settings:normal; font-style:normal;
 }
 body.studio .hx-title em,
@@ -697,7 +698,7 @@ body.studio .nav{
   box-shadow:0 8px 30px -18px rgba(12,12,14,.28);
 }
 body.studio .nav-links a{
-  font-family:'Syne',sans-serif; font-weight:600;
+  font-family:var(--f-body); font-weight:600;
   font-size:13.5px; letter-spacing:-.01em; color:var(--ink);
   position:relative; padding-bottom:2px;
 }
@@ -708,13 +709,13 @@ body.studio .nav-links a::after{
 body.studio .nav-links a:hover::after,
 body.studio .nav-links a.active::after{ right:0; }
 body.studio .nav-links a.active{ color:var(--red); }
-body.studio .brand-name{ font-family:'Syne',sans-serif; font-weight:800; letter-spacing:-.03em; }
+body.studio .brand-name{ font-family:var(--f-display); font-weight:800; letter-spacing:-.03em; }
 
 /* CTA is an outlined invitation, not a black brick */
 body.studio .nav-cta-lite{
   background:transparent; color:var(--ink);
   border:1.5px solid var(--ink);
-  font-family:'Syne',sans-serif; font-weight:700; font-size:13px;
+  font-family:var(--f-body); font-weight:700; font-size:13px;
 }
 body.studio .nav-cta-lite:hover{ background:var(--red); border-color:var(--red); color:#fff; }
 body.studio .nav-cta-lite .arrow{ color:currentColor; }
@@ -743,7 +744,7 @@ body.studio .nav-cta-lite .arrow{ color:currentColor; }
 .hx-rowhint{
   position:absolute; left:50%; bottom:clamp(22px,5vh,52px); z-index:4;
   transform:translateX(-50%);
-  font-family:'Syne',sans-serif; font-weight:600; font-size:11px;
+  font-family:var(--f-body); font-weight:600; font-size:11px;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
   display:flex; align-items:center; gap:9px; opacity:0; transition:opacity .5s;
 }
@@ -793,21 +794,22 @@ body.studio .reveal-stagger{
    FINAL PASS — one constant family, premium spacing, bigger cards
    ============================================================ */
 
-/* one typeface everywhere: real Helvetica on Mac/iOS, Inter elsewhere */
+/* two roles, applied consistently: display for headlines and numbers,
+   body for everything you actually read and every UI control. */
 body.studio,
+body.studio .nav-links a, body.studio .nav-cta-lite{
+  font-family:var(--f-body); font-variation-settings:normal;
+}
 body.studio .hx-title, body.studio .section-title, body.studio .swa-title,
 body.studio .hx-banner-line, body.studio .page-header h1,
 body.studio h1, body.studio h2, body.studio h3,
 body.studio .hx-stat b, body.studio .svc-title, body.studio .work-title,
-body.studio .rail-title, body.studio .blog-card-title, body.studio .brand-name,
-body.studio .nav-links a, body.studio .nav-cta-lite{
-  font-family:'Helvetica Neue',Helvetica,'Inter',Arial,sans-serif;
-  font-variation-settings:normal;
+body.studio .rail-title, body.studio .blog-card-title, body.studio .brand-name{
+  font-family:var(--f-display); font-variation-settings:normal;
 }
-/* Helvetica needs tight tracking and real weight to feel premium */
 body.studio .hx-title, body.studio .section-title,
 body.studio .swa-title, body.studio .hx-banner-line, body.studio .page-header h1{
-  font-weight:700; letter-spacing:-.038em; font-style:normal;
+  font-weight:700; letter-spacing:-.028em; font-style:normal;
 }
 body.studio .hx-title em, body.studio .section-title em,
 body.studio .swa-title em, body.studio .hx-banner-line em{

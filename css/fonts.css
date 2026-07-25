@@ -1,0 +1,64 @@
+/* ============================================================
+   RETENCY · FONTS
+   Self-hosted display + body faces.
+
+   Mageitan and Menirva are licensed marketplace fonts — they are
+   NOT on Google Fonts and cannot be fetched from a CDN. Drop the
+   webfont files into /fonts/ using exactly the names below and
+   they activate automatically. Until then every @font-face here
+   fails silently and the stack falls through to Inter, so the
+   site never breaks while we wait on the files.
+
+   Needed (woff2 strongly preferred — ~40% smaller than woff):
+     fonts/mageitan-regular.woff2
+     fonts/mageitan-bold.woff2      (optional)
+     fonts/menirva-regular.woff2
+     fonts/menirva-medium.woff2     (optional)
+     fonts/menirva-bold.woff2       (optional)
+
+   The stack itself lives in css/styles.css (--f-display/--f-body).
+   ============================================================ */
+
+/* ---------- DISPLAY — Mageitan ---------- */
+@font-face {
+  font-family: 'Mageitan';
+  src: url('/fonts/mageitan-regular.woff2') format('woff2'),
+       url('/fonts/mageitan-regular.woff')  format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Mageitan';
+  src: url('/fonts/mageitan-bold.woff2') format('woff2'),
+       url('/fonts/mageitan-bold.woff')  format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- BODY / UI — Menirva ---------- */
+@font-face {
+  font-family: 'Menirva';
+  src: url('/fonts/menirva-regular.woff2') format('woff2'),
+       url('/fonts/menirva-regular.woff')  format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Menirva';
+  src: url('/fonts/menirva-medium.woff2') format('woff2'),
+       url('/fonts/menirva-medium.woff')  format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Menirva';
+  src: url('/fonts/menirva-bold.woff2') format('woff2'),
+       url('/fonts/menirva-bold.woff')  format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
