@@ -33,9 +33,9 @@
   --line-warm: rgba(230, 56, 70, 0.22);
 
   /* Type — Fraunces (Google Fonts, editorial serif) + DM Sans body */
-  --f-display: 'Syne', 'Inter', sans-serif;
-  --f-body: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-  --f-mono: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --f-display: 'Helvetica Neue', Helvetica, 'Inter', Arial, sans-serif;
+  --f-body: 'Helvetica Neue', Helvetica, 'Inter', Arial, sans-serif;
+  --f-mono: 'Helvetica Neue', Helvetica, 'Inter', Arial, sans-serif;
 
   /* Spacing scale — 4px base */
   --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;

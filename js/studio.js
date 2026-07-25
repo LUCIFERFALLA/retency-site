@@ -68,18 +68,27 @@
 
     const field = hx.querySelector('.hx-field');
     const hint  = hx.querySelector('.hx-rowhint');
-    let cur = 0, carousel = false;
+    let cur = 0, carousel = false, lastJ = -1, paused = false;
     // carousel state for the joined row
     let off = 0, vel = 0, dragging = false, lastX = 0, moved = 0;
     const SPAN = () => N * clamp(innerWidth * 0.152, 96, 210);
     if (field) {
+      let downX = 0, downY = 0, claimed = false;
       field.addEventListener('pointerdown', e => {
         if (!carousel) return;
-        dragging = true; moved = 0; lastX = e.clientX; field.classList.add('dragging');
-        try { field.setPointerCapture(e.pointerId); } catch (_) {}
+        dragging = true; claimed = false; moved = 0;
+        lastX = e.clientX; downX = e.clientX; downY = e.clientY;
       });
       field.addEventListener('pointermove', e => {
         if (!dragging) return;
+        if (!claimed) {
+          const adx = Math.abs(e.clientX - downX), ady = Math.abs(e.clientY - downY);
+          if (adx < 8 && ady < 8) return;          // not yet a gesture
+          if (ady > adx) { dragging = false; return; }  // vertical -> let the page scroll
+          claimed = true;
+          field.classList.add('dragging');
+          try { field.setPointerCapture(e.pointerId); } catch (_) {}
+        }
         const dx = e.clientX - lastX; lastX = e.clientX; moved += Math.abs(dx);
         off -= dx; vel = -dx * 1.4;
       });
@@ -136,18 +145,38 @@
         copy.style.pointerEvents = fade > 0.7 ? 'none' : '';
       }
 
-      // once joined, the row behaves like a carousel: it keeps drifting
-      // and you can throw it. No blur, nothing covering the films.
-      const join = clamp((eased - 0.66) / 0.34, 0, 1);
+      // once joined: the row blurs back into one slab, the title forms over
+      // it, and the belt keeps drifting underneath (still draggable).
+      // Blur is applied ONCE to the container and the clips pause while
+      // blurred — filtering live video per-element destroys the framerate.
+      const join = clamp((eased - 0.62) / 0.38, 0, 1);
       const j = join * join * (3 - 2 * join);
-      carousel = j > 0.5;
-      if (banner) {
-        banner.style.opacity = (j * 0.96).toFixed(3);
-        banner.style.transform = `translate(-50%,-50%) translate3d(0,${(-(innerHeight * 0.30)).toFixed(0)}px,0)`;
-        banner.classList.toggle('on', j > 0.6);
-      }
-      if (hint) hint.classList.toggle('on', j > 0.6);
+      carousel = j > 0.35;
+      if (Math.abs(j - lastJ) > 0.004) {
+        lastJ = j;
+        if (field) {
+          field.style.filter = j > 0.01
+            ? `blur(${(j * 9).toFixed(1)}px) brightness(${(1 - j * 0.46).toFixed(2)})`
+            : '';
+        }
+        if (banner) {
+          banner.style.opacity = j.toFixed(3);
+          banner.style.transform = `translate(-50%,-50%) translate3d(0,${((1 - j) * 26).toFixed(1)}px,0)`;
+          banner.classList.toggle('on', j > 0.55);
+        }
+        if (hint) hint.classList.toggle('on', j > 0.62);
 
+        const shouldPause = j > 0.4;
+        if (shouldPause !== paused) {
+          paused = shouldPause;
+          for (let i = 0; i < N; i++) {
+            const v = conf[i].el.querySelector('video');
+            if (!v) continue;
+            if (paused) { if (!v.paused) v.pause(); }
+            else { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
+          }
+        }
+      }
     });
   }
 
@@ -293,12 +322,20 @@
       if (r.top < innerHeight && r.bottom > 0) vel += dy * 0.85;
     }, { passive: true });
 
+    let downX = 0, downY = 0, claimed = false;
     view.addEventListener('pointerdown', e => {
-      dragging = true; moved = 0; lastX = e.clientX;
-      try { view.setPointerCapture(e.pointerId); } catch (_) {}
+      dragging = true; claimed = false; moved = 0;
+      lastX = e.clientX; downX = e.clientX; downY = e.clientY;
     });
     view.addEventListener('pointermove', e => {
       if (!dragging) return;
+      if (!claimed) {
+        const adx = Math.abs(e.clientX - downX), ady = Math.abs(e.clientY - downY);
+        if (adx < 8 && ady < 8) return;
+        if (ady > adx) { dragging = false; return; }   // vertical -> page scrolls
+        claimed = true;
+        try { view.setPointerCapture(e.pointerId); } catch (_) {}
+      }
       const dx = e.clientX - lastX; lastX = e.clientX; moved += Math.abs(dx);
       off -= dx; vel = -dx * 1.5;
     });

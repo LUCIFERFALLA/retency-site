@@ -787,3 +787,79 @@ body.studio .reveal-stagger{
   opacity:1 !important;
   transform:none !important;
 }
+
+
+/* ============================================================
+   FINAL PASS — one constant family, premium spacing, bigger cards
+   ============================================================ */
+
+/* one typeface everywhere: real Helvetica on Mac/iOS, Inter elsewhere */
+body.studio,
+body.studio .hx-title, body.studio .section-title, body.studio .swa-title,
+body.studio .hx-banner-line, body.studio .page-header h1,
+body.studio h1, body.studio h2, body.studio h3,
+body.studio .hx-stat b, body.studio .svc-title, body.studio .work-title,
+body.studio .rail-title, body.studio .blog-card-title, body.studio .brand-name,
+body.studio .nav-links a, body.studio .nav-cta-lite{
+  font-family:'Helvetica Neue',Helvetica,'Inter',Arial,sans-serif;
+  font-variation-settings:normal;
+}
+/* Helvetica needs tight tracking and real weight to feel premium */
+body.studio .hx-title, body.studio .section-title,
+body.studio .swa-title, body.studio .hx-banner-line, body.studio .page-header h1{
+  font-weight:700; letter-spacing:-.038em; font-style:normal;
+}
+body.studio .hx-title em, body.studio .section-title em,
+body.studio .swa-title em, body.studio .hx-banner-line em{
+  font-style:normal; font-weight:700; color:var(--red);
+}
+
+/* ---- HERO: air. the copy sits low-left, never crowding the centre ---- */
+.hx-stick{ place-items:end start; }
+.hx-copy{
+  padding-bottom:clamp(26px,5vh,62px);
+  max-width:min(1180px,92vw);
+  margin:0 auto;
+}
+.hx-eyebrow{ margin-bottom:clamp(20px,3.2vh,34px); }
+.hx-title{
+  max-width:15ch;
+  margin:0 0 clamp(30px,5.2vh,62px);
+  line-height:1.02;
+  font-size:clamp(2.3rem,6.4vw,6.2rem);
+}
+.hx-foot{
+  padding-top:clamp(22px,3.4vh,34px);
+  gap:clamp(28px,4vw,64px);
+  align-items:end;
+}
+.hx-sub{ max-width:42ch; }
+.hx-stats{ margin-top:clamp(20px,3.2vh,34px); }
+.hx-stat{ padding:clamp(14px,2.2vh,22px) 20px 4px 0; }
+.hx-stat + .hx-stat{ padding-left:20px; }
+
+/* ---- bigger cards: fill the gap above the logo band ---- */
+.hx-tile{
+  width:clamp(120px,14.5vw,220px);
+  border-radius:14px;
+  box-shadow:0 26px 70px -22px rgba(12,12,14,.5);
+}
+@media (max-width:768px){ .hx-tile{ width:clamp(96px,27vw,150px); border-radius:11px; } }
+
+/* the joined slab reads bigger and tighter */
+.hx-banner-line{ font-size:clamp(1.9rem,5.4vw,4.6rem); max-width:15ch; letter-spacing:-.04em; }
+.hx-banner-kicker{ letter-spacing:.2em; }
+
+/* ---- MOBILE: horizontal drags must never eat vertical scrolling ---- */
+.hx-field, .rail-view{ touch-action:pan-y; }
+@media (max-width:768px){
+  .hx-stick{ place-items:end start; }
+  .hx-copy{ padding-bottom:clamp(20px,4vh,40px); }
+  .hx-title{ max-width:13ch; }
+  /* shorter runways so a phone isn't stuck scrolling a sticky section */
+  .hx{ height:180vh; }
+  .swa{ height:200vh; }
+}
+
+/* tighten the gap between hero and the logo band */
+body.studio .marquee-section{ padding-block:clamp(56px,7vw,92px); }
