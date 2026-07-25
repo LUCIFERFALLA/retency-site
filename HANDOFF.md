@@ -1,109 +1,122 @@
-# RETENCY SITE — CONTINUATION PROMPT
+# RETENCY — CONTINUATION PROMPT
 
-Copy everything below into a new chat.
+Copy everything below the line into a new chat.
 
 ---
 
-I'm Parth Agarwal, founder of **Retency** — an AI-native creative studio in Bengaluru. Continue work on my site. Read this fully before touching anything.
+I'm Parth Agarwal, founder of **Retency**, an AI-native creative studio in Bengaluru. You're continuing an in-progress redesign of my site. Read all of this before touching anything.
 
 ## PROJECT
 
-- **Local path:** `C:\Users\dg611\Desktop\CLAUDE CODE\retency-site\`
+- **Path:** `C:\Users\dg611\Desktop\CLAUDE CODE\retency-site\`
 - **Live:** https://retency.in (Vercel, auto-deploys on push to `main`)
 - **Repo:** https://github.com/LUCIFERFALLA/retency-site
-- Static HTML/CSS/JS. **No Node, no build step.** Windows + PowerShell/Bash.
-- Push workflow: you run `git add . && git commit -m "..." && git push` yourself. I never touch git. Vercel deploys in ~30–60s.
-- **Local preview:** `python -m http.server 8899` from the project root, then open `http://127.0.0.1:8899/index.html`. Always review locally before pushing.
+- Static HTML/CSS/JS. **No Node, no build step.** Windows, PowerShell + Bash.
+- **You run git yourself:** `git add . && git commit -m "..." && git push`. I never touch git. Vercel deploys in ~30–60s.
+- **Preview locally before pushing:** `python -m http.server 8899` from the project root → `http://127.0.0.1:8899/index.html`.
 
-## CURRENT STATE — READ CAREFULLY
+## STATE OF PLAY — IMPORTANT
 
-The site has **19 pages** that are fully SEO-optimised (schema, sitemap, llms.txt, canonicals, blog, pillar page, service pages, privacy/terms). **Do not break that work.**
+The site has **19 pages that are fully SEO-optimised** (JSON-LD schema, sitemap, llms.txt, canonicals, blog + pillar page, 4 service pages, privacy/terms). **Do not break that.**
 
-There is an **in-progress visual redesign** committed locally but **NOT pushed**:
-- `d366a69` — latest redesign state
-- `bf63cc4` — earlier redesign state
-- `d395a54` — abandoned WebGL/ASCII hero experiment (kept for reference only)
-- `041bca7` — **last pushed commit = what's live right now**
+There is a **visual redesign committed locally but NOT pushed**. Live production is still the OLD DARK SITE.
 
-So: **live production is still the OLD dark site.** The redesign lives only on my machine.
+Commits (newest first):
+- `8a6289d` — Helvetica, bigger hero cards, hero spacing, blur+title restore, mobile scroll fix ← **current**
+- `d366a69` — Syne type, 8 hero tiles, 250M stat, Swarajya copy to top, reveal-bug fix
+- `bf63cc4` — light theme, converging hero, Swarajya scroll-open, canvas graphic
+- `d395a54` — abandoned WebGL/ASCII hero (reference only)
+- `041bca7` — **last PUSHED commit = what's live now**
 
-### Redesign so far (homepage only, `index.html`)
+### What the redesign is
 
-New files: `css/studio.css` and `js/studio.js` (both additive; `index.html` has `<body class="studio">`).
+New files `css/studio.css` + `js/studio.js` (additive). `index.html` has `<body class="studio">`. Only the homepage is converted.
 
-- **Light editorial theme** — warm white `#f7f5f0`, near-black ink `#0c0c0e`, single red accent `#e63846`. Dark full-bleed bands for media, with **gradient feathered edges** (no hard black cuts).
-- **Hero** — headline plus **8 real client videos** scattered around it, drifting with the cursor. On scroll they **converge into a row that becomes a draggable, drifting carousel**. A CTA banner ("Growth is luck. Luck is engineered.") sits above the row.
-- **Swarajya section** — the trailer opens from an inset frame to full-bleed as you scroll. Title sits at the **top** (never covering the film), then an invitation + "Enter the world" CTA arrives. Links to `/swarajya`.
-- **Portfolio rail** — separate infinite momentum carousel; wheel, drag, throw, and page-scroll all drive it.
-- **Process section** — a **custom canvas motion graphic** ("signal pipeline"): particles enter as noise on the left and resolve into a clean red wave on the right. ~2KB, no network cost.
-- Scroll reveals with stagger on ~43 elements; stats count up on arrival.
-- **Fonts:** display = **Syne** (600/700/800), body = **Inter**. Set via `--f-display` / `--f-body` in `css/styles.css`. Font links updated on all 17 pages.
-- **All gold is gone** — 17 hardcoded gold values purged. Red only.
-- HUD/crosshairs/coordinate readouts and the custom cursor were built, then **removed** (felt gimmicky and AI-ish). Native cursor. Don't reintroduce.
-- Perf: was 6 FPS / 568ms frames because live videos were being CSS-blurred. Fixed — blur is applied once to the container and clips pause while blurred. **Now 57 FPS, 28ms worst frame.** Offscreen sections do no work.
+- **Light editorial theme** — warm white `#f7f5f0`, ink `#0c0c0e`, one red accent `#e63846`. Dark full-bleed bands for media with **gradient feathered edges** (no hard black cuts).
+- **Hero** — headline + **8 real client videos** scattered, drifting with cursor. On scroll they **converge into a row**, the row **blurs into one slab**, the title forms over it (*"Growth is luck. Luck is engineered."* + CTA), and the belt **keeps drifting and is draggable**.
+- **Swarajya section** — trailer opens from inset frame to full-bleed on scroll. Copy sits at the **TOP** (never over the film), then invitation + "Enter the world" arrives. Links to `/swarajya`.
+- **Portfolio rail** — separate infinite momentum carousel (wheel, drag, throw, page-scroll).
+- **Process section** — custom **canvas motion graphic**: particles enter as noise on the left, resolve into a clean red wave on the right (~2KB, no network cost).
+- Scroll reveals with stagger on ~43 elements. Stats count up on arrival.
+- **Type:** one constant family — `'Helvetica Neue', Helvetica, 'Inter', Arial, sans-serif` on `--f-display`, `--f-body`, `--f-mono` in `css/styles.css`. Real Helvetica on Mac/iOS, Inter elsewhere. (We tried and rejected: Fraunces, Instrument Serif, Bricolage Grotesque, Syne.)
+- **Zero gold** — 17 hardcoded gold values purged. Red only.
+- **Perf:** was 6 FPS / 568ms frames from CSS-blurring live videos. Fixed — blur applied once to the container, clips pause while blurred. **57 FPS, 28ms worst frame.** Offscreen sections do no work.
+- **Mobile:** horizontal drag handlers now only claim a gesture when horizontal movement dominates, so vertical page scroll is never swallowed. `touch-action: pan-y` on `.hx-field` and `.rail-view`.
 
-## MY TASTE — LEARNED THE HARD WAY
+## MY TASTE — LEARNED OVER MANY ITERATIONS
 
-- **No gold.** Red (`#e63846`), white, black only.
+- **No gold.** Red `#e63846`, white, black.
 - **Light theme**, not dark.
-- **No serif** display fonts — they read as "default AI premium". Syne is current; I want **bold, sharp, fun, readable**. Change it if you have something better.
-- **No HUD markings, no crosshairs, no custom cursor, no coordinate readouts.** They make it look small and AI-generated.
-- **No text covering video.** Put copy above or beside, never centred on top of footage.
-- **Generous spacing.** Give sections room and give people time to read as things move.
-- **No section should be boring or static.** Motion everywhere, driven by scroll.
-- **Custom canvas/CSS motion graphics, not generated video files** — sharper, lighter, editable. (I agreed with this reasoning.)
+- **No serif display fonts** — they read as default "AI premium". Helvetica, kept constant, is the current answer.
+- **No HUD markings, crosshairs, coordinate readouts, or custom cursor.** Built then removed — they made it look small and AI-generated. Do not reintroduce.
+- **Never put text over the middle of a video.** Above or beside only.
+- **Spacing is the premium signal.** Be generous. Give people time to read as things move.
+- **No boring or static sections.** Motion driven by scroll, everywhere.
+- **Custom canvas/CSS motion graphics, not generated video files** — sharper, lighter, editable. I agreed with this.
 - Must stay **fast and smooth**. Never trade that away.
-- Keep it **human**, not "AI-looking".
+- Should feel **human and fun**, not AI-generated.
+
+## FIRST THING TO DO
+
+Run the local server and check the homepage. **I could not verify the hero blur/title-form in my last session** (Lenis blocks programmatic scroll and the test browser became unresponsive). Confirm by actually scrolling:
+1. Tiles converge into a row.
+2. Row blurs and the title slab forms over it.
+3. Belt keeps drifting and can be dragged.
+4. Vertical scrolling still works on a phone/narrow viewport.
+
+Fix anything broken there before new work.
 
 ## STILL TO DO
 
-1. **Founder section** — currently just a photo beside a quote. Make it interactive and fun, with motion. High priority.
-2. **Propagate the light theme + motion to the other 18 pages.** Right now only the homepage is light; everything else is still dark. **This mismatch must be resolved before pushing** — a half-light/half-dark site is the one outcome that definitely looks broken.
-3. **More custom motion graphics** in other sections (services, proof, contact) — same canvas approach as the Process one.
-4. **Header** — I said it felt too generic. It's been lightened (outlined CTA, underline-on-hover section links) but check it feels right.
-5. **More videos coming from me.** Hero tiles live in `index.html` as `<figure class="hx-tile" data-i="N" style="--sx:..;--sy:..;--sr:..">`; add new ones there and they auto-space in the converge.
-6. Then **push to Vercel** once I approve.
+1. **Founder section** — currently a photo beside a quote. Make it interactive and fun with motion. High priority; I called out that it should feel premium and playful.
+2. **Convert the other 18 pages to the light theme + motion.** Only the homepage is light right now. **This must be resolved before pushing** — half-light/half-dark is the one outcome that definitely looks broken.
+3. **More custom canvas motion graphics** in other sections (services, proof, contact), same approach as the Process one.
+4. **Header** — I said it felt too generic. Now: outlined CTA, section links with red underline-on-hover. Check it feels right.
+5. **More videos coming from me.** Hero tiles are `<figure class="hx-tile" data-i="N" style="--sx:..;--sy:..;--sr:..">` in `index.html`; add and they auto-space in the converge.
+6. **Push to Vercel** once I approve.
 
-## KEY NUMBERS (use these exactly)
+## KEY NUMBERS — use exactly
 
-- **24H** — brief to first cut
-- **40+** — brands shipped
-- **62%** — avg ROAS lift
-- **250M+** — views engineered
+- **24H** brief to first cut
+- **40+** brands shipped
+- **62%** avg ROAS lift
+- **250M+** views engineered
 - 70% of SuperMoney's public Meta Ad Library is our work
-- Shivora Ghee ≈ ₹80 CAC; SHEIN = 24-hour turnaround during the Slay Sale
+- Shivora Ghee ≈ ₹80 CAC · SHEIN = 24-hour turnaround during the Slay Sale
 - AI ad creatives ₹5,000–₹15,000/video, 5 business-day delivery
 
-## CLIENTS (all real — never invent testimonials, press, or metrics)
+## CLIENTS — all real. Never invent testimonials, press, or metrics.
 
-SuperMoney (fintech), SHEIN (fashion), Flipkart, XTEP (sportswear), Shivora Ghee (FMCG), Parv Essentials (D2C), Enorex (lubricants B2B→D2C), Manak Petroleum (lubricants, SEO). Original IP: **Swarajya**, India's first AI anime (Chhatrapati Shivaji Maharaj).
+SuperMoney (fintech), SHEIN (fashion), Flipkart, XTEP (sportswear), Shivora Ghee (FMCG), Parv Essentials (D2C), Enorex (lubricants, B2B→D2C), Manak Petroleum (lubricants, SEO). Original IP: **Swarajya**, India's first AI anime (Chhatrapati Shivaji Maharaj).
 
-## ASSETS — Cloudinary
+## ASSETS — Cloudinary (two accounts)
 
-Two accounts in play. Newer uploads are on `daklv12br`, most media on `uebesiag`.
+Most media on `uebesiag`; newest uploads on `daklv12br`.
 
-Hero/work videos (`uebesiag`): `57_supermoney_crowd_o0ta6n`, `16_ipl_interview_0804_uzibug`, `HANUMAN_kvilbb`, `13_cashback_nita_0704_si7djk`, `42_walk_spot_hu9jjq`, `22_girl_stadium_ugc1004_hyaabr`
-Newest SHEIN clips: `v1785018765/2_men_outfi_sets_qqhmly.mp4`, `v1785019089/04_shein_haul_ln9chs.mp4`
-Swarajya trailer: `v1783360946/second_draft_1_olzldl.mp4`
-Founder photo: `v1783365954/IMG_8912_mdktoh.jpg`
-Logos: SuperMoney `v1783365774/White_logo_1_1_1_jsbdnc.png` (white — needs a dark background), XTEP `v1783365833/WhatsApp_Image_...wwk6yn.png`, Shivora `v1783365802/...noskhu.png`, Parv `v1783365927/logo_1_szysi0.png`, SHEIN + Flipkart + Enorex + Manak on `daklv12br`.
+- **Hero deck (9 tiles, current):** `v1783359624/57_supermoney_crowd_o0ta6n`, `v1783360201/HANUMAN_kvilbb`, `v1783360303/42_walk_spot_hu9jjq`, `v1785018765/2_men_outfi_sets_qqhmly`, `v1785019089/04_shein_haul_ln9chs`, `v1785019856/SHOW_AD_mex7jx`, `v1785019936/54_hostage_drama_1_y3bawq`, `v1785019942/Copy_of_39asmr_yltbak`, `v1785019961/52_Therapist_1_wixurd`
+- Retired from the hero (weaker): `16_ipl_interview_0804_uzibug`, `13_cashback_nita_0704_si7djk`, `22_girl_stadium_ugc1004_hyaabr` — still used in the portfolio rail
+- **`Copy_of_39asmr_yltbak` is a `.mov`** — always request it as `.mp4` so Cloudinary transcodes it; `.mov` will not play in most browsers
+- Swarajya trailer: `v1783360946/second_draft_1_olzldl.mp4`
+- Founder photo: `v1783365954/IMG_8912_mdktoh.jpg`
+- Logos: SuperMoney `v1783365774/White_logo_1_1_1_jsbdnc.png` (**white — needs a dark background**), XTEP `v1783365833/WhatsApp_Image_...wwk6yn.png`, Shivora `v1783365802/...noskhu.png`, Parv `v1783365927/logo_1_szysi0.png`; SHEIN, Flipkart, Enorex, Manak on `daklv12br`.
 
-**Cloudinary gotcha:** always include `h_NNN` or `w_NNN` when transforming images — `q_auto,f_auto` alone 400s on some IDs. Videos are fine with `q_auto,f_auto` and should be capped with `br_` for weight.
+**Gotcha:** always include `h_NNN` or `w_NNN` when transforming images — `q_auto,f_auto` alone returns 400 on some IDs. Cap videos with `br_` for weight.
 
 ## HARD RULES
 
-1. **Never touch the `.reveal` rule in `css/styles.css`.** It broke the site once. It needs a `.visible` class from `js/main.js`; when that observer misses, whole sections sit at `opacity:0`. On studio pages it is neutralised from `css/studio.css` instead — keep doing it that way.
+1. **Never edit the `.reveal` rule in `css/styles.css`.** It broke the site once. It needs a `.visible` class from `js/main.js`; when that observer misses, entire sections sit at `opacity:0` — this is exactly why sections "weren't opening". On studio pages it's neutralised from `css/studio.css` instead. Keep doing it that way.
 2. **One change at a time, separate commits**, so anything can be reverted.
-3. Don't push until I've reviewed locally and said go.
+3. **Don't push until I've reviewed locally and said go.**
 4. No mocks, no fake content, no invented numbers.
-5. Flag risks before pushing. Tell me when changes will be visible (~30–60s after push).
-6. I prefer brutally honest assessments over agreement. Push back if I'm wrong.
+5. Flag risks before pushing. Tell me when changes go live (~30–60s).
+6. Give me brutally honest assessments, not agreement. Push back when I'm wrong.
+7. Verify with real measurement, and tell me plainly when you couldn't verify something.
 
 ## PENDING ON MY SIDE (not code)
 
-- Set `retency.in` as **primary domain in Vercel** (apex currently 307s to `www`, but canonicals say apex).
+- Set `retency.in` as **primary domain in Vercel** (apex currently 307s to `www` while canonicals declare apex).
 - Submit sitemap + request indexing in Google Search Console.
-- Send real social URLs so `sameAs` can be filled on Organization + Person schema (currently empty).
+- Send real social URLs so `sameAs` can be filled on Organization + Person schema (currently empty `[]`).
 - Set up Google Business Profile.
 
-Start by running the local server and looking at `index.html`, then tell me what you'd do first.
+Start by previewing the homepage locally, verify the four hero behaviours above, then tell me what you'd fix first.
