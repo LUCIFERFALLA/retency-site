@@ -156,7 +156,7 @@
         lastJ = j;
         if (field) {
           field.style.filter = j > 0.01
-            ? `blur(${(j * 9).toFixed(1)}px) brightness(${(1 - j * 0.46).toFixed(2)})`
+            ? `blur(${(j * 11).toFixed(1)}px) brightness(${(1 - j * 0.7).toFixed(2)}) saturate(${(1 - j * 0.3).toFixed(2)})`
             : '';
         }
         if (banner) {

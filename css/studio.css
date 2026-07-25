@@ -811,29 +811,15 @@ body.studio .nav-cta-lite .arrow{ color:currentColor; }
    this grid resolves to the top of .hx-stick, which threw the white text
    onto the cream page where it read as invisible. */
 .hx-banner{ top:50%; bottom:auto; }
-/* The banner carries its own dark plate. Earlier this was a soft radial
-   that only worked if the blurred video row happened to sit behind it —
-   if the clips were slow, blocked or the row drifted, the white copy had
-   nothing to sit on and read as invisible. This plate is part of the
-   banner, fades in with it, and guarantees legibility on its own. */
-.hx-banner{ padding:clamp(26px,4vw,48px) clamp(28px,5vw,64px); }
-.hx-banner::before{
-  content:""; position:absolute; inset:0; z-index:-1;
-  border-radius:clamp(14px,1.6vw,22px);
-  background:rgba(9,9,12,.82);
-  backdrop-filter:blur(6px) saturate(1.15);
-  -webkit-backdrop-filter:blur(6px) saturate(1.15);
-  box-shadow:0 40px 90px -30px rgba(0,0,0,.7);
-  pointer-events:none;
+/* No plate behind the copy. The banner sits outside .hx-field now, so
+   the row can be pushed properly dark without touching the type — the
+   footage itself is the background. Only a soft text shadow remains, as
+   insurance against a bright frame landing under a letter. */
+.hx-banner{ padding:clamp(20px,3vw,36px) clamp(22px,4vw,48px); }
+.hx-banner-line{
+  text-shadow:0 2px 26px rgba(6,6,9,.62), 0 1px 3px rgba(6,6,9,.4);
 }
-/* and a wider feather so the plate does not read as a hard box */
-.hx-banner::after{
-  content:""; position:absolute; left:50%; top:50%; z-index:-2;
-  width:190%; height:260%; transform:translate(-50%,-50%);
-  background:radial-gradient(ellipse at center,
-    rgba(8,8,10,.55) 0%, rgba(8,8,10,.28) 48%, rgba(8,8,10,0) 74%);
-  pointer-events:none;
-}
+.hx-banner-kicker{ text-shadow:0 1px 14px rgba(6,6,9,.7); }
 
 
 /* ============================================================
@@ -1095,3 +1081,92 @@ body.studio .article-cta .btn-ghost{
   color:#f4f2ee; border-color:rgba(244,242,238,.34); background:transparent;
 }
 body.studio .article-cta .btn-ghost:hover{ border-color:#f4f2ee; }
+
+/* ============================================================
+   MOTION LAYER — canvas graphics that sit behind the copy.
+   pointer-events:none always: the graphic reacts to the cursor
+   (js/motion.js tracks on the parent section) but can never
+   intercept a click or a scroll.
+   ============================================================ */
+.mg{
+  position:absolute; inset:0; z-index:0;
+  pointer-events:none; overflow:hidden;
+}
+.mg-canvas{ display:block; width:100%; height:100%; }
+
+/* a section hosting a motion layer needs a stacking context and its
+   content lifted above it */
+.mg-host{ position:relative; isolation:isolate; }
+.mg-host > .wrap{ position:relative; z-index:1; }
+
+/* feather the edges so the graphic dissolves into the page instead of
+   ending on a hard line */
+.mg::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg,
+    var(--paper) 0%, rgba(247,245,240,0) 18%,
+    rgba(247,245,240,0) 82%, var(--paper) 100%);
+}
+/* inside a dark band the feather has to match the band, not the page */
+.band .mg::after,
+.rail-sec .mg::after,
+.footer .mg::after{
+  background:linear-gradient(180deg,
+    #0a0a0c 0%, rgba(10,10,12,0) 18%,
+    rgba(10,10,12,0) 82%, #0a0a0c 100%);
+}
+
+/* standalone band usage: a motion strip with its own height */
+.mg-band{
+  position:relative; height:clamp(150px,20vw,260px);
+  margin:clamp(30px,4vw,54px) 0;
+}
+.mg-band .mg{ position:absolute; inset:0; }
+
+@media (prefers-reduced-motion:reduce){
+  .mg{ opacity:.5; }
+}
+
+/* ============================================================
+   PAGE HEADERS — give the title room. The nav is a fixed pill,
+   so a header that starts too high reads as cramped under it.
+   Generous top padding, a real gap between kicker / title / sub,
+   and a measure that stops the deck running the full width.
+   ============================================================ */
+body.studio .page-header{
+  position:relative;
+  padding-top:clamp(140px,17vh,220px);
+  padding-bottom:clamp(56px,8vh,110px);
+}
+body.studio .page-header .mono{
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:clamp(22px,3.4vh,36px) !important;
+  font-size:11px; font-weight:600; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--red);
+}
+body.studio .page-header .mono::before{
+  content:""; width:26px; height:1px; background:var(--red); flex:none;
+}
+body.studio .page-header h1{
+  margin:0 0 clamp(24px,3.6vh,40px);
+  font-size:clamp(2.4rem,6.4vw,6rem);
+  line-height:.96;
+  max-width:19ch;
+}
+body.studio .page-header p{
+  margin:0;
+  font-size:clamp(15px,1.35vw,18px);
+  line-height:1.62;
+  max-width:56ch;
+  color:var(--ink-2);
+}
+/* section headings on inner pages get the same breathing room */
+body.studio .section-head,
+body.studio .rail-head{ margin-bottom:clamp(30px,4.4vw,56px); }
+body.studio .section-title{ margin-bottom:clamp(16px,2.2vw,26px); }
+body.studio .section-num{ margin-bottom:clamp(16px,2.4vh,26px); }
+
+@media (max-width:768px){
+  body.studio .page-header{ padding-top:clamp(112px,15vh,150px); }
+  body.studio .page-header h1{ max-width:15ch; }
+}
