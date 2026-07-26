@@ -125,13 +125,18 @@
           ex = (((ex - off) % span) + span * 1.5) % span - span / 2;
         }
         const x = lerp(c.sx * vw, ex, eased) + px * (10 - i * 1.1);
-        const y = lerp(c.sy * vh, 0, eased) + py * (8 - i * 0.9);
+        // On a phone the copy sits low-left and the scattered clips used to
+        // land straight on it. Rather than fading the work into nothing —
+        // the clips ARE the product — bias the whole drift upward so they
+        // own the top of the screen and the copy owns the bottom. The bias
+        // eases out as they converge into the row.
+        const bias = NARROW ? (1 - eased) * -innerHeight * 0.17 : 0;
+        const y = lerp(c.sy * vh * (NARROW ? 0.55 : 1), 0, eased) + bias + py * (8 - i * 0.9);
         const rot = lerp(c.sr, 0, eased);
         const sc = lerp(0.92, 1.24, eased);
-        // On a 390px screen the scattered tiles land directly on the
-        // headline instead of spreading around it, so the drift phase
-        // sits much further back. Desktop keeps the fuller presence.
-        const op = lerp(NARROW ? 0.13 : 0.30, 1, eased);
+        // They sit in their own zone on a phone now, so they no longer
+        // need to be faded almost to nothing to keep the copy readable.
+        const op = lerp(NARROW ? 0.5 : 0.30, 1, eased);
         c.el.style.transform =
           `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
         c.el.style.opacity = op.toFixed(3);

@@ -1279,14 +1279,56 @@ body.studio .section-num{ margin-bottom:clamp(16px,2.4vh,26px); }
    sit further back (js) and the copy gets its own soft paper wash so
    the type never competes with a moving frame behind it. */
 @media (max-width:768px){
+  /* The clips live in the upper zone (biased there from js) and the copy
+     owns the lower half, so the wash only has to protect the bottom of
+     the screen rather than blanket the whole hero. */
   body.studio .hx-copy{ position:relative; }
   body.studio .hx-copy::before{
     content:""; position:absolute; z-index:-1;
-    left:-22px; right:-22px; top:-28px; bottom:-28px;
-    background:radial-gradient(120% 90% at 30% 50%,
-      var(--paper) 0%, rgba(247,245,240,.94) 52%, rgba(247,245,240,.62) 82%, rgba(247,245,240,0) 100%);
+    left:-24px; right:-24px; top:-56px; bottom:-40px;
+    background:linear-gradient(180deg,
+      rgba(247,245,240,0) 0%, rgba(247,245,240,.72) 22%,
+      rgba(247,245,240,.95) 46%, var(--paper) 70%);
     pointer-events:none;
   }
-  /* smaller, calmer tiles so they read as texture, not competition */
-  body.studio .hx-tile{ width:clamp(80px,22vw,118px); }
+  /* the work is the product — keep the clips a real size on phone */
+  body.studio .hx-tile{ width:clamp(104px,29vw,150px); border-radius:12px; }
+}
+
+/* ============================================================
+   PHONE FOOTER — it was 1255px on a 390px screen, 1.5 screens
+   of scrolling to get past. Everything stacked into one column
+   and the giant wordmark ate the rest. Same content, a third
+   of the height.
+   ============================================================ */
+@media (max-width:768px){
+  body.studio .footer{ padding-top:44px; padding-bottom:20px; }
+
+  /* brand + three link columns become a compact 2-up block */
+  body.studio .footer-grid{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:26px 20px; align-items:start;
+  }
+  body.studio .footer-brand{ grid-column:1 / -1; }
+  body.studio .footer-brand p{ font-size:13px; line-height:1.5; margin:8px 0 0; }
+  body.studio .footer-nap{ margin-top:8px !important; }
+
+  body.studio .footer-col h4{ margin-bottom:10px; }
+  body.studio .footer-col ul{ display:flex; flex-direction:column; gap:2px; }
+  body.studio .footer-col li{ margin:0; }
+  body.studio .footer-col a{ font-size:13px; line-height:1.35; }
+
+  /* the "Reach us" column has two items — let it sit beside Services */
+  body.studio .footer-col:last-of-type{ grid-column:1 / -1; }
+
+  /* the oversized wordmark is a desktop flourish; on a phone it is
+     several hundred px of nothing. Keep a hint of it, not a billboard. */
+  body.studio .footer-mega{
+    font-size:clamp(52px,17vw,86px) !important;
+    line-height:.82; margin:22px 0 6px; opacity:.10;
+  }
+  body.studio .footer-bottom{ padding-top:14px; }
+}
+@media (max-width:420px){
+  body.studio .footer-mega{ display:none; }
 }
