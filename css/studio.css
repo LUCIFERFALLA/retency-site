@@ -1485,3 +1485,68 @@ body.studio .footer-col-label{
   letter-spacing:.18em; text-transform:uppercase;
   color:var(--text-mute); margin-bottom:16px;
 }
+
+/* ============================================================
+   HERO / NAV COLLISION
+   .hx-stick bottom-aligns the copy inside a 100svh sticky box. Once
+   the copy is taller than the room left under the fixed nav, an
+   end-aligned grid item overflows UPWARD — straight under the header.
+   Measured gaps before this: 1366x768 -4px, 1280x720 -24px,
+   390x740 -58px, 390x667 -68px and clipped by overflow:hidden.
+
+   Three parts to the fix:
+   1. reserve nav clearance as padding on the sticky box
+   2. `safe end` so it flips to top-alignment instead of overflowing
+      up when it genuinely cannot fit
+   3. compress the hero on short viewports so it does not need to
+   ============================================================ */
+body.studio .hx-stick{
+  padding-top:clamp(96px,13vh,128px);
+  padding-bottom:clamp(12px,2vh,24px);
+  align-items:end;
+  align-items:safe end;          /* modern browsers: never overflow upward */
+  box-sizing:border-box;
+}
+@media (max-width:768px){
+  body.studio .hx-stick{ padding-top:clamp(84px,12vh,104px); }
+}
+
+/* ---- short viewports: shrink the hero so it fits above the fold ---- */
+@media (max-height:820px) and (min-width:769px){
+  body.studio .hx-title{
+    font-size:clamp(2rem,4.6vw,4.2rem);
+    margin-bottom:clamp(20px,3vh,30px);
+  }
+  body.studio .hx-eyebrow{ margin-bottom:clamp(12px,1.8vh,18px); }
+  body.studio .hx-foot{ padding-top:clamp(16px,2.2vh,22px); }
+  body.studio .hx-stats{ margin-top:clamp(14px,2vh,20px); }
+  body.studio .hx-stat{ padding-block:clamp(12px,1.8vh,18px) clamp(10px,1.4vh,14px); }
+  body.studio .hx-sub{ font-size:15.5px; line-height:1.55; }
+}
+@media (max-height:700px) and (min-width:769px){
+  body.studio .hx-title{ font-size:clamp(1.8rem,3.9vw,3.2rem); }
+  body.studio .hx-stat b{ font-size:22px; }
+  body.studio .hx-copy{ padding-bottom:8px; }
+}
+@media (max-height:780px) and (max-width:768px){
+  body.studio .hx-title{ font-size:clamp(1.9rem,8vw,2.6rem); margin-bottom:18px; }
+  body.studio .hx-eyebrow{ margin-bottom:12px; font-size:10px; }
+  body.studio .hx-foot{ padding-top:16px; gap:14px; }
+  body.studio .hx-stats{ margin-top:14px; }
+  body.studio .hx-stat{ padding-block:12px 10px; }
+  body.studio .hx-stat b{ font-size:24px; }
+  body.studio .hx-sub{ font-size:14.5px; line-height:1.5; }
+  body.studio .hx-copy{ padding-bottom:10px; }
+}
+
+/* smallest phones still in use (360x640): the stats row was landing 1px
+   past the sticky box, so trim the last of the slack */
+@media (max-height:670px) and (max-width:768px){
+  body.studio .hx-title{ font-size:clamp(1.75rem,7.4vw,2.3rem); margin-bottom:14px; }
+  body.studio .hx-sub{ font-size:14px; }
+  body.studio .hx-foot{ padding-top:13px; gap:12px; }
+  body.studio .hx-stats{ margin-top:12px; }
+  body.studio .hx-stat{ padding-block:10px 8px; }
+  body.studio .hx-stat b{ font-size:21px; }
+  body.studio .hx-eyebrow{ margin-bottom:10px; }
+}
