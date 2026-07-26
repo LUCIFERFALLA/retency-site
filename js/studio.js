@@ -75,8 +75,15 @@
     const SPAN = () => N * clamp(innerWidth * 0.152, 96, 210);
     if (field) {
       let downX = 0, downY = 0, claimed = false;
+      // Leave dead space at the screen edges on touch. A thumb coming
+      // down the side of the phone to scroll should never be able to
+      // grab the reel by accident — the drag only arms away from the
+      // edges, where the gesture is unambiguous.
+      const EDGE = () => (COARSE ? 28 : 0);
       field.addEventListener('pointerdown', e => {
         if (!carousel) return;
+        const m = EDGE();
+        if (m && (e.clientX < m || e.clientX > innerWidth - m)) return;
         dragging = true; claimed = false; moved = 0;
         lastX = e.clientX; downX = e.clientX; downY = e.clientY;
       });
@@ -85,7 +92,7 @@
         if (!claimed) {
           const adx = Math.abs(e.clientX - downX), ady = Math.abs(e.clientY - downY);
           if (adx < 8 && ady < 8) return;          // not yet a gesture
-          if (ady > adx) { dragging = false; return; }  // vertical -> let the page scroll
+          if (ady * (COARSE ? 0.75 : 1) > adx) { dragging = false; return; }  // vertical -> let the page scroll
           claimed = true;
           field.classList.add('dragging');
           try { field.setPointerCapture(e.pointerId); } catch (_) {}
@@ -124,14 +131,21 @@
           const span = SPAN();
           ex = (((ex - off) % span) + span * 1.5) % span - span / 2;
         }
-        const x = lerp(c.sx * vw, ex, eased) + px * (10 - i * 1.1);
+
         // On a phone the copy sits low-left and the scattered clips used to
         // land straight on it. Rather than fading the work into nothing —
         // the clips ARE the product — bias the whole drift upward so they
         // own the top of the screen and the copy owns the bottom. The bias
         // eases out as they converge into the row.
-        const bias = NARROW ? (1 - eased) * -innerHeight * 0.17 : 0;
-        const y = lerp(c.sy * vh * (NARROW ? 0.55 : 1), 0, eased) + bias + py * (8 - i * 0.9);
+        // Keep the clips out of the copy. On a phone that means pushing
+        // them up (copy is bottom-left); on desktop it means pushing them
+        // up AND right, so the type owns the lower-left quadrant and the
+        // work owns the upper-right. Both biases ease out as the row
+        // converges, so the joined belt still lands dead centre.
+        const yBias = (1 - eased) * -innerHeight * (NARROW ? 0.17 : 0.13);
+        const xBias = NARROW ? 0 : (1 - eased) * innerWidth * 0.13;
+        const y = lerp(c.sy * vh * (NARROW ? 0.55 : 1), 0, eased) + yBias + py * (8 - i * 0.9);
+        const x = lerp(c.sx * vw, ex, eased) + xBias + px * (10 - i * 1.1);
         const rot = lerp(c.sr, 0, eased);
         const sc = lerp(0.92, 1.24, eased);
         // They sit in their own zone on a phone now, so they no longer
