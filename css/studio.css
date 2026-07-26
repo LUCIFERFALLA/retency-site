@@ -44,6 +44,8 @@ body.studio .rail-card,
 body.studio .article-cta,
 body.studio .circ-card,
 body.studio .trailer-overlay,
+body.studio .shivaji-hero,
+body.studio .shivaji-teaser,
 body.studio .shivaji-bg,
 body.studio .shivaji-hero-bg,
 body.studio .footer{
@@ -1332,3 +1334,42 @@ body.studio .section-num{ margin-bottom:clamp(16px,2.4vh,26px); }
 @media (max-width:420px){
   body.studio .footer-mega{ display:none; }
 }
+
+/* ============================================================
+   SWARAJYA HERO — it sits on a dark photograph with a black
+   scrim, so it is a dark context on a light site. The light
+   theme had turned the headline to near-black on near-black.
+   ============================================================ */
+body.studio .shivaji-hero h1,
+body.studio .shivaji-hero .shivaji-hero-content h1{ color:#fff; }
+body.studio .shivaji-hero h1 em{ color:var(--red); }
+body.studio .shivaji-hero p{ color:rgba(244,242,238,.86); }
+body.studio .shivaji-badge{
+  color:#fff; border-color:rgba(255,255,255,.34);
+  background:rgba(255,255,255,.10);
+}
+/* crimson CTA had dark ink on red — white reads, ink does not */
+body.studio .btn-crimson{ background:var(--red); border-color:var(--red); color:#fff; }
+body.studio .btn-crimson:hover{ background:#c92f3c; border-color:#c92f3c; color:#fff; }
+body.studio .shivaji-hero .btn-ghost{
+  color:#fff; border-color:rgba(255,255,255,.4); background:transparent;
+}
+body.studio .shivaji-hero .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,.08); }
+
+/* the CTA was being pushed toward the fold — tighten the stack on phone
+   so both buttons land comfortably in view with browser chrome showing */
+@media (max-width:768px){
+  body.studio .shivaji-hero{ padding-top:clamp(112px,15vh,150px); min-height:auto; }
+  body.studio .shivaji-hero h1{ font-size:clamp(2.1rem,9.5vw,3.2rem); line-height:.98; }
+  body.studio .shivaji-hero p{
+    font-size:15px !important; line-height:1.55 !important;
+    margin-bottom:26px !important; max-width:34ch !important;
+  }
+  body.studio .shivaji-badge{ margin-bottom:16px; }
+}
+
+/* the teaser sits on the same photograph as the hero — its title and
+   deck were near-black on it for exactly the same reason */
+body.studio .shivaji-teaser .shivaji-title{ color:#fff; }
+body.studio .shivaji-teaser .shivaji-title em{ color:var(--red); }
+body.studio .shivaji-teaser .shivaji-desc{ color:rgba(244,242,238,.84); }
