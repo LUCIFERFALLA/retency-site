@@ -1272,3 +1272,21 @@ body.studio .section-num{ margin-bottom:clamp(16px,2.4vh,26px); }
   /* the drag hint is desktop language — there is no cursor to drag with */
   body.studio .hx-rowhint{ display:none; }
 }
+
+/* ---- phone hero: the copy must always have clean ground ----
+   The tiles scatter across a 390px viewport and land on the headline
+   rather than around it, which is most of what read as clutter. They
+   sit further back (js) and the copy gets its own soft paper wash so
+   the type never competes with a moving frame behind it. */
+@media (max-width:768px){
+  body.studio .hx-copy{ position:relative; }
+  body.studio .hx-copy::before{
+    content:""; position:absolute; z-index:-1;
+    left:-22px; right:-22px; top:-28px; bottom:-28px;
+    background:radial-gradient(120% 90% at 30% 50%,
+      var(--paper) 0%, rgba(247,245,240,.94) 52%, rgba(247,245,240,.62) 82%, rgba(247,245,240,0) 100%);
+    pointer-events:none;
+  }
+  /* smaller, calmer tiles so they read as texture, not competition */
+  body.studio .hx-tile{ width:clamp(80px,22vw,118px); }
+}

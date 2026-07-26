@@ -11,6 +11,7 @@
 
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const COARSE  = matchMedia('(hover: none), (pointer: coarse)').matches;
+  const NARROW  = matchMedia('(max-width: 768px)').matches;
   const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
   const lerp  = (a, b, t) => a + (b - a) * t;
 
@@ -127,7 +128,10 @@
         const y = lerp(c.sy * vh, 0, eased) + py * (8 - i * 0.9);
         const rot = lerp(c.sr, 0, eased);
         const sc = lerp(0.92, 1.24, eased);
-        const op = lerp(0.30, 1, eased);
+        // On a 390px screen the scattered tiles land directly on the
+        // headline instead of spreading around it, so the drift phase
+        // sits much further back. Desktop keeps the fuller presence.
+        const op = lerp(NARROW ? 0.13 : 0.30, 1, eased);
         c.el.style.transform =
           `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
         c.el.style.opacity = op.toFixed(3);
