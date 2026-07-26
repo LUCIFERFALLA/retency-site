@@ -4,12 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#07070a" />
-  <title>Retency — AI Creative Studio · AI Ads, AI Anime & Performance Marketing · Bengaluru</title>
-  <meta name="description" content="Retency is India's AI-native creative studio. AI ads, performance marketing, PR & original IP for SuperMoney, XTEP, SHEIN, Flipkart, Shivora Ghee, Parv Essentials, Enorex and Manak Petroleum. Makers of Swarajya — India's first AI anime. Bengaluru. Founded by Parth Agarwal." />
+  <title>Retency — AI Creative Studio in Bengaluru | AI Ads &amp; Anime</title>
+  <meta name="description" content="India's AI-native creative studio. AI ads, performance marketing and PR for SHEIN, Flipkart, SuperMoney and XTEP. Makers of Swarajya, India's first AI anime." />
   <meta name="keywords" content="Retency, Retency Media, Retency Bengaluru, Parth Agarwal, AI creatives, AI ads, AI creative studio India, AI creative agency, AI performance creative, AI video ads, AI animation studio India, AI anime India, Swarajya anime, Swarajya AI anime, AI Meta ads, AI Instagram Reels, AI YouTube Shorts, performance marketing India, AI ad agency Bengaluru, SHEIN ads India, Flipkart creative, SuperMoney creative, XTEP ads, Shivora Ghee, Parv Essentials, Enorex, Manak Petroleum, D2C creative India, B2B marketing India, SEO Bengaluru, lubricants marketing India" />
   <meta name="author" content="Parth Agarwal · Retency Media" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="google" content="notranslate" />
   <link rel="canonical" href="https://retency.in/" />
 
   <!-- Favicon set — chakra logo across all devices -->
@@ -200,12 +199,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://res.cloudinary.com" />
-  <!-- Preload hero poster (LCP element) so it fetches in parallel with CSS -->
-  <link rel="preload" as="image" fetchpriority="high" href="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_1920,q_auto,f_auto/v1783360143/upscaled-video_3_poqqla.jpg" />
+  <!-- Preload the first hero tile poster — this is the real LCP candidate.
+       The previous preload pointed at upscaled-video_3_poqqla, which appears
+       nowhere else in the site: a high-priority 1920px fetch for nothing. -->
+  <link rel="preload" as="image" fetchpriority="high" href="https://res.cloudinary.com/uebesiag/video/upload/so_2,w_620,q_auto,f_auto/v1783359624/57_supermoney_crowd_o0ta6n.jpg" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300..800&display=swap" />
-  <link rel="stylesheet" href="css/styles.css?v=20260726l" />
-  <link rel="stylesheet" href="css/studio.css?v=20260726l" />
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/styles.css?v=20260726m" />
+  <link rel="stylesheet" href="css/studio.css?v=20260726m" />
 </head>
 <body class="studio">
 
@@ -251,6 +251,7 @@
 
 
 <!-- HERO — work converges into the reel -->
+<main id="content">
 <section class="hx" data-hx>
   <div class="hx-stick">
     <div class="hx-field" aria-hidden="true">
@@ -983,6 +984,7 @@
 </section>
 
 <!-- FOOTER -->
+</main>
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -1001,7 +1003,7 @@
     <div class="footer-mega">retency</div>
     <div class="footer-bottom">
       <span>© 2026 Retency Media · All rights reserved</span>
-      
+      <span style="text-transform:none;letter-spacing:0"><a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></span>
     </div>
   </div>
 </footer>
@@ -1019,8 +1021,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
-<script src="js/main.js?v=20260726l"></script>
-<script src="js/studio.js?v=20260726l"></script>
-<script src="js/motion.js?v=20260726l"></script>
+<script src="js/main.js?v=20260726m"></script>
+<script src="js/studio.js?v=20260726m"></script>
+<script src="js/motion.js?v=20260726m"></script>
 </body>
 </html>

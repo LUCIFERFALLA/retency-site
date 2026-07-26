@@ -1373,3 +1373,18 @@ body.studio .shivaji-hero .btn-ghost:hover{ border-color:#fff; background:rgba(2
 body.studio .shivaji-teaser .shivaji-title{ color:#fff; }
 body.studio .shivaji-teaser .shivaji-title em{ color:var(--red); }
 body.studio .shivaji-teaser .shivaji-desc{ color:rgba(244,242,238,.84); }
+
+/* ============================================================
+   NO-JS FALLBACK for the two scroll-driven reveals that had none.
+   .hx-banner and .swa-invite sit at opacity:0 and are driven purely
+   by scroll progress in js/studio.js. Without JS they never appear
+   at all. .sr and .rv already have this escape hatch; these didn't.
+   ============================================================ */
+html:not(.js) .hx-banner,
+html:not(.js) .swa-invite,
+html:not(.js) .hx-rowhint{
+  opacity:1 !important;
+  transform:none !important;
+}
+/* <main> is a plain landmark — it must not introduce a box */
+main#content{ display:block; }
