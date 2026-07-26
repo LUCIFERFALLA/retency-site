@@ -772,6 +772,30 @@
   }
 
   /* ==========================================================
+     7 · NAV — mark the section you are actually in.
+     studio.css already styles .nav-links a.active, but nothing was
+     ever applying it, so every page looked like every other page.
+     ========================================================== */
+  function initNavActive() {
+    const links = [...document.querySelectorAll('.nav-links a')];
+    if (!links.length) return;
+    // "/blog/ai-ads-cost-india" should still light up "Blog"
+    const path = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+    let best = null, bestLen = 0;
+    links.forEach(a => {
+      const href = (a.getAttribute('href') || '').replace(/\.html$/, '').replace(/\/$/, '');
+      if (!href || href === '/' || href.startsWith('#')) return;
+      if ((path === href || path.startsWith(href + '/')) && href.length > bestLen) {
+        best = a; bestLen = href.length;
+      }
+    });
+    if (best) {
+      best.classList.add('active');
+      best.setAttribute('aria-current', 'page');
+    }
+  }
+
+  /* ==========================================================
      BOOT
      ========================================================== */
   const boot = () => {
@@ -784,6 +808,7 @@
     safe(initSections, 'sections');
     safe(initSignal, 'signal');
     safe(initFounder, 'founder');
+    safe(initNavActive, 'navactive');
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();

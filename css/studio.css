@@ -754,16 +754,28 @@ body.studio .nav{
 /* Plain nav links. No sliding underline, no colour swipe — just a quiet
    opacity shift on hover. The bar itself never moves, resizes or
    restyles on scroll; it stays exactly where it is the whole way down. */
+/* Resting weight comes from COLOUR, not opacity. Opacity was competing
+   with a transition and left the active item reading the same as the
+   rest. No sliding underline — you did not want the swipe. */
 body.studio .nav-links a{
   font-family:var(--f-body); font-weight:500;
-  font-size:14px; letter-spacing:0; color:var(--ink);
+  font-size:14px; letter-spacing:0;
+  color:#6a6a72;
   position:relative; padding:6px 2px;
-  opacity:.72;
-  transition:opacity .25s ease;
+  opacity:1;
+  transition:color .22s ease;
 }
 body.studio .nav-links a::after{ content:none; }
-body.studio .nav-links a:hover{ opacity:1; }
-body.studio .nav-links a.active{ opacity:1; font-weight:600; }
+body.studio .nav-links a:hover{ color:var(--ink); }
+/* the page you are on: full ink, heavier, and a small red marker */
+body.studio .nav-links a.active{
+  color:var(--ink); font-weight:700;
+}
+body.studio .nav-links a.active::before{
+  content:""; position:absolute; left:50%; bottom:-1px;
+  width:5px; height:5px; margin-left:-2.5px;
+  border-radius:50%; background:var(--red);
+}
 body.studio .brand-name{ font-family:var(--f-display); font-weight:800; letter-spacing:-.03em; }
 
 /* CTA is an outlined invitation, not a black brick */
