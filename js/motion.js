@@ -86,12 +86,25 @@
         zone.addEventListener('pointerleave', () => { this.tx = -9999; this.ty = -9999; }, { passive: true });
       }
 
+      /* On touch there is no cursor, and cursor reaction is the entire
+         point of these graphics. Animating them on a phone spends GPU
+         and battery on motion nobody can interact with — so paint one
+         static frame for the texture and never run the loop. Same for
+         reduced-motion. This is a design decision for the phone, not
+         the desktop version throttled. */
+      if (COARSE || REDUCED) {
+        new IntersectionObserver(([e], obs) => {
+          if (!e.isIntersecting) return;
+          this.visible = true; this.step(0.6); this.visible = false;
+          obs.disconnect();
+        }, { rootMargin: '120px 0px' }).observe(host);
+        return;
+      }
+
       new IntersectionObserver(([e]) => {
         this.visible = e.isIntersecting;
         if (this.visible) wake();
       }, { rootMargin: '120px 0px' }).observe(host);
-
-      if (REDUCED) { this.visible = true; this.step(0); this.visible = false; }
     }
 
     resize() {

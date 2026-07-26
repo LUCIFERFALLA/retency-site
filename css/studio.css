@@ -1170,3 +1170,105 @@ body.studio .section-num{ margin-bottom:clamp(16px,2.4vh,26px); }
   body.studio .page-header{ padding-top:clamp(112px,15vh,150px); }
   body.studio .page-header h1{ max-width:15ch; }
 }
+
+/* ============================================================
+   PHONE — designed for the phone, not the desktop squeezed.
+   Different layout decisions, not smaller ones.
+   ============================================================ */
+@media (max-width:768px){
+
+  /* ---- 1. NOTHING under 11px. Micro-labels at 7.5-9.5px were the
+       single biggest source of the cluttered feel: a wall of grey
+       specks the eye cannot resolve. ---- */
+  body.studio .hx-stat span,
+  body.studio .fnd-fact span,
+  body.studio .shero-stat span,
+  body.studio .marquee-label,
+  body.studio .rail-hint,
+  body.studio .rail-tag,
+  body.studio .rail-idx,
+  body.studio .section-num,
+  body.studio .svc-num,
+  body.studio .work-tag,
+  body.studio .trust-label,
+  body.studio .process-label,
+  body.studio .hx-banner-kicker,
+  body.studio .svc-tag,
+  body.studio .work-meta span,
+  body.studio .fnd-sign-meta,
+  body.studio .swa-badge,
+  body.studio .contact-method-label,
+  body.studio .footer-col h4,
+  body.studio .footer-bottom span,
+  body.studio .mono{
+    font-size:11px !important;
+    letter-spacing:.1em !important;
+    line-height:1.45;
+  }
+
+  /* ---- 2. Hero stats become a 2x2 block. Four across on a 390px
+       screen gives 74px columns — too narrow for a label, so the
+       type had been shrunk to 7.5px to fit. Two up fixes the cause
+       instead of the symptom. ---- */
+  body.studio .hx-stats,
+  body.studio .shero-stats{
+    display:grid; grid-template-columns:1fr 1fr; gap:0;
+    border-top:1px solid var(--rule);
+  }
+  body.studio .hx-stat,
+  body.studio .shero-stat{
+    min-width:0; padding:18px 16px 16px 0;
+    border-left:none !important;
+  }
+  body.studio .hx-stat:nth-child(2n),
+  body.studio .shero-stat:nth-child(2n){
+    padding-left:16px; border-left:1px solid var(--rule) !important;
+  }
+  body.studio .hx-stat:nth-child(n+3),
+  body.studio .shero-stat:nth-child(n+3){ border-top:1px solid var(--rule); }
+  body.studio .hx-stat b,
+  body.studio .shero-stat b{ font-size:30px; }
+
+  /* founder facts: three across at 112px is the same mistake */
+  body.studio .fnd-facts{ display:grid; grid-template-columns:1fr 1fr; gap:0; }
+  body.studio .fnd-fact{ padding:18px 14px 14px 0; border-left:none !important; }
+  body.studio .fnd-fact:nth-child(2n){ padding-left:14px; border-left:1px solid var(--rule) !important; }
+  body.studio .fnd-fact:nth-child(n+3){ border-top:1px solid var(--rule); grid-column:1 / -1; }
+  body.studio .fnd-fact b{ font-size:32px; }
+
+  /* ---- 3. backdrop-filter is the most expensive thing a phone GPU
+       can be asked to do, and there were eight of them. Keep it on
+       the nav only; everything else gets a solid fill that looks the
+       same at these sizes. ---- */
+  body.studio .rail-idx,
+  body.studio .swa-badge,
+  body.studio .tag-pill,
+  body.studio .trailer-sound{
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    background:rgba(10,10,12,.72);
+  }
+
+  /* ---- 4. Tap targets. 15-22px links fail every touch guideline. ---- */
+  body.studio .mobile-menu a,
+  body.studio .footer a,
+  body.studio .nav-links a{
+    min-height:44px; display:inline-flex; align-items:center;
+  }
+  body.studio .brand{ min-height:44px; display:inline-flex; align-items:center; }
+
+  /* ---- 5. Give the phone room. Tight gutters read as cheap. ---- */
+  body.studio .wrap{ padding-inline:22px; }
+  body.studio .section{ padding-block:clamp(64px,13vw,96px); }
+  body.studio .hx-title{ font-size:clamp(2.2rem,10vw,3.4rem); max-width:14ch; }
+  body.studio .section-title{ font-size:clamp(1.9rem,8.4vw,2.8rem); }
+  body.studio .fnd-quote{ font-size:17px; line-height:1.55; }
+
+  /* founder: portrait first, capped so it never eats the fold */
+  body.studio .fnd-portrait-inner{ aspect-ratio:1/1; }
+}
+
+@media (max-width:600px){
+  /* the drag hint is desktop language — there is no cursor to drag with */
+  body.studio .hx-rowhint{ display:none; }
+}
