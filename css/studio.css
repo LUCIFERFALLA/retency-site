@@ -1465,3 +1465,11 @@ body.studio .whatsapp-fab{ bottom:clamp(20px,3vh,34px); }
       rgba(247,245,240,.72) 72%, rgba(247,245,240,0) 100%);
   }
 }
+
+/* footer column labels were <h4> sitting after an <h2>, which put a
+   level jump in every page's outline for what is only a label */
+body.studio .footer-col-label{
+  font-family:var(--f-body); font-size:10px; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--text-mute); margin-bottom:16px;
+}
