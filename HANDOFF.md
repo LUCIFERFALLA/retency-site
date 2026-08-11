@@ -8,7 +8,7 @@ I'm Parth Agarwal, founder of **Retency**, an AI-native creative studio in Benga
 
 ## PROJECT
 
-- **Path:** `C:\Users\dg611\Desktop\CLAUDE CODE\retency-site\`
+- **Path:** `D:\CLAUDE CODE\retency-site\`
 - **Live:** https://retency.in (Vercel, auto-deploys on push to `main`)
 - **Repo:** https://github.com/LUCIFERFALLA/retency-site
 - Static HTML/CSS/JS. **No Node, no build step.** Windows, PowerShell + Bash.
