@@ -42,4 +42,17 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
+# Common Crawl feeds the training corpus of many assistants
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
 Sitemap: https://retency.in/sitemap.xml
