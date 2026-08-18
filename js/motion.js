@@ -72,6 +72,18 @@
       this._onResize = () => { clearTimeout(rt); rt = setTimeout(() => this.resize(), 140); };
       addEventListener('resize', this._onResize, { passive: true });
 
+      /* The constructor runs at DOMContentLoaded, before layout has
+         settled, so the host can still measure 0 wide — which produced a
+         1px-wide backing store that was redrawn every frame and showed
+         nothing. Re-measure whenever the box actually changes size. */
+      if (window.ResizeObserver) {
+        let last = 0;
+        new ResizeObserver(entries => {
+          const w = entries[0].contentRect.width;
+          if (w > 2 && Math.abs(w - last) > 1) { last = w; this.resize(); }
+        }).observe(host);
+      }
+
       /* Listen on the whole section, not the canvas. The canvas sits
          behind the copy at pointer-events:none so it can never swallow a
          click — which also means it would never see a pointermove. Track
@@ -155,6 +167,7 @@
     }
 
     step(t) {
+      if (this.w < 2 || this.h < 2) return;   // not laid out yet: don't burn frames
       const c = this.ctx;
       this.trackPointer();
       if (this.mode === 'grid')  return this.grid(c, t);

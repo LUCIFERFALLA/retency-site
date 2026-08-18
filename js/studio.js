@@ -46,12 +46,20 @@
     }));
 
     // wake the videos only while the hero is on screen
+    /* Nine simultaneous video decodes is real GPU memory and was enough
+       to crash laptops with integrated graphics. The rail already caps
+       itself at four; the hero now does the same. The rest stay loaded
+       but paused, so the row still looks complete — a paused video keeps
+       its poster frame — and they resume as the belt drifts them in. */
+    const MAX_LIVE = 4;
     let live = false;
     new IntersectionObserver(([e]) => {
       live = e.isIntersecting;
+      let started = 0;
       tiles.forEach(t => {
         const v = t.querySelector('video'); if (!v) return;
-        if (live) {
+        if (live && started < MAX_LIVE) {
+          started++;
           const s = v.querySelector('source[data-src]');
           if (s && !s.src) { s.src = s.dataset.src; v.load(); }
           const p = v.play(); if (p && p.catch) p.catch(() => {});
@@ -192,11 +200,15 @@
         const shouldPause = j > 0.4;
         if (shouldPause !== paused) {
           paused = shouldPause;
+          let resumed = 0;
           for (let i = 0; i < N; i++) {
             const v = conf[i].el.querySelector('video');
             if (!v) continue;
             if (paused) { if (!v.paused) v.pause(); }
-            else { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
+            else if (resumed < MAX_LIVE) {
+              resumed++;
+              const pr = v.play(); if (pr && pr.catch) pr.catch(() => {});
+            } else if (!v.paused) v.pause();
           }
         }
       }
@@ -637,6 +649,16 @@
     }
     size();
     addEventListener('resize', size, { passive: true });
+    /* size() runs before layout settles, so the host can measure 0 wide
+       and leave a 1px backing store that renders nothing. Re-measure on
+       the first real size change. */
+    if (window.ResizeObserver) {
+      let lastW = 0;
+      new ResizeObserver(es => {
+        const w = es[0].contentRect.width;
+        if (w > 2 && Math.abs(w - lastW) > 1) { lastW = w; size(); }
+      }).observe(host);
+    }
 
     new IntersectionObserver(([e]) => { live = e.isIntersecting; }, { threshold: 0.02 }).observe(host);
 

@@ -1550,3 +1550,34 @@ body.studio .hx-stick{
   body.studio .hx-stat b{ font-size:21px; }
   body.studio .hx-eyebrow{ margin-bottom:10px; }
 }
+
+/* ============================================================
+   GPU SAFETY — this was crashing laptops.
+   Four .svc cards each carried backdrop-filter: blur(20px) over a
+   ~683x440 area. backdrop-filter is the single most expensive
+   property in CSS: it forces its own compositing layer and blurs
+   everything painted behind it, every frame. Four of those, at over
+   a million pixels each, plus the nav and six rail badges, is enough
+   to exhaust the GPU process on integrated laptop graphics and take
+   the tab with it.
+
+   Keep it ONLY on the nav, which is small (1100x58) and genuinely
+   sits over moving content. Everything else gets a solid fill that
+   is visually identical on a light page.
+   ============================================================ */
+body.studio .svc,
+body.studio .svc-card,
+body.studio .rail-idx,
+body.studio .swa-badge,
+body.studio .tag-pill,
+body.studio .metric-card,
+body.studio .contact-form,
+body.studio .trailer-sound,
+body.studio .circ-tag,
+body.studio .circ-pager-btn{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+/* the two that sat on media need an opaque ground now that the blur is gone */
+body.studio .rail-idx{ background:rgba(10,10,12,.78); }
+body.studio .swa-badge{ background:rgba(10,10,12,.55); }
