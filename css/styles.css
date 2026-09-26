@@ -2089,3 +2089,74 @@ h1, h2, h3, h4, h5, h6,
 }
 /* the largest sizes need slightly less than the small ones */
 h1, .hero-title, .shero-title, .page-header h1 { letter-spacing: 0.006em; }
+
+/* ============================================================
+   COMPARISON TABLES
+   Structured comparison markup. AI answer engines lift <table>
+   far more readily than equivalent prose, so comparison content
+   is marked up as real tables. Phones scroll horizontally rather
+   than stacking, matching the swipe-rail pattern used elsewhere.
+   ============================================================ */
+.cmp-wrap {
+  margin: var(--s-8) 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg, 18px);
+  background: var(--bg-card);
+}
+.cmp-wrap::-webkit-scrollbar { height: 6px; }
+.cmp-wrap::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+
+table.cmp {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.55;
+}
+table.cmp caption {
+  caption-side: top;
+  text-align: left;
+  padding: var(--s-5) var(--s-5) var(--s-3);
+  color: var(--text-dim);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+table.cmp th,
+table.cmp td {
+  padding: var(--s-4) var(--s-5);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+table.cmp thead th {
+  font-family: var(--f-display);
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--line-2);
+  white-space: nowrap;
+}
+table.cmp tbody th {
+  font-weight: 600;
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+table.cmp td { color: var(--text-dim); }
+table.cmp td.win {
+  color: var(--text);
+  font-weight: 600;
+}
+table.cmp tbody tr:last-child th,
+table.cmp tbody tr:last-child td { border-bottom: none; }
+table.cmp tbody tr:hover td,
+table.cmp tbody tr:hover th { background: rgba(255, 255, 255, 0.02); }
+
+@media (max-width: 640px) {
+  table.cmp { font-size: 14px; }
+  table.cmp th, table.cmp td { padding: var(--s-3) var(--s-4); }
+  table.cmp thead th { font-size: 15px; }
+}
