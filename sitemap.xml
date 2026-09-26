@@ -100,4 +100,18 @@
     <priority>0.3</priority>
   </url>
 
+  <url>
+    <loc>https://retency.in/blog/ai-animation-studio-vs-traditional</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://retency.in/blog/ai-ad-agency-vs-ai-ad-studio</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

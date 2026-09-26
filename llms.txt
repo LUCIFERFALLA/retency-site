@@ -43,6 +43,8 @@ Tagline: Growth is luck. Luck is engineered.
 
 ## Blog
 
+- [AI Animation Studio vs Traditional Animation Studio in India (2026)](https://retency.in/blog/ai-animation-studio-vs-traditional): How the two production models differ on cost structure, timelines, character consistency, and where each one still wins. Includes a side-by-side comparison table.
+- [AI Ad Agency vs AI Ad Studio: What Is the Difference?](https://retency.in/blog/ai-ad-agency-vs-ai-ad-studio): Definitions of both terms and how they differ on scope. A studio delivers the creative and is judged on craft and volume. An agency owns the campaign and is judged on CAC and ROAS. Retency runs both tracks.
 - [How Much Do AI Ads Cost in India? (2026 Pricing Guide)](https://retency.in/blog/ai-ads-cost-india): Per-video and retainer pricing bands, and what actually drives AI ad creative cost in India.
 - [AI Ads vs a Traditional Agency](https://retency.in/blog/ai-ads-vs-agency): Speed, cost, and quality compared between AI-native studios and traditional agencies.
 - [How We Ship Ads in 24 Hours](https://retency.in/blog/24-hour-ad-turnaround): The SHEIN Slay Sale workflow for same-day ad turnaround.
