@@ -2160,3 +2160,50 @@ table.cmp tbody tr:hover th { background: rgba(255, 255, 255, 0.02); }
   table.cmp th, table.cmp td { padding: var(--s-3) var(--s-4); }
   table.cmp thead th { font-size: 15px; }
 }
+
+/* ============================================================
+   CASE DETAIL BLOCKS (work page)
+   Self-contained prose per client. Answer engines need an
+   extractable passage; the card grid above gives them nothing.
+   ============================================================ */
+.case-detail {
+  margin-top: var(--s-20, 80px);
+  padding-top: var(--s-12, 48px);
+  border-top: 1px solid var(--line-2);
+}
+.case-detail-heading {
+  font-family: var(--f-display);
+  font-size: clamp(30px, 4vw, 46px);
+  letter-spacing: 0.02em;
+  color: var(--text);
+  margin-bottom: var(--s-8, 32px);
+}
+.case-block {
+  max-width: 74ch;
+  padding: var(--s-6, 24px) 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 96px;
+}
+.case-block:last-child { border-bottom: none; }
+.case-block h3 {
+  font-family: var(--f-body);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text);
+  margin-bottom: var(--s-3, 12px);
+}
+.case-block p {
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+.case-block a { color: var(--text-soft); text-decoration: underline; text-underline-offset: 3px; }
+.case-block a:hover { color: var(--copper); }
+
+@media (max-width: 640px) {
+  .case-detail { margin-top: var(--s-12, 48px); }
+  .case-block h3 { font-size: 17px; }
+  .case-block p { font-size: 15px; line-height: 1.7; }
+}
