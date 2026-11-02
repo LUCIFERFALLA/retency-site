@@ -43,6 +43,8 @@ Tagline: Growth is luck. Luck is engineered.
 
 ## Blog
 
+- [Google AI Mode Ads in India: What Brands Should Change Now](https://retency.in/blog/google-ai-mode-ads-india): Google announced on 28 October 2026 that ads in AI Mode are scaling to India. Existing Search, Shopping and Performance Max campaigns are automatically eligible and cannot opt out separately. Covers formats, the AI explainer advertisers cannot edit, and what to fix in feeds, creative and pages.
+- [AI Ad Labelling Rules in India (2026)](https://retency.in/blog/ai-ad-labelling-rules-india): What the ASCI guideline dated 17 September 2026 requires from advertisers using AI-generated content, what MeitY's amended IT Rules require from platforms, when a label is mandatory, when none is needed, and what is banned even with a label.
 - [AI Animation Studio vs Traditional Animation Studio in India (2026)](https://retency.in/blog/ai-animation-studio-vs-traditional): How the two production models differ on cost structure, timelines, character consistency, and where each one still wins. Includes a side-by-side comparison table.
 - [AI Ad Agency vs AI Ad Studio: What Is the Difference?](https://retency.in/blog/ai-ad-agency-vs-ai-ad-studio): Definitions of both terms and how they differ on scope. A studio delivers the creative and is judged on craft and volume. An agency owns the campaign and is judged on CAC and ROAS. Retency runs both tracks.
 - [How Much Do AI Ads Cost in India? (2026 Pricing Guide)](https://retency.in/blog/ai-ads-cost-india): Per-video and retainer pricing bands, and what actually drives AI ad creative cost in India.

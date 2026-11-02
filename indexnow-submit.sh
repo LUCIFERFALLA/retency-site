@@ -26,6 +26,8 @@ read -r -d '' PAYLOAD <<JSON || true
     "https://${HOST}/swarajya",
     "https://${HOST}/ai-ads-in-india",
     "https://${HOST}/blog",
+    "https://${HOST}/blog/google-ai-mode-ads-india",
+    "https://${HOST}/blog/ai-ad-labelling-rules-india",
     "https://${HOST}/blog/ai-animation-studio-vs-traditional",
     "https://${HOST}/blog/ai-ad-agency-vs-ai-ad-studio",
     "https://${HOST}/blog/ai-ads-cost-india",
